@@ -4,6 +4,9 @@
 **IMPORTANT:** Three principles ride along on every change: **YAGNI (You Aren't Gonna Need It) — KISS (Keep It Simple, Stupid) — DRY (Don't Repeat Yourself)**.
 **IMPORTANT:** The craftsman disposition behind these rules — voice, the Study→Deliver flow, Iron Laws, confidence taxonomy — lives in `.claude/ethos/ETHOS.md`. Read it when an artifact's voice or judgment is in question.
 
+## Claude Code Configuration
+- **[IMPORTANT]** Mọi config liên quan đến Claude Code (settings, hooks, MCP servers, skills, rules...) phải được đặt trong thư mục `.claude/` của project này (`/workspace/agentic-coding-saa-thedtv/.claude/`). **TUYỆT ĐỐI KHÔNG** ghi vào thư mục home cá nhân của máy host (`~/.claude/` hay `/home/.../.claude/`).
+
 ## General
 - **File Naming**: Name files in kebab-case, and let the name say plainly what the file is for. Length is fine — a long, self-describing name pays off the moment an LLM scans the tree with Grep or similar and grasps the purpose without opening the file.
 - **File Size Management**: Hold each code file under 200 lines so context stays manageable.
