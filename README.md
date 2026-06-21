@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agentic Coding — SAA Hands-on (Web)
 
-## Getting Started
+Dự án thực hành khóa học **Agentic Coding** nội bộ Sun\*, sử dụng MoMorph + Claude Code để generate code từ Figma design.
 
-First, run the development server:
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** TailwindCSS 4
+- **Backend:** Supabase (local Docker)
+- **Deploy:** Cloudflare Workers
+
+## Yêu cầu
+
+- Node.js 18+
+- Docker (để chạy Supabase local)
+- [Supabase CLI](https://supabase.com/docs/guides/cli)
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+
+## Cài đặt
+
+```bash
+npm install
+```
+
+## Chạy dự án
+
+**1. Khởi động Supabase local:**
+
+```bash
+supabase start
+```
+
+Sau khi chạy xong, copy `Project URL` và `Publishable key` từ output vào file `.env.local`.
+
+**2. Tạo file môi trường:**
+
+```bash
+cp .env.local.example .env.local
+```
+
+Điền thông tin Supabase vào `.env.local`:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<publishable key từ supabase start>
+```
+
+**3. Chạy dev server:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Truy cập [http://localhost:3000](http://localhost:3000) để xem kết quả.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Lệnh | Mục đích |
+|---|---|
+| `npm run dev` | Chạy dev server |
+| `npm run build` | Build production |
+| `npm run lint` | Kiểm tra lỗi lint |
+| `npm run pages:build` | Build cho Cloudflare Workers |
+| `npm run preview` | Preview trên Cloudflare local |
+| `npm run deploy` | Deploy lên Cloudflare Pages |
 
-## Learn More
+## MCP Servers
 
-To learn more about Next.js, take a look at the following resources:
+Dự án sử dụng các MCP server sau (cấu hình trong `.mcp.json`):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| MCP | Vai trò |
+|---|---|
+| `supabase` | Truy cập database local |
+| `playwright` | Automation browser, visual validation |
+| `context7` | Tra cứu docs Next.js/TailwindCSS/Supabase |
+| `momorph` | Đọc Figma spec/design (global config) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Supabase Studio
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Khi `supabase start` đang chạy, truy cập [http://127.0.0.1:54323](http://127.0.0.1:54323) để quản lý database qua giao diện trực quan.
