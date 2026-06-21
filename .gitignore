@@ -49,3 +49,4 @@ my-docs/
 .claude/templates/
 .claude/skills/
 .claude/hooks/
+.playwright-mcp/

@@ -1,0 +1,12 @@
+{
+  "login": {
+    "welcome_line1": "Start your journey with SAA 2025.",
+    "welcome_line2": "Log in to explore!",
+    "login_button": "Login With Google",
+    "footer": "Copyright belongs to Sun* © 2025",
+    "logo_alt": "Sun* Annual Awards 2025",
+    "language_label_vn": "VN",
+    "language_label_en": "EN",
+    "error_message": "Login failed. Please try again."
+  }
+}

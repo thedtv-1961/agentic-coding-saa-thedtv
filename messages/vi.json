@@ -1,0 +1,12 @@
+{
+  "login": {
+    "welcome_line1": "Bắt đầu hành trình của bạn cùng SAA 2025.",
+    "welcome_line2": "Đăng nhập để khám phá!",
+    "login_button": "Đăng nhập bằng Google",
+    "footer": "Bản quyền thuộc về Sun* © 2025",
+    "logo_alt": "Sun* Annual Awards 2025",
+    "language_label_vn": "VN",
+    "language_label_en": "EN",
+    "error_message": "Đăng nhập thất bại. Vui lòng thử lại."
+  }
+}

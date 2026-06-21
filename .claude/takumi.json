@@ -9981,5 +9981,6 @@
     ".takumi.json"
   ],
   "telemetry_endpoint": "https://agent-kit.sun-asterisk.ai/api",
-  "deletions": []
+  "deletions": [],
+  "sddMode": "always"
 }
