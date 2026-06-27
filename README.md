@@ -1,80 +1,154 @@
 # Agentic Coding — SAA Hands-on (Web)
 
-Dự án thực hành khóa học **Agentic Coding** nội bộ Sun\*, sử dụng MoMorph + Claude Code để generate code từ Figma design.
+Dự án thực hành khóa học **Agentic Coding** nội bộ Sun\*, sử dụng **MoMorph + Claude Code** để generate code từ Figma design.
+
+**Figma file:** [SAA 2025 - Internal Live Coding](https://www.figma.com/design/9ypp4enmFmdK3YAFJLIu6C/SAA-2025---Internal-Live-Coding)
 
 ## Tech Stack
 
-- **Framework:** Next.js 15 (App Router)
-- **Styling:** TailwindCSS 4
-- **Backend:** Supabase (local Docker)
-- **Deploy:** Cloudflare Workers
+| | |
+|---|---|
+| Framework | Next.js 15.3.x (App Router) |
+| Styling | TailwindCSS 4 |
+| i18n | next-intl (EN / VI) |
+| Backend | Supabase (local Docker) |
+| Auth | Supabase Auth — Google OAuth |
+| Testing | Vitest + Playwright |
+| Deploy | Cloudflare Workers (next-on-pages) |
+| Language | TypeScript |
 
 ## Yêu cầu
 
-- Node.js 18+
-- Docker (để chạy Supabase local)
+- Node.js v24.x
+- Docker
 - [Supabase CLI](https://supabase.com/docs/guides/cli)
+- [MoMorph CLI](https://github.com/momorph/cli)
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 
-## Cài đặt
+## Cài đặt (lần đầu)
+
+**1. Tạo file môi trường:**
+
+```bash
+cp .env.example .env
+```
+
+Điền thông tin vào `.env` sau khi có output từ `supabase start`:
+
+```
+SUPABASE_URL=http://127.0.0.1:54321
+SUPABASE_PUBLISHABLE_KEY=<publishable key>
+GOOGLE_CLIENT_ID=<google oauth client id>
+GOOGLE_CLIENT_SECRET=<google oauth client secret>
+```
+
+**2. Cài đặt dependencies:**
 
 ```bash
 npm install
 ```
 
+**3. Thiết lập MoMorph:**
+
+```bash
+# Đăng nhập
+momorph login
+
+# Khởi tạo project (sinh ra .claude/, prompt files...)
+momorph init . --ai claude
+```
+
 ## Chạy dự án
 
-**1. Khởi động Supabase local:**
-
 ```bash
+# 1. Khởi động Supabase local (cần Docker đang chạy)
 supabase start
-```
 
-Sau khi chạy xong, copy `Project URL` và `Publishable key` từ output vào file `.env.local`.
-
-**2. Tạo file môi trường:**
-
-```bash
-cp .env.local.example .env.local
-```
-
-Điền thông tin Supabase vào `.env.local`:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<publishable key từ supabase start>
-```
-
-**3. Chạy dev server:**
-
-```bash
+# 2. Chạy dev server
 npm run dev
 ```
 
-Truy cập [http://localhost:3000](http://localhost:3000) để xem kết quả.
+- App: [http://localhost:3000](http://localhost:3000)
+- Supabase Studio: [http://127.0.0.1:54323](http://127.0.0.1:54323)
 
 ## Scripts
 
 | Lệnh | Mục đích |
 |---|---|
 | `npm run dev` | Chạy dev server |
-| `npm run build` | Build production |
+| `npm run build` | Build production (kiểm tra type errors) |
 | `npm run lint` | Kiểm tra lỗi lint |
+| `npm run test` | Chạy unit tests (Vitest) |
+| `npm run test:watch` | Chạy tests ở watch mode |
+| `npm run test:coverage` | Báo cáo coverage |
+| `npm run test:e2e` | Chạy E2E tests (Playwright) |
 | `npm run pages:build` | Build cho Cloudflare Workers |
-| `npm run preview` | Preview trên Cloudflare local |
 | `npm run deploy` | Deploy lên Cloudflare Pages |
+| `supabase start` | Khởi động local Supabase |
+| `supabase stop` | Dừng local Supabase |
+| `supabase db reset` | Reset database + chạy lại migrations & seeds |
+| `supabase migration new <name>` | Tạo migration mới |
+
+## Cấu trúc thư mục
+
+```
+├── app/                        # Next.js App Router
+│   ├── auth/callback/          # OAuth callback route
+│   ├── components/             # UI components theo feature
+│   │   └── login/              # Login page components
+│   ├── login/                  # Login page (route + actions)
+│   ├── layout.tsx              # Root layout
+│   └── page.tsx                # Home page
+├── utils/
+│   └── supabase/               # Supabase client helpers
+│       ├── client.ts           # Browser client
+│       ├── server.ts           # Server client
+│       └── middleware.ts       # Auth middleware helper
+├── i18n/                       # next-intl config
+│   ├── routing.ts              # Locale routing
+│   └── request.ts              # Server request config
+├── messages/                   # i18n translations
+│   ├── en.json
+│   └── vi.json
+├── src/test/                   # Unit tests (Vitest)
+├── e2e/                        # E2E tests (Playwright)
+├── supabase/                   # Supabase local config & migrations
+├── middleware.ts               # Next.js middleware (auth + i18n)
+└── public/                     # Static assets
+```
 
 ## MCP Servers
 
-Dự án sử dụng các MCP server sau (cấu hình trong `.mcp.json`):
+Cấu hình trong `.mcp.json` — Claude Code tự động kết nối khi mở project:
 
 | MCP | Vai trò |
 |---|---|
-| `supabase` | Truy cập database local |
-| `playwright` | Automation browser, visual validation |
-| `context7` | Tra cứu docs Next.js/TailwindCSS/Supabase |
-| `momorph` | Đọc Figma spec/design (global config) |
+| `supabase` | Truy vấn và quản lý database local |
+| `playwright` | Automation browser, kiểm tra UI |
+| `context7` | Tra cứu docs Next.js / TailwindCSS / Supabase mới nhất |
+| `momorph` | Đọc Figma spec/design |
 
-## Supabase Studio
+> `supabase` MCP yêu cầu `supabase start` đang chạy.
 
-Khi `supabase start` đang chạy, truy cập [http://127.0.0.1:54323](http://127.0.0.1:54323) để quản lý database qua giao diện trực quan.
+## Quy trình generate code với MoMorph
+
+Chạy lần lượt các slash commands trong Claude Code:
+
+| Command | Mục đích |
+|---|---|
+| `/momorph.constitution` | Thiết lập coding standards (chạy **một lần** đầu tiên) |
+| `/momorph.specify` | Kéo screen spec + design Figma về local |
+| `/momorph.reviewspecify` | Review spec (nên chạy 2–3 lần) |
+| `/momorph.plan` | Tạo implementation plan |
+| `/momorph.reviewplan` | Review plan (nên chạy 2–3 lần) |
+| `/momorph.tasks` | Chia plan thành danh sách tasks |
+| `/momorph.implement` | Sinh code theo từng task |
+
+## Cấu trúc AI config
+
+| File/Thư mục | Vai trò |
+|---|---|
+| `CLAUDE.md` | Entry point — trỏ vào `AGENTS.md` |
+| `AGENTS.md` | Hướng dẫn hành vi cho Claude Code (ngôn ngữ, tech stack, context) |
+| `.mcp.json` | Cấu hình MCP servers |
+| `.claude/` | Prompt templates, slash commands của MoMorph |
