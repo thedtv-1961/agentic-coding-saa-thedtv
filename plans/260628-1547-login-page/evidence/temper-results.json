@@ -1,0 +1,32 @@
+{
+  "commands": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "22/22 tests passing across 5 test files (login-button, language-switcher, login-hero, login-footer, login-header)",
+      "ts": "2026-06-28T09:04:06Z"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Build successful — /login route 5.7kB, all routes compiled without errors",
+      "ts": "2026-06-28T09:04:30Z"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "ESLint passed with 0 errors, 0 warnings on app source files",
+      "ts": "2026-06-28T09:03:50Z"
+    },
+    {
+      "command": "npm run test:coverage",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Coverage: 100% statements, 91.66% branches, 100% functions, 100% lines — exceeds 80% target",
+      "ts": "2026-06-28T09:04:45Z"
+    }
+  ]
+}

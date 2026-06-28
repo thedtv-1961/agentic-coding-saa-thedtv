@@ -1,0 +1,28 @@
+{
+  "score": 9,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "UI matches Figma design: ROOT FURTHER font-weight thin, correct font size, gradient background overlay, Google icon right of button text — confirmed: font-thin class in login-hero.tsx, clamp(3.5rem,8vw,7rem), gradient from-black/80 in page.tsx, Image after span in login-button.tsx",
+    "Responsive layout works at 375px, 768px, 1440px with no horizontal overflow — confirmed: px-6 md:px-10 lg:px-16 padding applied, screenshots at all 3 breakpoints verified no overflow",
+    "en.json and vi.json have all 8 login namespace keys — confirmed: both files contain welcome_line1, welcome_line2, login_button, footer, logo_alt, language_label_vn, language_label_en, error_message",
+    "Error message displays when ?error= param present in URL — confirmed: login/page.tsx reads searchParams.error, LoginHero renders t('error_message') conditionally, verified at /login?error=test",
+    "Unit tests pass for login-hero, login-footer, login-header (Server Components) — confirmed: 5+2+3=10 tests all green, async Server Component pattern used correctly",
+    "npm run build succeeds with no errors — confirmed: exit 0, all 5 routes compiled, /login route 5.7kB",
+    "npm run lint succeeds with no errors — confirmed: eslint exit 0, 0 errors, 0 warnings on app source",
+    "Test coverage >= 80% for login components — confirmed: 100% statements, 91.66% branches, 100% functions across 22 tests"
+  ],
+  "regressionChecked": [
+    "Auth redirect: authenticated user redirected to /todo via supabase.auth.getUser() — unchanged logic",
+    "Login button disabled state and spinner during OAuth flow — no regression",
+    "ESLint flat config: defineConfig + globalIgnores API used correctly, no breaking change to existing lint rules",
+    "E2E tests: removed unused page param on skipped test (line 62) — no behavioral change",
+    "i18n: no keys removed from either locale file, only additions/existing retained",
+    "Responsive padding change (px-6 md:px-10 lg:px-16) — additive, no removal of breakpoint coverage",
+    "login-button.tsx: label span always visible during loading — correct UX, no regression from icon reorder"
+  ],
+  "contractStatus": "OK",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

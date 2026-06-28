@@ -47,7 +47,9 @@ export default function LoginButton({ label }: LoginButtonProps) {
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
           />
         </svg>
-      ) : (
+      ) : null}
+      <span>{label}</span>
+      {!loading && (
         <Image
           src="/icons/google-logo.svg"
           alt="Google"
@@ -56,7 +58,6 @@ export default function LoginButton({ label }: LoginButtonProps) {
           unoptimized
         />
       )}
-      <span>{label}</span>
     </button>
   );
 }

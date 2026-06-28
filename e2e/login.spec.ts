@@ -59,7 +59,7 @@ test.describe("Login Page", () => {
     await expect(loginBtn).toBeDisabled();
   });
 
-  test("authenticated user redirected from /login to /", async ({ page }) => {
+  test("authenticated user redirected from /login to /", async () => {
     test.skip(
       true,
       "Requires Google OAuth credentials configured in Supabase local",
