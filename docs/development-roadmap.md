@@ -18,6 +18,14 @@ Thực hành nội bộ Sun* sử dụng MoMorph + Claude Code để generate co
 - [x] Implement Login page (Supabase Auth + Google OAuth)
 - [x] Auth callback route + middleware
 
+### Phase 1b — Database Schema ✅ Complete
+- [x] 9 Supabase tables: profiles, kudos, hashtags, kudos_hashtags, kudos_images, awards, app_settings, nomination_periods, nominations, audit_logs
+- [x] RLS policies trên tất cả tables
+- [x] 3 trigger functions: handle_new_user, update_hero_level, log_kudos_insert, log_nomination_insert
+- [x] Performance indexes (BRIN, composite, partial)
+- [x] Seed data: hashtags, awards, app_settings
+- [x] Feature spec: `docs/features/F001_DatabaseDesignSaa2025/`
+
 ### Phase 2 — Core Features 🔄 In Progress
 - [ ] Home page sau khi đăng nhập
 - [ ] User profile
@@ -41,5 +49,6 @@ Thực hành nội bộ Sun* sử dụng MoMorph + Claude Code để generate co
 |---|---|---|
 | Project setup | ✅ Done | 2026-06 |
 | Login / Auth | ✅ Done | 2026-06 |
+| Database schema | ✅ Done | 2026-06-28 |
 | Core features | 🔄 In Progress | — |
 | Production deploy | 📋 Planned | — |

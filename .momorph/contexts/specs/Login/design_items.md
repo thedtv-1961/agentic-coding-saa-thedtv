@@ -1,23 +1,24 @@
 # Design Context - Login
 
 ## Screen Info
-- Screen ID: GzbNeVGJHz
-- Figma Node: 662:14387
-- Name: Login
-- Design Status: done
-- Spec Status: in_progress
-- Image: https://momorph.ai/api/images/9ypp4enmFmdK3YAFJLIu6C/662:14387/ce8369b6f37969efb082212c4af494ca.png
 
-## Design Item Inventory
+- **Screen**: Login
+- **screenId**: GzbNeVGJHz
+- **fileKey**: 9ypp4enmFmdK3YAFJLIu6C
+- **figmaNodeId**: 662:14387
+- **designStatus**: done
+- **specStatus**: done
+- **Overview**: Màn hình đăng nhập giới thiệu chương trình với hero visual nổi bật, phần nhận diện thương hiệu ở đầu trang và nút đăng nhập bằng Google ở khu vực nội dung chính. Bố cục gồm header chọn ngôn ngữ, khối giới thiệu trung tâm và footer bản quyền ở cuối trang.
 
-| No   | itemId                   | itemName             | type     | textInItem                                                                                       | iconNameInItem | hasChildren | childIds                                           |
-|------|--------------------------|----------------------|----------|--------------------------------------------------------------------------------------------------|----------------|-------------|----------------------------------------------------|
-| A    | 662:14391                | Header               | INSTANCE |                                                                                                  |                | yes         | A.1, A.2                                           |
-| A.1  | I662:14391;186:2166      | Logo                 | FRAME    | Sun* Annual Awards 2025                                                                          | SAA logo       | no          |                                                    |
-| A.2  | I662:14391;186:1601      | Language Switcher    | FRAME    | VN                                                                                               | flag, chevron  | no          |                                                    |
-| B    | 662:14393                | Main Content         | FRAME    |                                                                                                  |                | yes         | B.1, B.2, B.3                                      |
-| B.1  | 662:14395                | Key Visual           | FRAME    | ROOT FURTHER                                                                                     |                | no          |                                                    |
-| B.2  | 662:14753                | Welcome Text         | TEXT     | Bắt đầu hành trình của bạn cùng SAA 2025. / Đăng nhập để khám phá!                              |                | no          |                                                    |
-| B.3  | 662:14425                | Login Button         | FRAME    | Đăng nhập bằng Google                                                                            | Google logo    | no          |                                                    |
-| C    | 662:14388                | Background Key Visual| GROUP    |                                                                                                  |                | no          |                                                    |
-| D    | 662:14447                | Footer               | INSTANCE | Bản quyền thuộc về Sun* © 2025                                                                   |                | no          |                                                    |
+## Item Overview
+
+| No    | designItemId               | itemName                    | textInItem                                                                 | iconNameInItem         | hasChildren | childIds       |
+|-------|----------------------------|-----------------------------|----------------------------------------------------------------------------|------------------------|-------------|----------------|
+| 1     | 662:14391                  | Header                      | -                                                                          | -                      | true        | [1.1, 1.2]     |
+| 1.1   | I662:14391;186:2166        | Brand Logo                  | -                                                                          | Sun* Annual Awards logo| false       | []             |
+| 1.2   | I662:14391;186:1601        | Language Selector           | VN                                                                         | flag-vn; dropdown-arrow| false       | []             |
+| 2     | 662:14393                  | Main Login Section          | -                                                                          | -                      | true        | [2.1, 2.2]     |
+| 2.1   | 662:14395                  | Hero Visual                 | -                                                                          | -                      | false       | []             |
+| 2.2   | 662:14755                  | Introduction Content Block  | ROOT FURTHER; Bắt đầu hành trình của bạn cùng SAA 2025.; Đăng nhập để khám phá! | -                | true        | [2.2.1]        |
+| 2.2.1 | 662:14425                  | Login with Google Button    | LOGIN With Google                                                          | Google icon            | false       | []             |
+| 3     | 662:14447                  | Footer                      | Bản quyền thuộc về Sun* © 2025                                            | -                      | false       | []             |

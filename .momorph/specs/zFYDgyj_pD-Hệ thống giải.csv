@@ -1,0 +1,72 @@
+No,itemId,itemName,nameJP,nameTrans,itemType,itemSubtype,buttonType,dataType,required,format,minLength,maxLength,defaultValue,validationNote,description,userAction,transitionNote,databaseTable,databaseColumn,databaseNote,qa
+"3","313:8437","Keyvisual","キービジュアル","Key Visual Banner","others","hero_banner",,,,,,,,,"Mục đích và Bối cảnh: Banner hero hiển thị hình ảnh chiến dịch và tiêu đề trang giải thưởng SAA 2025.
+Các yếu tố hiển thị: Hình nền (1200x871px; cover; center-crop); tiêu đề 'ROOT FURTHER'; phụ đề 'Sun* Annual Award 2025'; logo và biểu tượng góc trên.
+Chức năng & Logic: Chỉ hiển thị; không có hành vi click. Responsive: scale to cover và center-crop.",,,,,,,"- Alt text 'Keyvisual Sun* Annual Award 2025' có cần dịch đa ngôn ngữ không?
+- Hành vi responsive trên mobile: chiều cao banner có thay đổi không?"
+"A","313:8453","Title hệ thống giải thưởng","賞制度タイトル","Award System Section Title","label",,,,,,,,,,"Mục đích và Bối cảnh: Tiêu đề phần tĩnh giới thiệu mục hệ thống giải thưởng SAA 2025.
+Các yếu tố hiển thị: Phụ đề 'Sun* Annual Awards 2025' (chữ nhỏ; muted); tiêu đề chính 'Hệ thống giải thưởng SAA 2025' (chữ lớn; vàng).
+Chức năng & Logic: Không tương tác; chỉ hiển thị tĩnh.",,,,,,,"- Văn bản tiêu đề có cần hỗ trợ đa ngôn ngữ (EN/VI) không?
+- Năm '2025' có được cấu hình động hay hardcode?"
+"B","313:8458","Hệ thống giải thưởng","賞制度セクション","Award System Section","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Container cha chứa toàn bộ danh mục giải thưởng SAA 2025 với điều hướng và thẻ thông tin.
+Các yếu tố hiển thị: Bảng điều hướng trái (C) và các thẻ giải thưởng (D.1–D.6). Mỗi thẻ hiển thị hình ảnh/icon; tiêu đề; mô tả; số lượng; và giá trị giải thưởng.
+Chức năng & Logic: Chỉ đọc. Click kích hoạt cuộn mượt đến phần giải thưởng tương ứng.","on_click","Cuộn mượt đến phần thẻ giải thưởng được chọn.",,,,"- Có lazy loading cho thẻ giải thưởng khi cuộn không?"
+"C","313:8459","Menu list","カテゴリナビゲーション","Award Category Navigation Menu","others","navigation",,,,,,,,,,"Mục đích và Bối cảnh: Điều hướng trái liệt kê 6 danh mục giải thưởng để người dùng truy cập nhanh đến từng section.
+Các yếu tố hiển thị: 6 mục: 'Top Talent'; 'Top Project'; 'Top Project Leader'; 'Best Manager'; 'Signature 2025 - Creator'; 'MVP'. Mục active hiển thị màu vàng và gạch chân.
+Chức năng & Logic: Navigation sticky — cố định bên trái khi cuộn trang. Click cuộn đến section tương ứng; scroll spy tự động đổi màu active theo section đang hiển thị. Mobile không trong phạm vi bài tập.","on_click","Trạng thái active: màu vàng + gạch chân khi click hoặc khi scroll đến section tương ứng (scroll spy confirmed; navigation sticky confirmed).",,,,"- Thẻ giải thưởng có hover effect khi di chuột không (shadow; scale; border...)?"
+"C.1","313:8460","Top talent","トップタレント（ナビ）","Top Talent (navigation item)","others","navigation_item",,,,,,,,,,"Mục đích và Bối cảnh: Mục điều hướng 'Top Talent' trong menu trái cho phép người dùng nhảy đến section giải thưởng Top Talent.
+Các yếu tố hiển thị: Nhãn text 'Top Talent' với icon dẫn đầu trong menu danh mục trái.
+Chức năng & Logic: Click cuộn đến section D.1; đặt C.1 ở trạng thái active (màu vàng + gạch chân).","on_click","Cuộn đến section D.1; đặt C.1 ở trạng thái active.",,,,"- Icon dẫn đầu là icon nào? Có thay đổi theo trạng thái active không?"
+"C.2","313:8461","Top project","トッププロジェクト（ナビ）","Top Project (navigation item)","others","navigation_item",,,,,,,,,,"Mục đích và Bối cảnh: Mục điều hướng 'Top Project' trong menu trái cho phép người dùng nhảy đến section giải thưởng Top Project.
+Các yếu tố hiển thị: Nhãn text 'Top Project' trong menu danh mục trái.
+Chức năng & Logic: Click cuộn đến section D.2; đặt C.2 ở trạng thái active.","on_click","Cuộn đến section D.2; đặt C.2 ở trạng thái active.",,,,"- Có icon dẫn đầu không? Nếu có thì icon gì?"
+"C.3","313:8462","Top Project leader","トッププロジェクトリーダー（ナビ）","Top Project Leader (navigation item)","others","navigation_item",,,,,,,,,,"Mục đích và Bối cảnh: Mục điều hướng 'Top Project Leader' trong menu trái cho phép người dùng nhảy đến section tương ứng.
+Các yếu tố hiển thị: Nhãn text 'Top Project Leader' trong menu danh mục trái.
+Chức năng & Logic: Click cuộn đến section D.3; đặt C.3 ở trạng thái active.","on_click","Cuộn đến section D.3; đặt C.3 ở trạng thái active.",,,,"- Có icon dẫn đầu không?"
+"C.4","313:8463","Best manager","ベストマネージャー（ナビ）","Best Manager (navigation item)","others","navigation_item",,,,,,,,,,"Mục đích và Bối cảnh: Mục điều hướng 'Best Manager' trong menu trái cho phép người dùng nhảy đến section tương ứng.
+Các yếu tố hiển thị: Nhãn text 'Best Manager' trong menu danh mục trái.
+Chức năng & Logic: Click cuộn đến section D.4; đặt C.4 ở trạng thái active.","on_click","Cuộn đến section D.4; đặt C.4 ở trạng thái active.",,,,"- Có icon dẫn đầu không?"
+"C.5","313:8464","Signature 2025","シグネチャー2025（ナビ）","Signature 2025 - Creator (navigation item)","others","navigation_item",,,,,,,,,,"Mục đích và Bối cảnh: Mục điều hướng 'Signature 2025 - Creator' trong menu trái cho phép người dùng nhảy đến section tương ứng.
+Các yếu tố hiển thị: Nhãn text 'Signature 2025' trong menu danh mục trái.
+Chức năng & Logic: Click cuộn đến section D.5; đặt C.5 ở trạng thái active.","on_click","Cuộn đến section D.5; đặt C.5 ở trạng thái active.",,,,"- Có icon dẫn đầu không?"
+"C.6","313:8465","MVP","MVP（ナビ）","MVP (navigation item)","others","navigation_item",,,,,,,,,,"Mục đích và Bối cảnh: Mục điều hướng 'MVP' trong menu trái cho phép người dùng nhảy đến section giải thưởng MVP.
+Các yếu tố hiển thị: Nhãn text 'MVP' trong menu danh mục trái.
+Chức năng & Logic: Click cuộn đến section D.6; đặt C.6 ở trạng thái active.","on_click","Cuộn đến section D.6; đặt C.6 ở trạng thái active.",,,,"- Có icon dẫn đầu không?"
+"D.1","313:8467","Top talent","トップタレント賞カード","Top Talent Award Card","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Thẻ thông tin giải thưởng 'Top Talent' hiển thị chi tiết giải thưởng dành cho nhân tài xuất sắc nhất.
+Các yếu tố hiển thị: Hình ảnh/icon giải thưởng (D.1.1; trái); khối nội dung (D.1.2; phải): tiêu đề 'Top Talent'; đoạn mô tả; số lượng 'Số lượng giải thưởng: 10 Đơn vị'; giá trị 'Giá trị giải thưởng: 7.000.000 VNĐ cho mỗi giải thưởng'.
+Chức năng & Logic: Chỉ đọc; không có tương tác.",,,,,,,"- TODO (DB design TBD): Số lượng và giá trị sẽ lưu trong DB — chờ thiết kế DB.
+- Thẻ có trạng thái hover không?
+- Thẻ có link đến trang chi tiết giải thưởng không?"
+"D.1.1","I313:8467;214:2525","Picture-Award","賞画像","Award Image","others","image",,,,,,,,,,"Mục đích và Bối cảnh: Hình ảnh/đồ họa đại diện giải thưởng trong thẻ Top Talent.
+Các yếu tố hiển thị: Hình ảnh/đồ họa giải thưởng (336x336px); chỉ hiển thị; không tương tác.
+Chức năng & Logic: Decorative display only.",,,,,,,"- Kích thước hình ảnh có cố định (336x336px) hay responsive không?
+- Alt text cần được xác định cho accessibility."
+"D.1.2","I313:8467;214:2526","Content","トップタレントコンテンツブロック","Top Talent Content Block","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Khối nội dung bên phải thẻ Top Talent hiển thị thông tin chi tiết về giải thưởng.
+Các yếu tố hiển thị: Icon/đồ họa (trái); tiêu đề 'Top Talent'; đoạn mô tả; 'Số lượng giải thưởng: 10 Đơn vị'; 'Giá trị giải thưởng: 7.000.000 VNĐ cho mỗi giải thưởng'.
+Chức năng & Logic: Chỉ đọc; không tương tác.",,,,,,,"- TODO (DB design TBD): Số lượng và giá trị sẽ lưu trong DB — chờ thiết kế DB."
+"D.2","313:8468","Top Project","トッププロジェクト賞カード","Top Project Award Card","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Thẻ thông tin giải thưởng 'Top Project' dành cho dự án xuất sắc nhất SAA 2025.
+Các yếu tố hiển thị: Hình ảnh/icon; tiêu đề 'Top Project'; đoạn mô tả; số lượng '02 Tập thể'; giá trị '15.000.000 VNĐ mỗi giải'.
+Chức năng & Logic: Chỉ đọc; không có tương tác.",,,,,,,"- TODO (DB design TBD): Số lượng và giá trị sẽ lưu trong DB — chờ thiết kế DB.
+- Thẻ có trạng thái hover/focus không?"
+"D.3","313:8469","Top Project Leader","トッププロジェクトリーダー賞カード","Top Project Leader Award Card","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Thẻ thông tin giải thưởng 'Top Project Leader' dành cho trưởng dự án xuất sắc nhất.
+Các yếu tố hiển thị: Hình ảnh/icon; tiêu đề 'Top Project Leader'; đoạn mô tả; số lượng '03 Cá nhân'; giá trị '7.000.000 VNĐ'.
+Chức năng & Logic: Chỉ đọc; không có tương tác.",,,,,,,"- TODO (DB design TBD): Số lượng và giá trị sẽ lưu trong DB — chờ thiết kế DB."
+"D.4","313:8470","Best manager","ベストマネージャー賞カード","Best Manager Award Card","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Thẻ thông tin giải thưởng 'Best Manager' dành cho quản lý xuất sắc nhất SAA 2025.
+Các yếu tố hiển thị: Hình ảnh/icon; tiêu đề 'Best Manager'; đoạn mô tả; số lượng '01 Cá nhân'; giá trị '10.000.000 VNĐ'.
+Chức năng & Logic: Chỉ đọc; không có tương tác.",,,,,,,"- TODO (DB design TBD): Số lượng và giá trị sẽ lưu trong DB — chờ thiết kế DB."
+"D.5","313:8471","Signature 2025","シグネチャー2025クリエイター賞カード","Signature 2025 - Creator Award Card","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Thẻ thông tin giải thưởng 'Signature 2025 - Creator' dành cho người tạo nội dung sáng tạo xuất sắc.
+Các yếu tố hiển thị: Hình ảnh/icon; tiêu đề 'Signature 2025 - Creator'; đoạn mô tả; số lượng '01'; giá trị '5.000.000 VNĐ (cá nhân)' và '8.000.000 VNĐ (tập thể)'.
+Chức năng & Logic: Chỉ đọc; không có tương tác.",,,,,,,"- Giải thưởng có 2 mức giá trị (cá nhân/tập thể) — hiển thị 2 giá trị như thế nào trên UI?
+- TODO (DB design TBD): Số lượng và giá trị sẽ lưu trong DB — chờ thiết kế DB."
+"D.6","313:8510","MVP","MVP賞カード","MVP Award Card","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Thẻ thông tin giải thưởng 'MVP (Most Valuable Person)' dành cho người có giá trị đóng góp lớn nhất.
+Các yếu tố hiển thị: Hình ảnh/icon; tiêu đề 'MVP (Most Valuable Person)'; đoạn mô tả; số lượng '01'; giá trị '15.000.000 VNĐ'.
+Chức năng & Logic: Chỉ đọc; không có tương tác.",,,,,,,"- TODO (DB design TBD): Số lượng và giá trị sẽ lưu trong DB — chờ thiết kế DB."
+"D1","335:12023","Sunkudos","サンクドスブロック","Sun* Kudos Recognition Program Block","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Khối quảng bá chương trình ghi nhận 'Sun* Kudos' ở cuối trang hệ thống giải thưởng.
+Các yếu tố hiển thị: Nhãn 'Phong trào ghi nhận'; tiêu đề 'Sun* Kudos'; đoạn mô tả; hình ảnh/logo minh họa (phải); nút CTA 'Chi tiết'.
+Chức năng & Logic: Click vào nút 'Chi tiết' điều hướng đến trang chi tiết Sun* Kudos.","on_click","Không điều hướng (UI only — phạm vi bài tập).",,,,"- TODO (DB design TBD): URL/route đích sẽ lưu trong DB. Click không có sự kiện trong phạm vi bài tập."
+"D2","I335:12023;313:8419","Content","サンクドスコンテンツブロック","Sun* Kudos Content Block","others","info_block",,,,,,,,,,"Mục đích và Bối cảnh: Khối nội dung trong section Sun* Kudos hiển thị thông tin chương trình ghi nhận.
+Các yếu tố hiển thị: Tiêu đề 'Phong trào ghi nhận' và 'Sun* Kudos'; đoạn mô tả; hình ảnh/logo minh họa (phải); nút CTA 'Chi tiết' (D2.1).
+Chức năng & Logic: Click điều hướng đến trang Sun* Kudos.","on_click","Không điều hướng (UI only — phạm vi bài tập).",,,,"- Nội dung khối có thể được cập nhật động từ CMS không?"
+"D2.1","I335:12023;313:8426","Button chi tiết","詳細ボタン","Detail Button","button",,"text_link",,,,,,,,,"Mục đích và Bối cảnh: Nút text-link 'Chi tiết' trong khối Sun* Kudos cho phép người dùng xem thêm thông tin về chương trình.
+Các yếu tố hiển thị: Nút text-link với nhãn 'Chi tiết' trong khối nội dung Sun* Kudos.
+Chức năng & Logic: Click không kích hoạt sự kiện (UI only — phạm vi bài tập); chỉ thiết kế UI theo design.","on_click","Không điều hướng (UI only — phạm vi bài tập).",,,,"- Có trạng thái hover/focus/disabled không?"
+"7.4",,,,,,,,,,,,,,,,,,,,,,

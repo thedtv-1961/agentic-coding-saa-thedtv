@@ -1,0 +1,149 @@
+No,itemId,itemName,nameJP,nameTrans,itemType,itemSubtype,buttonType,dataType,required,format,minLength,maxLength,defaultValue,validationNote,description,userAction,transitionNote,databaseTable,databaseColumn,databaseNote,qa
+"3.5","","","キービジュアル","Keyvisual - Main Banner","others","hero","","","false","","","","","","Mục đích: Banner chính trang chủ giới thiệu chủ đề 'ROOT FURTHER' và đồng hồ đếm ngược sự kiện SAA 2025.
+Hiển thị: Tiêu đề lớn 'ROOT FURTHER'; nhãn 'Coming soon'; đồng hồ đếm ngược (DAYS/HOURS/MINUTES); thông tin sự kiện (thời gian; địa điểm); 2 nút CTA; hình nền họa tiết rễ cây.
+Chức năng: Click 'ABOUT AWARDS' → trang Awards Information; Click 'ABOUT KUDOS' → trang Sun* Kudos; đồng hồ cập nhật realtime theo phút; responsive co/xếp chồng trên mobile.","","","","","","- Thời gian sự kiện được cấu hình từ đâu (env var; CMS; DB)?
+- Khi đồng hồ về 0 hero section thay đổi như thế nào (ẩn Coming soon; hiện gì thêm)?
+- Responsive: trên mobile layout hero có đặc biệt gì so với desktop?"
+"3.5","2167:9027","mms_3.5_Keyvisual","キービジュアル背景","Keyvisual BG","others","background","","","","","","","","","Mục đích: Ảnh nền toàn màn hình khu vực hero của trang chủ.
+Hiển thị: Nền tối trang trí với họa tiết rễ hữu cơ và branding sự kiện; phủ toàn chiều rộng hero section; overlay tối bán trong suốt để tăng khả năng đọc text.
+Chức năng: Hiển thị tĩnh; không tương tác; responsive chế độ cover giữ tỉ lệ khung hình.","","","","","","- Ảnh nền được lưu ở đâu (static asset; Supabase Storage)?
+- Có phiên bản ảnh khác nhau cho mobile/desktop không?"
+"6","","","ウィジェットボタン","Widget Button (Quick Action)","button","","icon_text","","false","","","","","","Mục đích: Nút hành động nhanh cố định góc phải dưới màn hình; luôn hiển thị khi cuộn trang.
+Hiển thị: Pill 105x64px nền vàng bo tròn; icon bút chì bên trái; icon SAA bên phải; ký tự '/' phân cách.
+Chức năng: Click → mở menu các option hành động nhanh; vị trí fixed z-index cao nhất.","on_click","Mở menu các tùy chọn hành động nhanh","","","","- Menu hành động nhanh gồm những option nào?
+- Nút này hiển thị cho mọi role hay chỉ một số role nhất định?"
+"7","","","フッター","Footer","others","navigation","","","false","","","","","","Mục đích: Thanh footer cuối trang chứa logo; liên kết điều hướng và thông tin bản quyền.
+Hiển thị: Logo SAA (trái); links 'About SAA 2025'; 'Awards Information'; 'Sun* Kudos' (giữa); bản quyền 'Bản quyền thuộc về Sun* © 2025' (phải).
+Chức năng: Click link → trang tương ứng; Click logo → đầu trang chủ; hover/active/normal state tương tự header.","","","","","","- Text bản quyền có cập nhật theo năm tự động không?"
+"7.1","","","ロゴ","Logo Sun* Annual Awards","others","logo","","","false","","","","","","Mục đích: Logo thương hiệu Sun* SAA trong footer (69x64px).
+Hiển thị: Biểu tượng Sun* SAA.
+Chức năng: Click → scroll lên đầu trang chủ; tương tự A1.1.","on_click","Scroll lên đầu trang chủ","","","",""
+"7.2","","","アバウトSAAボタン","About SAA 2025 Button (Footer)","button","","text_link","","false","","","","","","Mục đích: Link điều hướng đến trang About SAA 2025 trong footer.
+Hiển thị: Text link 'About SAA 2025'.
+Chức năng: Click → trang About SAA 2025; tương tự A1.2.","on_click","Điều hướng đến trang About SAA 2025","","","",""
+"7.3","","","アワード情報ボタン","Awards Information Button (Footer)","button","","text_link","","false","","","","","","Mục đích: Link điều hướng đến trang Awards Information trong footer.
+Hiển thị: Text link 'Awards Information'.
+Chức năng: Click → trang Awards Information; tương tự A1.3.","on_click","Điều hướng đến trang Awards Information","","","",""
+"7.4","","","サンクドスボタン","Sun* Kudos Button (Footer)","button","","text_link","","false","","","","","","Mục đích: Link điều hướng đến trang Sun* Kudos trong footer.
+Hiển thị: Text link 'Sun* Kudos'.
+Chức năng: Click → trang Sun* Kudos; tương tự A1.5.","on_click","Điều hướng đến trang Sun* Kudos","","","",""
+"7.5","","","共通基準ボタン","Common Standards Button (Footer)","button","","text_link","","false","","","","","","Mục đích: Link điều hướng đến trang Tiêu chuẩn chung trong footer.
+Hiển thị: Text link 'Tiêu chuẩn chung'.
+Chức năng: Click → trang Tiêu chuẩn chung.","on_click","Điều hướng đến trang Tiêu chuẩn chung","","","","- Trang 'Tiêu chuẩn chung' tồn tại riêng hay chỉ là anchor trong một trang khác?"
+"A1","","","ヘッダー","Header (Main Navigation)","others","navigation","","","true","","","","","","Mục đích: Header điều hướng chính gồm logo; các link và icon chức năng; cố định trên đầu trang.
+Hiển thị: Logo (trái); links 'About SAA 2025'; 'Awards Information'; 'Sun* Kudos'; bell; 'VI'; user icon (phải).
+Chức năng: Click logo → trang chủ; Click link → trang/section; active → đổi màu + underline; hover → highlight; Click VN/bell/avatar → mở menu tương ứng.","","","","","","- Header có sticky/fixed khi cuộn không?
+- Trên mobile header collapse thành hamburger menu không?"
+"A1","I2167:9091;186:2166","mms_A1_Header","ヘッダーコンポーネント","Header Navigation Component","others","navigation","","","","","","","","","Mục đích: Instance component header hiển thị 3 trạng thái: selected (About SAA 2025); hover (Awards Information); normal (Sun* Kudos).
+Hiển thị: Logo SAA (trái); Nav links với 3 states; Notification bell; Language 'VN'; User profile icon (phải); nền tối bán trong suốt.
+Chức năng: Xem chi tiết từ A1.1 đến A1.8; vị trí sticky/fixed trên cùng viewport.","","","","","",""
+"A1.1","","","ロゴ","Home Logo","button","","icon_text","","false","","","","","","Mục đích: Logo thương hiệu Sun* SAA trong header để điều hướng về trang chủ.
+Hiển thị: Biểu tượng Sun* SAA 64x60px với alt text.
+Chức năng: Click → scroll về đầu trang chủ (About SAA 2025).","on_click","Scroll lên đầu trang About SAA 2025","","","",""
+"A1.2","","","About SAA 2025 ボタン（選択中）","About SAA 2025 Button (Selected)","button","","text_link","","false","","","","","","Mục đích: Nút menu 'About SAA 2025' trong header; trạng thái selected.
+Hiển thị: Text 'About SAA 2025' màu vàng/underline khi selected; highlight khi hover; text thông thường khi normal.
+Chức năng: Click khi selected → scroll lên đầu trang; Click khi chưa selected → điều hướng đến About SAA 2025; hover → highlight.","on_click","Scroll đầu trang nếu selected; điều hướng đến About SAA 2025 nếu chưa selected","","","","- Active state được xác định bằng route matching hay manual control?"
+"A1.3","","","Awards Information ボタン（ホバー）","Awards Information Button (Hover State)","button","","text_link","","false","","","","","","Mục đích: Nút menu 'Awards Information' trong header; minh họa trạng thái hover.
+Hiển thị: Nền sáng highlight khi hover; màu vàng/underline khi selected; text thông thường khi normal.
+Chức năng: Click → Awards Information; hover → highlight; selected → scroll lên đầu trang.","on_click","Điều hướng đến trang Awards Information","","","",""
+"A1.5","","","Sun* Kudos ボタン（通常）","Sun* Kudos Button (Normal)","button","","text_link","","false","","","","","","Mục đích: Nút menu 'Sun* Kudos' trong header; trạng thái bình thường.
+Hiển thị: Text thông thường khi normal; highlight khi hover; màu vàng/underline khi selected.
+Chức năng: Click → Sun* Kudos; hover → highlight; selected → scroll đầu trang.","on_click","Điều hướng đến trang Sun* Kudos","","","",""
+"A1.6","","","通知ボタン","Notification Button","button","","icon_text","","false","","","","","","Mục đích: Nút icon thông báo 40x40px để mở panel thông báo.
+Hiển thị: Icon chuông; badge đỏ khi có thông báo chưa đọc; state enabled/disabled.
+Chức năng: Click → mở panel thông báo; badge hiển thị số lượng chưa đọc.","on_click","Mở panel thông báo","","","","- Badge số lượng có giới hạn hiển thị không (vd: 99+)?
+- Panel thông báo là dropdown; modal hay slide-out?"
+"A1.7","","","言語選択ボタン","Language Switcher Button","button","","icon_text","","false","","","","VN","","Mục đích: Nút hiển thị ngôn ngữ hiện tại và cho phép chuyển đổi ngôn ngữ.
+Hiển thị: Label ngôn ngữ hiện tại 'VN' kèm icon cờ.
+Chức năng: Click → mở menu chọn ngôn ngữ; chọn VN/EN → đổi toàn bộ giao diện.","on_click","Mở menu chọn ngôn ngữ và reload giao diện theo ngôn ngữ được chọn","","","","- Ngôn ngữ được lưu vào đâu (cookie; localStorage; session)?"
+"A1.8","","","アカウントアイコンボタン","Account Icon Button","button","","icon_text","","false","","","","","","Mục đích: Nút icon 40x40px góc trên phải để truy cập menu tài khoản.
+Hiển thị: Icon user avatar.
+Chức năng: Click → mở dropdown menu tài khoản với option Profile/Sign out/Admin Dashboard (riêng role admin).","on_click","Mở dropdown Dropdown-profile","","","","- Khi chưa đăng nhập nút này hiển thị gì?
+- Admin Dashboard option chỉ hiện với role admin — logic phân quyền ở đâu?"
+"B1","","","カウントダウン セクション","Countdown Time Section","others","countdown","","","false","","","","","","Mục đích: Section hiển thị đồng hồ đếm ngược đến thời điểm sự kiện SAA 2025. Thời điểm sự kiện cấu hình qua biến môi trường (ISO-8601).
+Hiển thị: Label 'Coming soon'; 3 nhóm số (Days/Hours/Minutes) mỗi nhóm 2 chữ số; nhãn đơn vị tương ứng.
+Chức năng: Tự cập nhật theo thời gian thực (theo phút); khi về 0 ẩn 'Coming soon' và giữ trạng thái 00.","","","","","","- Thời điểm sự kiện đọc từ env var hay API?
+- Sau khi về 0; section thay đổi giao diện hay chỉ ẩn nhãn 'Coming soon'?"
+"B1.2","","","カミングスーンラベル","Coming Soon Label","label","","","","false","","","","","","Mục đích: Nhãn 'Coming soon' hiển thị dưới tiêu đề; thông báo sự kiện chưa bắt đầu.
+Hiển thị: Text label; không có tương tác.
+Chức năng: Bị ẩn khi thời gian vượt quá mốc thời điểm sự kiện bắt đầu.","","","","","",""
+"B1.3","","","カウントダウン時計","Countdown Clock","others","countdown","","","false","","","","","","Mục đích: Component đồng hồ đếm ngược hiển thị thời gian còn lại đến sự kiện.
+Hiển thị: 3 nhóm số (2 chữ số/nhóm); nhãn DAYS/HOURS/MINUTES phía dưới mỗi nhóm.
+Chức năng: Tự giảm và cập nhật theo thời gian; luôn hiển thị 2 chữ số (zero-pad); khi về 0 ẩn 'Coming soon' và giữ 00.","","","","","",""
+"B1.3.1","","","日数表示","Days Display Tile","others","countdown_tile","","","false","","","","","","Mục đích: Ô hiển thị số ngày còn lại trong bộ đếm ngược.
+Hiển thị: 2 chữ số số ngày còn lại; nhãn 'DAYS'.
+Chức năng: Tự cập nhật khi thời gian giảm (theo phút).","","","","","",""
+"B1.3.2","","","時間表示","Hours Display Unit","others","countdown_unit","","","false","","","","","","Mục đích: Ô hiển thị số giờ còn lại trong bộ đếm ngược.
+Hiển thị: 2 chữ số số giờ còn lại; nhãn 'HOURS'.
+Chức năng: Tự cập nhật khi thời gian giảm (theo phút).","","","","","",""
+"B1.3.3","","","分表示","Minutes Display Unit","others","countdown_unit","","","false","","","","","","Mục đích: Ô hiển thị số phút còn lại trong bộ đếm ngược.
+Hiển thị: 2 chữ số số phút còn lại; nhãn 'MINUTES'.
+Chức năng: Tự cập nhật khi thời gian giảm (theo phút).","","","","","",""
+"B2","","","イベント情報","Event Info (Time and Location)","others","info_block","","","false","","","","","","Mục đích: Hiển thị thông tin cơ bản sự kiện: thời gian; địa điểm và ghi chú phát sóng trực tiếp.
+Hiển thị: Nhãn 'Thời gian:' / 'Địa điểm:'; giá trị '26/12/2025' / 'Âu Cơ Art Center'; ghi chú 'Tường thuật trực tiếp qua sóng Livestream'.
+Chức năng: Static; chỉ hiển thị; responsive tự xuống hàng khi màn nhỏ.","","","","","","- Thông tin sự kiện (thời gian; địa điểm) lấy từ đâu (env var; CMS; DB)?
+- Link Livestream có đi kèm không?"
+"B3","","","CTAボタングループ","Call-To-Action Button Group","button","","text_link","","false","","","","","","Mục đích: Nhóm 2 nút CTA chính trong hero section.
+Hiển thị: 'ABOUT AWARDS' (nút vàng; hover state); 'ABOUT KUDOS' (nút viền; normal state); cả 2 nút thay đổi state giống nhau.
+Chức năng: Click → điều hướng đến trang tương ứng.","on_click","Click ABOUT AWARDS → Awards Information; Click ABOUT KUDOS → Sun* Kudos","","","",""
+"B3.1","","","About Awardsボタン","ABOUT AWARDS Button","button","","icon_text","","false","","","","","","Mục đích: Nút CTA 'ABOUT AWARDS' trong hero section.
+Hiển thị: Nút vàng với text 'ABOUT AWARDS' và icon mũi tên; hover state.
+Chức năng: Click → Awards Information; state normal giống B3.2.","on_click","Điều hướng đến trang Awards Information","","","",""
+"B3.2","","","About Kudosボタン","ABOUT KUDOS Button","button","","icon_text","","false","","","","","","Mục đích: Nút CTA 'ABOUT KUDOS' trong hero section.
+Hiển thị: Nút viền với text 'ABOUT KUDOS' và icon mũi tên; normal state.
+Chức năng: Click → Sun* Kudos; state hover giống B3.1.","on_click","Điều hướng đến trang Sun* Kudos","","","",""
+"B4","","","ルートファーザーコンテンツ","Root Further Description Content","others","info_block","","","false","","","","","","Mục đích: Đoạn mô tả 'Root Further' giải thích tinh thần chương trình SAA 2025 ngay dưới hero section.
+Hiển thị: Văn bản mô tả nhiều đoạn; màu sáng trên nền tối; font kích thước trung bình.
+Chức năng: Hiển thị tĩnh; responsive tự xuống dòng và co lại trên màn hình nhỏ.","","","","","","- Nội dung đoạn mô tả là static hay lấy từ CMS?"
+"B4","5001:14827","mms_B4_content","ルートファーザーコンテンツブロック","Root Further Content Block","others","info_block","","","","","","","","","Mục đích: Content block mô tả chủ đề 'Root Further' của SAA 2025.
+Hiển thị: Text trang trí lớn 'ROOT' / 'FURTHER' làm nền; các đoạn văn mô tả; câu trích dẫn 'A tree with deep roots fears no storm'; text trắng trên nền tối.
+Chức năng: Hiển thị tĩnh; responsive text tự wrap và thu nhỏ trên màn hình nhỏ.","","","","","",""
+"C1","","","賞セクションヘッダー","Awards Section Header","others","info_block","","","false","","","","","","Mục đích: Tiêu đề section giới thiệu hệ thống giải thưởng SAA 2025.
+Hiển thị: Caption nhỏ 'Sun* annual awards 2025'; tiêu đề lớn 'Hệ thống giải thưởng'; mô tả phụ 'Các hạng mục sẽ được trao giải theo TOP những người xuất sắc nhất.'.
+Chức năng: Hiển thị tĩnh; không tương tác.","","","","","",""
+"C2","","","賞一覧","Award List","others","card","","","false","","","","","","Mục đích: Danh sách hạng mục giải thưởng hiển thị dạng lưới thẻ trên trang chủ.
+Hiển thị: Ảnh vuông + hiệu ứng vòng sáng; tiêu đề hạng mục; mô tả 1-2 dòng; link 'Chi tiết'; layout responsive.
+Chức năng: Click ảnh/tiêu đề/'Chi tiết' → Awards Information#slug; hover → lift + glow; Mobile/Tablet: 2 cột; Desktop: 3 cột.","on_click","Awards Information với hashtag slug hạng mục","","","","- Slug của từng hạng mục được sinh ra như thế nào?
+- Số lượng hạng mục là cố định (6) hay có thể mở rộng từ DB?"
+"C2","5005:14974","mms_C2_Award list","賞グリッド","Award List Grid","others","card","","","","","","","","","Mục đích: Grid 6 thẻ giải thưởng hiển thị trong 2 hàng 3 cột.
+Hiển thị: 3 cột (desktop); 2 cột (tablet); 1 cột (mobile); mỗi thẻ: thumbnail + tiêu đề + mô tả + link 'Chi tiết'.
+Chức năng: Click bất kỳ element trong card → Awards Information với hash anchor; hover → lift + glow; xem C2.1 đến C2.6.","on_click","Awards Information với hash anchor hạng mục","","","",""
+"C2.1","","","トップタレントカード","Top Talent Award Card","others","card","","","false","","","","","","Mục đích: Thẻ hiển thị hạng mục giải thưởng 'Top Talent'.
+Hiển thị: Ảnh graphic vuông (phần trên); tiêu đề 'Top Talent'; mô tả 'Vinh danh top cá nhân xuất sắc trên mọi phương diện'; link 'Chi tiết'.
+Chức năng: Click ảnh/tiêu đề/'Chi tiết' → Awards Information#top-talent; hover → lift + glow.","on_click","Awards Information#top-talent","","","",""
+"C2.1.1","","","トップタレント賞画像","Top Talent Award Picture","others","card","","","false","","","","","","Mục đích: Ảnh thumbnail hạng mục 'Top Talent' trong lưới giải thưởng.
+Hiển thị: Hình vuông bo góc; viền mảnh màu vàng; hiệu ứng ánh sáng; tiêu đề/mô tả hiển thị bên dưới (ngoài vùng ảnh).
+Chức năng: Click → Awards Information#top-talent; hover → lift + glow; không có trạng thái input; luôn enabled.","on_click","Awards Information#top-talent","","","","- Ảnh được lưu ở đâu (static asset; Supabase Storage)?"
+"C2.1.2","","","トップタレント名","Top Talent (Award Name Label)","label","","","","false","","","","","","Mục đích: Hiển thị tên hạng mục giải thưởng 'Top Talent'.
+Hiển thị: Text label tên hạng mục.
+Chức năng: Click → Awards Information#top-talent.","on_click","Awards Information#top-talent","","","",""
+"C2.1.3","","","トップタレント説明","Top Talent Description","label","","","","false","","","","","","Mục đích: Dòng mô tả ngắn về hạng mục 'Top Talent'.
+Hiển thị: Text mô tả; tối đa 2 dòng; truncate với dấu ba chấm nếu quá dài.
+Chức năng: Hiển thị tĩnh; không tương tác.","","","","","","- maxLength của mô tả hạng mục là bao nhiêu ký tự?"
+"C2.1.4","","","詳細ボタン（トップタレント）","Detail Button (Top Talent)","button","","icon_text","","false","","","","","","Mục đích: Nút 'Chi tiết' mở trang thông tin chi tiết hạng mục Top Talent.
+Hiển thị: Text 'Chi tiết' kèm icon mũi tên.
+Chức năng: Click → Awards Information#top-talent.","on_click","Awards Information#top-talent","","","",""
+"C2.2","","","トッププロジェクトカード","Top Project Award Card","others","card","","","false","","","","","","Mục đích: Thẻ hiển thị hạng mục giải thưởng 'Top Project'.
+Hiển thị: Ảnh graphic vuông; tiêu đề 'Top Project'; mô tả; link 'Chi tiết'.
+Chức năng: Click → Awards Information#top-project; hover → lift + glow.","on_click","Awards Information#top-project","","","",""
+"C2.3","","","トッププロジェクトリーダーカード","Top Project Leader Award Card","others","card","","","false","","","","","","Mục đích: Thẻ hiển thị hạng mục giải thưởng 'Top Project Leader'.
+Hiển thị: Ảnh graphic vuông; tiêu đề 'Top Project Leader'; mô tả; link 'Chi tiết'.
+Chức năng: Click → Awards Information#top-project-leader; hover → lift + glow.","on_click","Awards Information#top-project-leader","","","",""
+"C2.4","","","ベストマネージャーカード","Best Manager Award Card","others","card","","","false","","","","","","Mục đích: Thẻ hiển thị hạng mục giải thưởng 'Best Manager'.
+Hiển thị: Ảnh graphic vuông; tiêu đề 'Best Manager'; mô tả; link 'Chi tiết'.
+Chức năng: Click → Awards Information#best-manager; hover → lift + glow.","on_click","Awards Information#best-manager","","","",""
+"C2.5","","","シグネチャー2025クリエイターカード","Signature 2025 Creator Award Card","others","card","","","false","","","","","","Mục đích: Thẻ hiển thị hạng mục giải thưởng 'Signature 2025 - Creator'.
+Hiển thị: Ảnh graphic vuông; tiêu đề 'Signature 2025 - Creator'; mô tả; link 'Chi tiết'.
+Chức năng: Click → Awards Information#signature-2025-creator; hover → lift + glow.","on_click","Awards Information#signature-2025-creator","","","",""
+"C2.6","","","MVPカード","MVP Award Card","others","card","","","false","","","","","","Mục đích: Thẻ hiển thị hạng mục giải thưởng 'MVP (Most Valuable Person)'.
+Hiển thị: Ảnh graphic vuông; tiêu đề 'MVP (Most Valuable Person)'; mô tả; link 'Chi tiết'.
+Chức năng: Click → Awards Information#mvp; hover → lift + glow.","on_click","Awards Information#mvp","","","",""
+"D1","","","Sun*クドスプロモブロック","Sun* Kudos Promo Block","others","card","","","false","","","","","","Mục đích: Khối quảng bá 'Sun* Kudos' với tiêu đề; mô tả ngắn và nút hành động.
+Hiển thị: Label 'Phong trào ghi nhận'; tiêu đề 'Sun* Kudos'; đoạn mô tả tóm tắt; button 'Chi tiết' kèm icon; logo KUDOS.
+Chức năng: Click 'Chi tiết' → trang chi tiết Sun* Kudos.","on_click","Mở trang chi tiết Sun* Kudos","","","",""
+"D2","","","Sun*クドスコンテンツブロック","Sun* Kudos Content Block","others","info_block","","","false","","","","","","Mục đích: Khối thông tin quảng bá Sun* Kudos kèm ảnh minh họa và nút CTA.
+Hiển thị: Tiêu đề 'Sun* Kudos'; dòng mô tả nhỏ 'Phong trào ghi nhận'; nội dung mô tả chiến dịch; ảnh/nền minh họa bên phải; nút 'Chi tiết'.
+Chức năng: Click 'Chi tiết' → tab Sun* Kudos.","on_click","Dẫn đến trang chi tiết tab Sun* Kudos","","","","- Nội dung mô tả là static hay lấy từ CMS?"
+"D2.1","","","詳細ボタン（Sun*クドス）","Detail Button (Sun* Kudos)","button","","icon_text","","false","","","","","","Mục đích: Nút 'Chi tiết' mở trang chi tiết Sun* Kudos.
+Hiển thị: Text 'Chi tiết' kèm icon mũi tên.
+Chức năng: Click → mở tab Sun* Kudos.","on_click","Mở tab Sun* Kudos","","","",""

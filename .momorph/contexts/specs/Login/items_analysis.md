@@ -1,190 +1,242 @@
 # Items Analysis - Login
 
-## A: Header (662:14391)
-- nameJP: ヘッダー
-- nameTrans: Header (Navigation Bar)
-- itemType: others
-- itemSubtype: navigation
-- buttonType: (none)
-- dataType: (none)
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: (none)
-- transitionNote: (none)
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: Top navigation bar fixed at the top of the Login page. Contains SAA brand logo (left) and language switcher button (right). Background: transparent/dark overlay. Fixed position at top of viewport.
-- qa: Q: Is the header fixed (sticky) or static on scroll?
+## Screen Context
 
-## A.1: Logo (I662:14391;186:2166)
-- nameJP: ロゴ
-- nameTrans: Logo SAA
-- itemType: others
-- itemSubtype: logo
-- buttonType: (none)
-- dataType: (none)
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: on_click
-- transitionNote: Navigate to homepage
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: SAA brand logo (~69×64 px) left-aligned in the header. Alt text: 'Sun* Annual Awards 2025'. Static image. Clicking navigates to homepage.
-- qa: Q: Should clicking the logo redirect to the homepage even from the login page (unauthenticated state)?
+- **Screen**: Login | screenId: GzbNeVGJHz
+- **Overview**: Màn hình đăng nhập SAA 2025 với hero visual, header chọn ngôn ngữ, nút đăng nhập Google và footer bản quyền.
+- **targetLanguage**: Vietnamese
 
-## A.2: Language Switcher (I662:14391;186:1601)
-- nameJP: 言語切替ボタン
-- nameTrans: Language Switcher Button
-- itemType: button
-- itemSubtype: (none)
-- buttonType: icon_text
-- dataType: string
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: VN
-- userAction: on_click
-- transitionNote: Open language dropdown (Dropdown-ngôn ngữ screen)
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: Button showing Vietnamese flag icon, 'VN' label, and down chevron (~110×40 px). Default: VN. Options: VN (Vietnamese), EN (English). Selecting an option updates the interface language and closes the dropdown.
-- qa: Q: Is the selected language persisted in localStorage/cookie/user profile? Q: What is the full list of supported languages?
+---
 
-## B: Main Content (662:14393)
-- nameJP: メインコンテンツ
-- nameTrans: Main Content (Login)
-- itemType: others
-- itemSubtype: hero
-- buttonType: (none)
-- dataType: (none)
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: (none)
-- transitionNote: (none)
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: Main content area centered vertically and horizontally. Contains Key Visual (top), Welcome Text (middle), Login Button (bottom). Background: dark with decorative root/line pattern. Responsive: stacks vertically on smaller screens.
-- qa: (none)
+### Item 1: mms_A_Header — Header
 
-## B.1: Key Visual (662:14395)
-- nameJP: キービジュアル
-- nameTrans: Key Visual 'Root Further'
-- itemType: others
-- itemSubtype: hero
-- buttonType: (none)
-- dataType: (none)
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: (none)
-- transitionNote: (none)
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: 'ROOT FURTHER' stylized text/logo as the primary visual element. Prominent, centered. Decorative typography with root/organic motifs. Static display only. Scales proportionally on different screen sizes.
-- qa: (none)
+- **nameJP**: ヘッダー
+- **nameTrans**: Header
+- **itemType**: others
+- **itemSubtype**: navigation_bar
+- **buttonType**: -
+- **dataType**: -
+- **format**: -
+- **required**: -
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: -
+- **userAction**: -
+- **transitionNote**: -
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**: -
+- **description**:
+  Mục đích và ngữ cảnh: Thanh điều hướng fixed/sticky ở đầu trang màn hình đăng nhập SAA 2025.
+  Thành phần hiển thị: Logo Sun* Annual Awards 2025 ở góc trái; bộ chọn ngôn ngữ (VN) ở góc phải.
+  Chức năng và logic: Container bố cục fixed (sticky) chứa logo và bộ chọn ngôn ngữ; không có tương tác trực tiếp ở cấp container.
+- **qa**:
+  - ~~Header có fixed/sticky khi scroll trang không?~~ → **Đã xác nhận: fixed/sticky.**
+  - ~~Background header là transparent hay solid?~~ → **Đã xác nhận: transparent.**
 
-## B.2: Welcome Text (662:14753)
-- nameJP: ウェルカムテキスト
-- nameTrans: Welcome Text
-- itemType: label
-- itemSubtype: (none)
-- buttonType: (none)
-- dataType: string
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: (none)
-- transitionNote: (none)
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: Two-line welcome message. Line 1: 'Bắt đầu hành trình của bạn cùng SAA 2025.' Line 2: 'Đăng nhập để khám phá!' White text, medium size, centered. Static display only.
-- qa: Q: Should welcome text update when language switcher is changed to EN?
+---
 
-## B.3: Login Button (662:14425)
-- nameJP: ログインボタン (Google)
-- nameTrans: Login Button (Google)
-- itemType: button
-- itemSubtype: (none)
-- buttonType: icon_text
-- dataType: (none)
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: on_click
-- transitionNote: On success → navigate to Homepage SAA; on failure → display error message
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: Primary Google OAuth login button. Icon: Google logo (left). Label: 'Đăng nhập bằng Google'. ~280×48 px. States: normal, hover (lighten), active (press), disabled/loading (spinner during auth). On success: redirect to Homepage SAA. On failure: display error message.
-- qa: Q: What error message should be shown on login failure? Q: Should the button be disabled while authentication is in progress? Q: Is there a loading/spinner state during OAuth flow?
+### Item 1.1: mms_A.1_Logo — Brand Logo
 
-## C: Background Key Visual (662:14388)
-- nameJP: 背景キービジュアル
-- nameTrans: Background Key Visual
-- itemType: others
-- itemSubtype: background
-- buttonType: (none)
-- dataType: (none)
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: (none)
-- transitionNote: (none)
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: Full-screen background image covering the entire viewport. Decorative root/organic pattern. Dark semi-transparent overlay for text readability. Static, no interaction. Responsive: cover entire viewport, no repeat.
-- qa: (none)
+- **nameJP**: ブランドロゴ
+- **nameTrans**: Brand Logo
+- **itemType**: others
+- **itemSubtype**: image
+- **buttonType**: -
+- **dataType**: -
+- **format**: -
+- **required**: -
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: -
+- **userAction**: -
+- **transitionNote**: -
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**: -
+- **description**:
+  Mục đích và ngữ cảnh: Logo nhận diện thương hiệu Sun* Annual Awards 2025 ở góc trên bên trái header.
+  Thành phần hiển thị: Hình ảnh logo Sun* Annual Awards 2025.
+  Chức năng và logic: Hiển thị tĩnh; chưa rõ có điều hướng khi click không.
+- **qa**:
+  - Click vào logo có điều hướng về trang chủ không?
+  - Logo có phiên bản responsive/mobile khác không?
 
-## D: Footer (662:14447)
-- nameJP: フッター
-- nameTrans: Footer
-- itemType: label
-- itemSubtype: (none)
-- buttonType: (none)
-- dataType: (none)
-- format: (none)
-- required: (none)
-- minLength: (none)
-- maxLength: (none)
-- defaultValue: (none)
-- userAction: (none)
-- transitionNote: (none)
-- databaseTable: (none)
-- databaseColumn: (none)
-- databaseNote: (none)
-- validationNote: (none)
-- description: Footer bar at the bottom of the page. Text: 'Bản quyền thuộc về Sun* © 2025'. Small text, light color on dark background. Static display only. Fixed at bottom or flows with content depending on viewport height.
-- qa: Q: Should footer text update when language switcher changes language?
+---
+
+### Item 1.2: mms_A.2_Language — Language Selector
+
+- **nameJP**: 言語選択
+- **nameTrans**: Language Selector
+- **itemType**: dropdown
+- **itemSubtype**: -
+- **buttonType**: -
+- **dataType**: string
+- **format**: ISO 639-1 language code (e.g. VN; EN)
+- **required**: false
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: VN
+- **userAction**: on_click
+- **transitionNote**: Hiển thị dropdown danh sách ngôn ngữ để người dùng chọn; cập nhật giao diện toàn trang theo ngôn ngữ đã chọn.
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**: -
+- **description**:
+  Mục đích và ngữ cảnh: Cho phép người dùng chuyển đổi ngôn ngữ giao diện trước khi đăng nhập.
+  Thành phần hiển thị: Cờ Việt Nam + nhãn "VN" + mũi tên dropdown; hiện đang chọn tiếng Việt (VN).
+  Chức năng và logic: Khi click hiển thị menu chọn ngôn ngữ; sau khi chọn cập nhật toàn bộ nội dung UI sang ngôn ngữ tương ứng.
+- **qa**:
+  - ~~Danh sách ngôn ngữ hỗ trợ gồm những ngôn ngữ nào?~~ → **Đã xác nhận: Tiếng Việt (VN) và Tiếng Anh (EN). Spec chi tiết sẽ cung cấp sau.**
+  - ~~Lựa chọn ngôn ngữ có được lưu vào localStorage/cookie không?~~ → **Đã xác nhận: Lưu vào cookie (`NEXT_LOCALE`).**
+  - ~~Sau khi chọn ngôn ngữ mới có reload trang hay update dynamic không?~~ → **Đã xác nhận: full page reload.**
+
+---
+
+### Item 2: mms_B_Bìa — Main Login Section
+
+- **nameJP**: メインログインセクション
+- **nameTrans**: Main Login Section
+- **itemType**: others
+- **itemSubtype**: section
+- **buttonType**: -
+- **dataType**: -
+- **format**: -
+- **required**: -
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: -
+- **userAction**: -
+- **transitionNote**: -
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**: -
+- **description**:
+  Mục đích và ngữ cảnh: Khu vực nội dung chính chiếm toàn bộ không gian giữa header và footer của màn hình đăng nhập.
+  Thành phần hiển thị: Hero visual (sóng màu trừu tượng) làm nền phủ toàn bộ; khối nội dung giới thiệu và nút đăng nhập ở phía trái.
+  Chức năng và logic: Container bố cục; không có tương tác trực tiếp ở cấp này.
+- **qa**:
+  - Layout có responsive trên tablet/mobile không? Vị trí khối nội dung thay đổi như thế nào?
+
+---
+
+### Item 2.1: mms_B.1_Key Visual — Hero Visual
+
+- **nameJP**: ヒービジュアル
+- **nameTrans**: Hero Visual
+- **itemType**: file_or_image
+- **itemSubtype**: -
+- **buttonType**: -
+- **dataType**: -
+- **format**: -
+- **required**: -
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: -
+- **userAction**: -
+- **transitionNote**: -
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**: -
+- **description**:
+  Mục đích và ngữ cảnh: Hình ảnh hero trang trí tạo nhận diện thị giác cho trang đăng nhập SAA 2025.
+  Thành phần hiển thị: Hình ảnh trừu tượng với các dải sóng màu rực rỡ (vàng; cam; xanh lá; xanh dương; tím) trên nền tối; phủ bên phải và một phần trên của màn hình.
+  Chức năng và logic: Hiển thị tĩnh trang trí; không có tương tác người dùng.
+- **qa**:
+  - Hero image responsive như thế nào trên mobile/tablet? Crop theo tỉ lệ nào?
+  - Định dạng file hỗ trợ (PNG/WebP/AVIF)?
+
+---
+
+### Item 2.2: mms_Frame 550 — Introduction Content Block
+
+- **nameJP**: 紹介コンテンツブロック
+- **nameTrans**: Introduction Content Block
+- **itemType**: others
+- **itemSubtype**: content_block
+- **buttonType**: -
+- **dataType**: -
+- **format**: -
+- **required**: -
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: -
+- **userAction**: -
+- **transitionNote**: -
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**: -
+- **description**:
+  Mục đích và ngữ cảnh: Khối nội dung giới thiệu chương trình SAA 2025 nằm phía bên trái trên hero section.
+  Thành phần hiển thị: Tiêu đề lớn "ROOT FURTHER"; subtitle "Bắt đầu hành trình của bạn cùng SAA 2025."; tagline "Đăng nhập để khám phá!"; nút đăng nhập Google (item 2.2.1).
+  Chức năng và logic: Container tĩnh chứa text giới thiệu và nút đăng nhập; không có tương tác trực tiếp ở cấp container.
+- **qa**:
+  - Nội dung text (tiêu đề; subtitle; tagline) có được quản lý qua i18n không?
+  - Trên mobile text "ROOT FURTHER" có thu nhỏ hoặc xuống dòng không?
+
+---
+
+### Item 2.2.1: mms_B.3_Login — Login with Google Button
+
+- **nameJP**: Googleログインボタン
+- **nameTrans**: Login with Google Button
+- **itemType**: button
+- **itemSubtype**: -
+- **buttonType**: icon_text
+- **dataType**: -
+- **format**: -
+- **required**: -
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: -
+- **userAction**: on_click
+- **transitionNote**: Kích hoạt luồng xác thực Google OAuth; chuyển hướng đến trang Google sign-in; sau khi xác thực thành công redirect về `/todo`.
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**:
+  Condition: Xác thực Google thất bại hoặc người dùng hủy
+  Error: "Đăng nhập không thành công. Vui lòng thử lại."
+- **description**:
+  Mục đích và ngữ cảnh: Nút duy nhất để đăng nhập vào ứng dụng SAA 2025 thông qua tài khoản Google.
+  Thành phần hiển thị: Nút màu vàng nhạt với biểu tượng Google và text "LOGIN With Google"; font đậm.
+  Chức năng và logic: Khi nhấn khởi động Google OAuth flow; hiển thị trạng thái loading trong khi chờ; sau xác thực thành công redirect vào ứng dụng.
+- **qa**:
+  - ~~Tài khoản Google nào được phép đăng nhập?~~ → **Đã xác nhận: Tất cả tài khoản Google.**
+  - ~~URL redirect sau đăng nhập thành công là gì?~~ → **Đã xác nhận: `/todo`.**
+  - ~~Loading state trong khi chờ Google OAuth phản hồi như thế nào?~~ → **Đã xác nhận: hiển thị spinner, disable button.**
+  - ~~Nếu popup bị block có fallback redirect flow không?~~ → **Đã xác nhận: dùng redirect flow (không phải popup) — popup blocker không ảnh hưởng.**
+
+---
+
+### Item 3: mms_D_Footer — Footer
+
+- **nameJP**: フッター
+- **nameTrans**: Footer
+- **itemType**: others
+- **itemSubtype**: -
+- **buttonType**: -
+- **dataType**: -
+- **format**: -
+- **required**: -
+- **minLength**: -
+- **maxLength**: -
+- **defaultValue**: -
+- **userAction**: -
+- **transitionNote**: -
+- **databaseTable**: -
+- **databaseColumn**: -
+- **databaseNote**: -
+- **validationNote**: -
+- **description**:
+  Mục đích và ngữ cảnh: Thanh chân trang hiển thị thông tin bản quyền của ứng dụng SAA 2025.
+  Thành phần hiển thị: Text "Bản quyền thuộc về Sun* © 2025" căn giữa trên nền tối.
+  Chức năng và logic: Hiển thị tĩnh; không có tương tác người dùng.
+- **qa**:
+  - Năm trong thông tin bản quyền có tự động cập nhật theo năm hiện tại không?

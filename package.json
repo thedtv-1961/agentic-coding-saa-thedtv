@@ -14,7 +14,8 @@
     "test:e2e:ui": "playwright test --ui",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && npx wrangler pages dev",
-    "deploy": "npm run pages:build && npx wrangler pages deploy"
+    "deploy": "npm run pages:build && npx wrangler pages deploy",
+    "gen:types": "supabase gen types typescript --local > src/types/database.types.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",

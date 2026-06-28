@@ -1,0 +1,18 @@
+{
+  "commands": [
+    {
+      "command": "supabase db reset",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "All 7 migrations applied: 000001_create_profiles, 000002_create_kudos_system, 000003_create_awards_settings, 000004_create_nominations, 000005_rls_policies, 000006_triggers_seed, 000007_finalize_indexes",
+      "ts": "2026-06-28T06:52:33Z"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Next.js build passed — 5 routes compiled, no TypeScript errors, Middleware 101kB",
+      "ts": "2026-06-28T06:52:33Z"
+    }
+  ]
+}
