@@ -1,0 +1,26 @@
+{
+  "task": "Login page visual validation and polish: compare live UI vs Figma design (screenId GzbNeVGJHz), fix visual gaps, add responsive layout, verify i18n completeness, add unit tests for Server Components",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "UI matches Figma design: ROOT FURTHER font-weight thin, correct font size, gradient background overlay, Google icon right of button text",
+    "Responsive layout works at 375px, 768px, 1440px with no horizontal overflow",
+    "en.json and vi.json have all 8 login namespace keys",
+    "Error message displays when ?error= param present in URL",
+    "Unit tests pass for login-hero, login-footer, login-header (Server Components)",
+    "npm run build succeeds with no errors",
+    "npm run lint succeeds with no errors",
+    "Test coverage >= 80% for login components"
+  ],
+  "touchpoints": [
+    "app/components/login/login-hero.tsx",
+    "app/components/login/login-button.tsx",
+    "app/login/page.tsx",
+    "eslint.config.mjs",
+    "e2e/login.spec.ts",
+    "src/test/login/login-hero.test.tsx",
+    "src/test/login/login-footer.test.tsx",
+    "src/test/login/login-header.test.tsx"
+  ],
+  "blastRadius": "Login page only — no shared components, no auth flow changes, no database changes",
+  "contracts": {}
+}

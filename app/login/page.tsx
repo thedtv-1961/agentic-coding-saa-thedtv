@@ -25,7 +25,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         style={{ backgroundImage: "url('/images/login-background.png')" }}
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" aria-hidden="true" />
 
       {/* Page content */}
       <div className="relative z-10 flex flex-col min-h-screen">

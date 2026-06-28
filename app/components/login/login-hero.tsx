@@ -8,10 +8,10 @@ interface LoginHeroProps {
 export default async function LoginHero({ errorMessage }: LoginHeroProps) {
   const t = await getTranslations("login");
   return (
-    <section className="flex-1 flex flex-col justify-center px-12 pt-24 pb-20">
+    <section className="flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-16 pt-24 pb-20">
       <h1
-        className="text-white font-bold leading-none mb-8 select-none"
-        style={{ fontSize: "clamp(4rem, 10vw, 9rem)", letterSpacing: "-0.02em" }}
+        className="text-white font-thin leading-none mb-8 select-none"
+        style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)", letterSpacing: "-0.02em" }}
       >
         ROOT
         <br />

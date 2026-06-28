@@ -4,6 +4,22 @@
 
 ---
 
+## [0.3.1] — 2026-06-28
+
+### Changed
+- Login hero: reduced font weight (thin) and font size; adjusted responsive padding
+- Login page background: gradient overlay (from-black/80 via-black/40 to-transparent) replacing flat overlay
+- Login button: Google icon repositioned after label text
+
+### Fixed
+- ESLint config: fixed module imports, added `.claude/**` to ignore list
+- E2E login spec: removed unused `page` parameter
+
+### Added
+- Unit tests: `login-hero.test.tsx`, `login-footer.test.tsx`, `login-header.test.tsx`
+
+---
+
 ## [0.3.0] — 2026-06-28
 
 ### Added
