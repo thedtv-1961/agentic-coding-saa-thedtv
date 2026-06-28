@@ -32,7 +32,7 @@ export const AWARD_META: Record<
     slug: "best-manager",
   },
   signature_creator: {
-    image: "/images/awards/signature-creator.png",
+    image: "/images/awards/signature-2025-creator.png",
     slug: "signature-2025-creator",
   },
   mvp: {

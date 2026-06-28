@@ -2,9 +2,26 @@ import createIntlMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import { updateSession } from "@/utils/supabase/middleware";
 
 const intlMiddleware = createIntlMiddleware(routing);
+
+async function isLaunchDatePassed(): Promise<boolean> {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return false;
+
+  const supabase = createClient(url, key);
+  const { data, error } = await supabase
+    .from("app_settings")
+    .select("value")
+    .eq("key", "countdown_date")
+    .single();
+
+  if (error || !data?.value) return false;
+  return new Date(data.value as string).getTime() <= Date.now();
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -16,10 +33,18 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/auth") || pathname === "/login";
 
   if (isPrelaunch && !isCountdownRoute && !isAuthRoute) {
-    return NextResponse.redirect(new URL("/countdown", request.url));
+    // If launch date has already passed, bypass the prelaunch gate
+    const launched = await isLaunchDatePassed();
+    if (!launched) {
+      return NextResponse.redirect(new URL("/countdown", request.url));
+    }
   }
-  if (!isPrelaunch && isCountdownRoute) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (isCountdownRoute) {
+    // Redirect away from /countdown when prelaunch is off OR launch date passed
+    const shouldBypass = !isPrelaunch || (await isLaunchDatePassed());
+    if (shouldBypass) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 
   // Helper: create a lightweight Supabase client for auth checks in middleware
