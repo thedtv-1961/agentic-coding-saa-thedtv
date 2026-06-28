@@ -18,5 +18,43 @@
     "hours": "HOURS",
     "minutes": "MINUTES",
     "launched": "The event has started!"
+  },
+  "common": {
+    "nav_about": "About SAA 2025",
+    "nav_awards": "Awards Information",
+    "nav_kudos": "Sun* Kudos",
+    "nav_standards": "Common Standards",
+    "copyright": "Copyright © Sun* 2025",
+    "notification_label": "Notifications",
+    "language_label": "Language",
+    "account_label": "Account"
+  },
+  "home": {
+    "hero_title": "ROOT FURTHER",
+    "hero_coming_soon": "Comming soon",
+    "event_date_label": "Date:",
+    "event_date_value": "December 26, 2025",
+    "event_venue_label": "Venue:",
+    "event_venue_value": "Âu Cơ Art Center",
+    "event_livestream": "Live broadcast via Livestream",
+    "cta_awards": "ABOUT AWARDS",
+    "cta_kudos": "ABOUT KUDOS",
+    "root_further_body": "Sun* Annual Awards 2025 — an event to honor outstanding individuals and teams who have relentlessly strived, innovated, and contributed throughout the year. This is our moment to reflect on the journey, celebrate core values, and inspire the entire Sun* Family.",
+    "root_further_body_1": "Facing the rapidly changing landscape of the AI era and increasingly high demands from clients, Sun* has chosen a strategy of diversifying capabilities — not just striving to be elite in their own field, but reaching for a higher goal where every Sunner becomes a \"problem-solver\" — an expert in resolving any challenge, finding solutions for every project, client, and societal problem.",
+    "root_further_body_2": "Drawing inspiration from this diversity of capabilities, the flexibility to grow, and the spirit of going deeper to break through in the AI era, \"Root Further\" has been chosen as the official theme for Sun* Annual Awards 2025.",
+    "root_further_body_3": "Beyond its surface meaning, \"Root Further\" represents our collective journey of continuously reaching further, planting roots deeper, touching the hidden \"geological layers\" to continue thriving, growing, and nurturing the passion for creating value that burns within every Sunner. Borrowing the image of roots continually driving deep into the earth, weaving through layers of sediment to absorb the finest nutrients, Sunners are \"absorbing\" the essence of the era and market challenges to reinvent themselves daily — expanding capabilities and firmly \"taking root\" in the AI era, a completely new, complex, and unpredictable \"geological layer\" that also holds boundless potential and opportunity.",
+    "root_further_quote": "A tree with deep roots fears no storm",
+    "root_further_quote_note": "(A tree with deep roots fears no storm — English proverb)",
+    "root_further_body_4": "In the face of storms, only trees with strong enough roots can stand firm. An organization with individuals who trust in their diverse capabilities, ready to innovate and embrace challenges, and take ownership of change — is one that not only stands strong amid turbulence, but also unlocks every advantage and conquers the challenges of the times. More than just a name for a new chapter in the organization's journey, \"Root Further\" is also a rallying call, encouraging each of us to dare to believe in ourselves, dare to go deeper, unlock every potential, break through every limit, and become the most versatile and outstanding version of ourselves. For in the AI era, diverse capabilities and harnessing the power of the times are the essential prerequisites for enduring.",
+    "root_further_body_5": "No one knows what hidden \"geological layers\" lie deep within the \"earth\" of today's technology industry and modern markets. What we do know is that when \"Root Further\" becomes the spirit of our roots, we will not be fearful — we will feel ever more excited before any uncharted territory on the journey ahead. For we always believe that within those boundless frontiers, countless wonders and opportunities to rise await us.",
+    "awards_caption": "Sun* annual awards 2025",
+    "awards_title": "Awards System",
+    "awards_subtitle": "Each category recognizes the top outstanding performers who have made exceptional contributions in their respective fields.",
+    "award_detail": "Details",
+    "kudos_label": "Recognition Movement",
+    "kudos_title": "Sun* Kudos",
+    "kudos_new_label": "What's new at SAA 2025",
+    "kudos_body": "Peer recognition and appreciation activity — introduced for all Sunners for the first time. Launching in November 2025, it encourages Sun* members to share recognition and appreciation messages to colleagues on the BTC-published platform. These will serve as reference material for the Heads Council when selecting award recipients.",
+    "kudos_detail": "Details"
   }
 }

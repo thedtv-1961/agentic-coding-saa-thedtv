@@ -10,24 +10,24 @@ export default function CountdownDigitBlock({ value, label }: Props) {
 
   return (
     <div
-      className="flex flex-col items-center gap-3"
+      className="flex gap-2 flex-col"
       aria-label={`${String(display).padStart(2, "0")} ${label.toLowerCase()}`}
     >
-      <div className="flex gap-2">
+      <div className="flex gap-1">
         {digits.map((digit, i) => (
           <div
             key={i}
             data-testid="digit"
-            className="w-16 h-20 flex items-center justify-center rounded-lg border border-white/25 bg-white/10 backdrop-blur-sm text-white text-5xl leading-none"
+            className="w-10 h-14 flex items-center justify-center rounded border border-white/25 bg-white/10 backdrop-blur-sm text-white text-3xl leading-none"
             style={{ fontFamily: "'DSEG7Classic', monospace" }}
           >
             {digit}
           </div>
         ))}
       </div>
-      <span className="text-white text-xs font-bold tracking-widest uppercase">
+      <p className="flex text-white text-xs font-bold tracking-widest uppercase">
         {label}
-      </span>
+      </p>
     </div>
   );
 }

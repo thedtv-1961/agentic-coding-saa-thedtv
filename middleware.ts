@@ -2,9 +2,26 @@ import createIntlMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import { updateSession } from "@/utils/supabase/middleware";
 
 const intlMiddleware = createIntlMiddleware(routing);
+
+async function isLaunchDatePassed(): Promise<boolean> {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return false;
+
+  const supabase = createClient(url, key);
+  const { data, error } = await supabase
+    .from("app_settings")
+    .select("value")
+    .eq("key", "countdown_date")
+    .single();
+
+  if (error || !data?.value) return false;
+  return new Date(data.value as string).getTime() <= Date.now();
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -16,44 +33,69 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/auth") || pathname === "/login";
 
   if (isPrelaunch && !isCountdownRoute && !isAuthRoute) {
-    return NextResponse.redirect(new URL("/countdown", request.url));
+    // If launch date has already passed, bypass the prelaunch gate
+    const launched = await isLaunchDatePassed();
+    if (!launched) {
+      return NextResponse.redirect(new URL("/countdown", request.url));
+    }
   }
-  if (!isPrelaunch && isCountdownRoute) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (isCountdownRoute) {
+    // Redirect away from /countdown when prelaunch is off OR launch date passed
+    const shouldBypass = !isPrelaunch || (await isLaunchDatePassed());
+    if (shouldBypass) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 
-  // Auth guard: redirect authenticated users away from /login
-  if (pathname === "/login") {
-    let response = NextResponse.next({ request });
-
-    const supabase = createServerClient(
+  // Helper: create a lightweight Supabase client for auth checks in middleware
+  function makeSupabaseClient(req: NextRequest, res: { current: NextResponse }) {
+    return createServerClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_PUBLISHABLE_KEY!,
       {
         cookies: {
-          getAll: () => request.cookies.getAll(),
+          getAll: () => req.cookies.getAll(),
           setAll: (cookiesToSet) => {
             cookiesToSet.forEach(({ name, value }) =>
-              request.cookies.set(name, value),
+              req.cookies.set(name, value),
             );
-            response = NextResponse.next({ request });
+            res.current = NextResponse.next({ request: req });
             cookiesToSet.forEach(({ name, value, options }) =>
-              response.cookies.set(name, value, options),
+              res.current.cookies.set(name, value, options),
             );
           },
         },
       },
     );
+  }
 
+  // Auth guard: redirect authenticated users away from /login
+  if (pathname === "/login") {
+    const res = { current: NextResponse.next({ request }) };
+    const supabase = makeSupabaseClient(request, res);
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (user) {
       return NextResponse.redirect(new URL("/todo", request.url));
     }
+    // Return intlMiddleware response so locale headers/cookies are applied
+    return intlMiddleware(request);
+  }
 
-    intlMiddleware(request);
-    return response;
+  // Auth guard: protect homepage — unauthenticated users go to /login.
+  // When authenticated, return the session-refreshed response directly to
+  // avoid a second Supabase client call via updateSession.
+  if (pathname === "/") {
+    const res = { current: NextResponse.next({ request }) };
+    const supabase = makeSupabaseClient(request, res);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    return res.current;
   }
 
   // All other routes: refresh Supabase session

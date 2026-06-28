@@ -4,6 +4,30 @@
 
 ---
 
+## [0.5.1] — 2026-06-28
+
+### Fixed
+- Root Further section: expanded body text from 1 paragraph to 3 to match Figma design
+- Kudos section: added "ĐIỂM MỚI CỦA SAA 2025" subtitle + updated body text to match design
+- Awards section: updated `Signature Creator` title to `Signature 2025 - Creator` in DB
+- Awards section: fixed empty display caused by `sb_publishable_` key format incompatibility — added JWT anon key override in `.env.local`
+- `AwardCard` test: fixed `getByText` → `getAllByText` due to title appearing in both medal circle and card heading
+
+---
+
+## [0.5.0] — 2026-06-28
+
+### Added
+- Homepage (`/`) implementation: Hero/Keyvisual, Root Further, Awards (DB-backed), Kudos sections
+- Shared components: `Header` (sticky, hamburger), `Footer`, `Widget Button`
+- `types/awards.ts` — `Award` type + `AWARD_META` mapping for 6 SAA 2025 categories
+- i18n keys: `common.*` and `home.*` namespaces (EN/VI)
+
+### Changed
+- `middleware.ts` — auth guard applied to `/` route (unauthenticated → redirect `/login`)
+
+---
+
 ## [0.4.0] — 2026-06-28
 
 ### Added
