@@ -26,6 +26,12 @@ Thực hành nội bộ Sun* sử dụng MoMorph + Claude Code để generate co
 - [x] Seed data: hashtags, awards, app_settings
 - [x] Feature spec: `docs/features/F001_DatabaseDesignSaa2025/`
 
+### Phase 1c — Countdown Prelaunch Page ✅ Complete
+- [x] Middleware gate `PRELAUNCH_MODE` redirect mọi route về `/countdown`
+- [x] Server Component `/countdown` fetch `countdown_date` từ `app_settings` (service role)
+- [x] 4 UI components: background, title, digit-block, timer (client)
+- [x] i18n keys EN/VI
+
 ### Phase 2 — Core Features 🔄 In Progress
 - [ ] Home page sau khi đăng nhập
 - [ ] User profile
@@ -50,5 +56,6 @@ Thực hành nội bộ Sun* sử dụng MoMorph + Claude Code để generate co
 | Project setup | ✅ Done | 2026-06 |
 | Login / Auth | ✅ Done | 2026-06 |
 | Database schema | ✅ Done | 2026-06-28 |
+| Countdown Prelaunch Page | ✅ Done | 2026-06-28 |
 | Core features | 🔄 In Progress | — |
 | Production deploy | 📋 Planned | — |

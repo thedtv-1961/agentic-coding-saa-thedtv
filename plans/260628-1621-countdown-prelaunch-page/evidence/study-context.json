@@ -1,0 +1,40 @@
+{
+  "task": "Implement Countdown Prelaunch Page: middleware-based PRELAUNCH_MODE gate, Server Component fetching countdown_date from app_settings via service role, LED-style countdown timer (Days/Hours/Minutes), i18n vi/en, unit tests and E2E spec.",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "PRELAUNCH_MODE=true redirects all routes to /countdown without loop",
+    "/countdown route is accessible without authentication",
+    "countdown_date is fetched from app_settings table via service role",
+    "fallback date used when Supabase is unreachable",
+    "Days/Hours/Minutes displayed as 2-digit zero-padded LED blocks",
+    "timer updates every second via setInterval with cleanup",
+    "when countdown reaches 0, launched state is shown instead of redirect loop",
+    "SUPABASE_SERVICE_ROLE_KEY never exposed to client bundle",
+    "all text uses next-intl i18n — no hardcoded strings",
+    "force-dynamic on CountdownPage prevents static rendering",
+    "unit tests pass for calcTimeLeft and CountdownDigitBlock",
+    "npm run build passes with 0 TypeScript errors",
+    "npm run lint passes with 0 errors"
+  ],
+  "touchpoints": [
+    "middleware.ts",
+    "app/countdown/page.tsx",
+    "utils/calc-time-left.ts",
+    "utils/supabase/get-countdown-date.ts",
+    "app/components/countdown/countdown-background.tsx",
+    "app/components/countdown/countdown-title.tsx",
+    "app/components/countdown/countdown-digit-block.tsx",
+    "app/components/countdown/countdown-timer.tsx",
+    "messages/vi.json",
+    "messages/en.json",
+    ".env.example"
+  ],
+  "blastRadius": [
+    "middleware.ts — prelaunch gate runs before auth guard, must not break /login flow",
+    "app_settings RLS — service role bypasses; key must stay server-side only"
+  ],
+  "contracts": [
+    "app_settings table has key=countdown_date with ISO 8601 timestamp value",
+    "PRELAUNCH_MODE env var controls redirect gate (string 'true' | anything else)"
+  ]
+}

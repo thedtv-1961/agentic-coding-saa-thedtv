@@ -9,6 +9,19 @@ const intlMiddleware = createIntlMiddleware(routing);
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Prelaunch gate — runs BEFORE auth guard so /countdown is public
+  const isPrelaunch = process.env.PRELAUNCH_MODE === "true";
+  const isCountdownRoute = pathname === "/countdown";
+  const isAuthRoute =
+    pathname.startsWith("/auth") || pathname === "/login";
+
+  if (isPrelaunch && !isCountdownRoute && !isAuthRoute) {
+    return NextResponse.redirect(new URL("/countdown", request.url));
+  }
+  if (!isPrelaunch && isCountdownRoute) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   // Auth guard: redirect authenticated users away from /login
   if (pathname === "/login") {
     let response = NextResponse.next({ request });
@@ -49,6 +62,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|fonts/|images/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|woff|woff2|ttf|eot)$).*)",
   ],
 };

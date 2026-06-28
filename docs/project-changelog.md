@@ -4,6 +4,16 @@
 
 ---
 
+## [0.4.0] — 2026-06-28
+
+### Added
+- Countdown Prelaunch Page (`/countdown`) — server-rendered, fetch `countdown_date` từ `app_settings` (Supabase service role)
+- Middleware prelaunch gate: `PRELAUNCH_MODE=true` redirect mọi route về `/countdown`
+- 4 UI components: `countdown-background`, `countdown-title`, `countdown-digit-block`, `countdown-timer` (client)
+- i18n keys cho countdown page (EN/VI)
+
+---
+
 ## [0.3.1] — 2026-06-28
 
 ### Changed
