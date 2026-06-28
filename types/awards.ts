@@ -1,53 +1,40 @@
-export type Award = {
-  id: string;
-  category:
-    | "top_talent"
-    | "top_project"
-    | "top_project_leader"
-    | "best_manager"
-    | "signature_creator"
-    | "mvp";
+export type AwardCategory = {
+  id: number;
+  name: string;
   title: string;
   description: string;
-  award_value?: string;
-  recipient_count?: number;
+  content: string;
+  image_url: string;
+  is_active: boolean;
 };
 
-export const CATEGORY_ORDER: Record<Award["category"], number> = {
-  top_talent: 0,
-  top_project: 1,
-  top_project_leader: 2,
-  best_manager: 3,
-  signature_creator: 4,
-  mvp: 5,
+export type Award = {
+  id: number;
+  category_id: number;
+  number_of_winners: number;
+  winner_unit: number | null; // 1=Cá nhân, 2=Tập thể, 3=Đơn vị, null=không áp dụng
+  prize_value: number; // raw VNĐ (bigint)
+  is_active: boolean;
+  award_categories: AwardCategory;
 };
 
-export const AWARD_META: Record<
-  Award["category"],
-  { image: string; slug: string }
-> = {
-  top_talent: {
-    image: "/images/awards/top-talent.png",
-    slug: "top-talent",
-  },
-  top_project: {
-    image: "/images/awards/top-project.png",
-    slug: "top-project",
-  },
-  top_project_leader: {
-    image: "/images/awards/top-project-leader.png",
-    slug: "top-project-leader",
-  },
-  best_manager: {
-    image: "/images/awards/best-manager.png",
-    slug: "best-manager",
-  },
-  signature_creator: {
-    image: "/images/awards/signature-2025-creator.png",
-    slug: "signature-2025-creator",
-  },
-  mvp: {
-    image: "/images/awards/mvp.png",
-    slug: "mvp",
-  },
+export const WINNER_UNIT_LABEL: Record<number, string> = {
+  1: "Cá nhân",
+  2: "Tập thể",
+  3: "Đơn vị",
 };
+
+export type GroupedAward = {
+  category: AwardCategory;
+  items: Award[];
+};
+
+export function nameToSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[()]/g, "")
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}

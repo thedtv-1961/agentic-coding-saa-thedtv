@@ -1,56 +1,25 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import AwardsSection from "@/app/components/home/awards-section";
-import type { Award } from "@/types/awards";
+import type { AwardCategory } from "@/types/awards";
 
-const mockAwards = [
-  {
-    id: "1",
-    category: "top_talent",
-    title: "Top Talent",
-    description: "Best individual performer",
-  },
-  {
-    id: "2",
-    category: "top_project",
-    title: "Top Project",
-    description: "Best project delivery",
-  },
-  {
-    id: "3",
-    category: "top_project_leader",
-    title: "Top Project Leader",
-    description: "Best project leader",
-  },
-  {
-    id: "4",
-    category: "best_manager",
-    title: "Best Manager",
-    description: "Outstanding manager",
-  },
-  {
-    id: "5",
-    category: "signature_creator",
-    title: "Signature Creator",
-    description: "Most creative individual",
-  },
-  {
-    id: "6",
-    category: "mvp",
-    title: "MVP",
-    description: "Most Valuable Person",
-  },
+const mockCategories: AwardCategory[] = [
+  { id: 1, name: "Top Talent", title: "Top Talent", description: "Best individual performer", content: "", image_url: "/images/awards/top-talent.png", is_active: true },
+  { id: 2, name: "Top Project", title: "Top Project", description: "Best project delivery", content: "", image_url: "/images/awards/top-project.png", is_active: true },
+  { id: 3, name: "Top Project Leader", title: "Top Project Leader", description: "Best project leader", content: "", image_url: "/images/awards/top-project-leader.png", is_active: true },
+  { id: 4, name: "Best Manager", title: "Best Manager", description: "Outstanding manager", content: "", image_url: "/images/awards/best-manager.png", is_active: true },
+  { id: 5, name: "Signature 2025 Creator", title: "Signature 2025 – Creator", description: "Most creative individual", content: "", image_url: "/images/awards/signature-2025-creator.png", is_active: true },
+  { id: 6, name: "MVP (Most Valuable Person)", title: "MVP (Most Valuable Person)", description: "Most valuable person", content: "", image_url: "/images/awards/mvp.png", is_active: true },
 ];
 
 vi.mock("next-intl/server", () => ({
   getTranslations: vi.fn(() => (key: string) => key),
 }));
 
-// Mock AwardCard to avoid testing its async rendering here (covered in award-card.test.tsx)
 vi.mock("@/app/components/home/award-card", () => ({
-  default: ({ award }: { award: Award }) => (
-    <a href={`/awards#${award.category}`} data-testid="award-card">
-      {award.title}
+  default: ({ category }: { category: AwardCategory }) => (
+    <a href={`/awards#${category.name}`} data-testid="award-card">
+      {category.name}
     </a>
   ),
 }));
@@ -60,7 +29,9 @@ vi.mock("@/utils/supabase/server", () => ({
     from: vi.fn(() => ({
       select: vi.fn(() => ({
         eq: vi.fn(() => ({
-          returns: vi.fn(() => ({ data: mockAwards, error: null })),
+          order: vi.fn(() => ({
+            returns: vi.fn(() => ({ data: mockCategories, error: null })),
+          })),
         })),
       })),
     })),
@@ -86,11 +57,11 @@ describe("AwardsSection", () => {
     expect(screen.getByText("awards_title")).toBeInTheDocument();
   });
 
-  it("renders each award title", async () => {
+  it("renders each award category name", async () => {
     const jsx = await AwardsSection();
     render(jsx);
-    for (const award of mockAwards) {
-      expect(screen.getByText(award.title)).toBeInTheDocument();
+    for (const category of mockCategories) {
+      expect(screen.getByText(category.name)).toBeInTheDocument();
     }
   });
 
@@ -100,7 +71,9 @@ describe("AwardsSection", () => {
       from: vi.fn(() => ({
         select: vi.fn(() => ({
           eq: vi.fn(() => ({
-            returns: vi.fn(() => ({ data: [], error: null })),
+            order: vi.fn(() => ({
+              returns: vi.fn(() => ({ data: [], error: null })),
+            })),
           })),
         })),
       })),

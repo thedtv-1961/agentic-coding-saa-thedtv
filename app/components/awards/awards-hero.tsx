@@ -24,8 +24,11 @@ export default async function AwardsHero() {
           className="w-auto max-h-40 md:max-h-52"
           priority
         />
-        <p className="text-white/80 text-base md:text-lg font-semibold tracking-widest uppercase">
+        <p className="text-white/80 text-base md:text-lg font-semibold tracking-widest">
           {t("hero_subtitle")}
+        </p>
+        <p className="text-[#FFEA9E] text-xl md:text-2xl font-black tracking-wide">
+          {t("section_title")}
         </p>
       </div>
     </section>

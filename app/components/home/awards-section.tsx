@@ -1,8 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { createClient } from "@/utils/supabase/server";
 import AwardCard from "./award-card";
-import type { Award } from "@/types/awards";
-import { CATEGORY_ORDER } from "@/types/awards";
+import type { AwardCategory } from "@/types/awards";
 
 export default async function AwardsSection() {
   const [t, supabase] = await Promise.all([
@@ -10,11 +9,12 @@ export default async function AwardsSection() {
     createClient(),
   ]);
 
-  const { data: awards } = await supabase
-    .from("awards")
-    .select("id,category,title,description")
-    .eq("year", 2025)
-    .returns<Award[]>();
+  const { data: categories } = await supabase
+    .from("award_categories")
+    .select("id, name, description, image_url, is_active")
+    .eq("is_active", true)
+    .order("id")
+    .returns<AwardCategory[]>();
 
   return (
     <section className="bg-zinc-950 py-20 px-6">
@@ -31,12 +31,9 @@ export default async function AwardsSection() {
 
         {/* Awards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {(awards ?? [])
-            .slice()
-            .sort((a, b) => (CATEGORY_ORDER[a.category] ?? 99) - (CATEGORY_ORDER[b.category] ?? 99))
-            .map((award) => (
-              <AwardCard key={award.id} award={award} />
-            ))}
+          {(categories ?? []).map((category) => (
+            <AwardCard key={category.id} category={category} />
+          ))}
         </div>
       </div>
     </section>

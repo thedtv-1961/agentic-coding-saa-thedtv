@@ -1,19 +1,19 @@
-import type { Award } from "@/types/awards";
-import { AWARD_META } from "@/types/awards";
+import type { GroupedAward } from "@/types/awards";
+import { nameToSlug } from "@/types/awards";
 import AwardDetailCard from "./award-detail-card";
 
 interface Props {
-  awards: Award[];
+  grouped: GroupedAward[];
 }
 
-export default function AwardsDetailList({ awards }: Props) {
+export default function AwardsDetailList({ grouped }: Props) {
   return (
     <div className="flex flex-col gap-20">
-      {awards.map((award) => {
-        const slug = AWARD_META[award.category]?.slug ?? award.category;
+      {grouped.map((g, index) => {
+        const slug = nameToSlug(g.category.name);
         return (
-          <section key={award.id} id={slug} className="scroll-mt-28">
-            <AwardDetailCard award={award} />
+          <section key={g.category.id} id={slug} className="scroll-mt-28">
+            <AwardDetailCard grouped={g} reverse={index % 2 !== 0} />
           </section>
         );
       })}
