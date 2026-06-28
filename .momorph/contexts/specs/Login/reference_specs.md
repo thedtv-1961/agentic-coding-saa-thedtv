@@ -1,28 +1,35 @@
 # Reference Specs - Login
 
-## C: Background Key Visual (662:14388)
+Screen: Login | screenId: GzbNeVGJHz | fileKey: 9ypp4enmFmdK3YAFJLIu6C
+
+## Item 1: mms_A_Header
+
 No related design items returned.
 
-## A: Header (662:14391)
+## Item 1.1: mms_A.1_Logo
+
 No related design items returned.
 
-## B: Main Content (662:14393)
+## Item 1.2: mms_A.2_Language
+
 No related design items returned.
 
-## B.1: Key Visual (662:14395)
+## Item 2: mms_B_Bìa
+
 No related design items returned.
 
-## B.3: Login Button (662:14425)
+## Item 2.1: mms_B.1_Key Visual
+
 No related design items returned.
 
-## D: Footer (662:14447)
+## Item 2.2: mms_Frame 550
+
 No related design items returned.
 
-## B.2: Welcome Text (662:14753)
+## Item 2.2.1: mms_B.3_Login
+
 No related design items returned.
 
-## A.2: Language Switcher (I662:14391;186:1601)
-No related design items returned.
+## Item 3: mms_D_Footer
 
-## A.1: Logo (I662:14391;186:2166)
 No related design items returned.

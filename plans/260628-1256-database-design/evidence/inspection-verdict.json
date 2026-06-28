@@ -1,0 +1,24 @@
+{
+  "score": 9.5,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "supabase db reset applies all 7 migrations without errors — verified: all 7 migrations applied on 2026-06-28, exit 0",
+    "all 9 tables have rls enabled — verified: each CREATE TABLE followed by ALTER TABLE ... ENABLE ROW LEVEL SECURITY in migrations 001-006",
+    "nominations insert blocked outside nomination period at db level — verified: nominations_insert policy includes now() between start_at and end_at subquery in migration 005",
+    "anonymous kudos sender_id not leaked in audit logs — verified: log_kudos_insert strips sender_id from new_data when is_anonymous=true in migration 006",
+    "hero_level updated automatically after kudos insert — verified: on_kudos_inserted_update_hero trigger with FOR UPDATE lock in migration 006",
+    "npm run build passes with no typescript errors — verified: build output shows 5 routes, no errors",
+    "src/types/database.types.ts exports all tables and views — verified: file exports profiles, kudos, hashtags, kudos_hashtags, kudos_images, awards, app_settings, nomination_periods, nominations, audit_logs, nominations_count_by_award"
+  ],
+  "regressionChecked": [
+    "package.json: only added gen:types script, no existing scripts modified",
+    "No existing src/ files reference database types yet — new file only",
+    "middleware.ts, app/login/page.tsx, app/auth/callback/route.ts: no database-level changes, not touched by this plan",
+    "Supabase auth flow unchanged — trigger only adds INSERT ON CONFLICT DO NOTHING, no existing behavior modified"
+  ],
+  "contractStatus": "VERIFIED",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

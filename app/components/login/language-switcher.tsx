@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 
 const LOCALES = [
@@ -11,17 +10,15 @@ const LOCALES = [
 ] as const;
 
 export default function LanguageSwitcher() {
-  const router = useRouter();
   const currentLocale = useLocale();
   const [open, setOpen] = useState(false);
-  const [, startTransition] = useTransition();
 
   const current = LOCALES.find((l) => l.code === currentLocale) ?? LOCALES[0];
 
   function selectLocale(code: string) {
     document.cookie = `NEXT_LOCALE=${code}; path=/; max-age=31536000`;
     setOpen(false);
-    startTransition(() => router.refresh());
+    window.location.reload();
   }
 
   return (

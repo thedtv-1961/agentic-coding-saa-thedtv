@@ -1,0 +1,7 @@
+{
+  "mode": "single",
+  "intents": [
+    "Design and implement the complete SAA 2025 database schema (core tables, RLS policies, triggers, seed data, and extended features for nominations/voting and audit)"
+  ],
+  "justification": ""
+}

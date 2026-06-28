@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   SAA Design Tokens — nguồn: Figma variable collection "Color"
+   fileKey: 9ypp4enmFmdK3YAFJLIu6C
+   ============================================================ */
+
+@theme {
+  /* --- Backgrounds (từ tối → sáng hơn) --- */
+  --color-bg:           #00101a; /* Details-Background  — nền trang chính */
+  --color-bg-surface:   #00070c; /* Details-Container-2 — dropdown, lớp sâu nhất */
+  --color-bg-container: #101417; /* Details-Container   — card, modal */
+  --color-bg-update:    #1e2d39; /* BG-Update           — vùng nổi bật phụ */
+
+  /* --- Divider / Border --- */
+  --color-divider:      #2e3940; /* Details-Divider */
+  --color-border:       #998c5f; /* Details-Border  — viền vàng đồng */
+
+  /* --- Primary accent (vàng gold) --- */
+  --color-primary:      #ffea9e; /* Details-Text-Primary-1 */
+  --color-primary-hover:#fff8e1; /* Details-PrimaryButton-Hover */
+  --color-on-primary:   #00101a; /* Details-Text-Primary-2 — text trên nền primary */
+
+  /* --- Text --- */
+  --color-text-white:   #ffffff; /* Details-Text-Secondary-1 */
+  --color-text-muted:   #999999; /* Details-Text-Secondary-2 */
+
+  /* --- State / Status --- */
+  --color-error:        #b3261e; /* Details-Error */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Body mặc định — SAA luôn dùng dark theme */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-white);
+  font-family: Montserrat, Arial, sans-serif;
 }

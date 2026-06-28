@@ -4,6 +4,19 @@
 
 ---
 
+## [0.3.0] — 2026-06-28
+
+### Added
+- Database schema SAA 2025: 9 tables (profiles, kudos, hashtags, kudos_hashtags, kudos_images, awards, app_settings, nomination_periods, nominations, audit_logs)
+- RLS policies trên tất cả tables
+- Trigger functions: `handle_new_user`, `update_hero_level`, `log_kudos_insert`, `log_nomination_insert` (tất cả SECURITY DEFINER)
+- Performance indexes: BRIN index trên `audit_logs.performed_at`, composite indexes trên nominations và kudos
+- EXCLUDE constraint (btree_gist) trên `nomination_periods` để ngăn overlap
+- Seed data: 10 hashtags, 6 awards (SAA 2025 categories), app_settings defaults
+- Feature spec: `docs/features/F001_DatabaseDesignSaa2025/`
+
+---
+
 ## [0.2.0] — 2026-06-21
 
 ### Added

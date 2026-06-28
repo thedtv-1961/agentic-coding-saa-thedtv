@@ -13,7 +13,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (user) redirect("/");
+  if (user) redirect("/todo");
 
   const { error } = await searchParams;
 

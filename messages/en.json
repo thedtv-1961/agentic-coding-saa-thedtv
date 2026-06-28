@@ -8,5 +8,8 @@
     "language_label_vn": "VN",
     "language_label_en": "EN",
     "error_message": "Login failed. Please try again."
+  },
+  "todo": {
+    "coming_soon": "Feature is under development."
   }
 }

@@ -1,0 +1,14 @@
+No,itemId,itemName,nameJP,nameTrans,itemType,itemSubtype,buttonType,dataType,required,format,minLength,maxLength,defaultValue,validationNote,description,userAction,transitionNote,databaseTable,databaseColumn,databaseNote,qa
+"A","313:9138","Widget Button","ウィジェットボタン","Floating Widget Button","button",,"icon_text",,"false",,,,,,,"Mục đích và Ngữ cảnh: Nút nổi cố định (fixed) cho phép người dùng thực hiện hành động nhanh trên màn hình.
+Thành phần Hiển thị: Icon cây bút (viết kudos) + ký tự '/' + icon đỏ-đen (thể lệ SAA) trên nền viên vàng (41x32px); có hiệu ứng bóng khi hover.
+Chức năng & Logic: Mặc định thu gọn khi vào màn hình; click mở 2 sub-button với animation nhanh; click icon × thu gọn về trạng thái ban đầu.","on_click","Vị trí fixed; mặc định thu gọn; click hiển thị 2 sub-button với animation nhanh; click icon × thu lại",,,,,
+"A.1","I313:9138;214:3839;186:1935","icon viết kudos","クドス作成アイコン","Write Kudos Icon","button",,"icon_text",,"false",,,,,,,"Mục đích và Ngữ cảnh: Nút icon con trong bộ floating action button cho phép viết kudos.
+Thành phần Hiển thị: Hiển thị icon viết kudos bên trong nút nổi Widget Button.
+Chức năng & Logic: Click chuyển sang màn hình ""phim nổi chức năng 2"" để viết kudos.","on_click","Điều hướng đến màn hình ""Floating Action Button - phim nổi chức năng 2""",,,,,"- Icon cụ thể nào được dùng cho 'viết kudos'?
+- Nút này có label text bên cạnh icon không?
+- Trạng thái disabled khi nào?"
+"A.2","I313:9138;214:3839;186:1766","icon thể lệ saa","SAA規約アイコン","SAA Rules Icon","button",,"icon_text",,"false",,,,,,,"Mục đích và Ngữ cảnh: Nút icon con trong bộ floating action button cho phép xem thể lệ SAA.
+Thành phần Hiển thị: Hiển thị icon thể lệ SAA bên trong nút nổi; tương tự mms_C.2_icon đã chọn.
+Chức năng & Logic: Click chuyển sang màn hình ""phim nổi chức năng 2"" để xem thể lệ SAA.","on_click","Điều hướng đến màn hình ""Floating Action Button - phim nổi chức năng 2""",,,,,"- Icon cụ thể nào được dùng cho 'thể lệ SAA'?
+- Nút này có label text bên cạnh icon không?
+- Trạng thái khi đang ở trang thể lệ (active state)?"

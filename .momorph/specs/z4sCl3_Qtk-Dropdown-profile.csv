@@ -1,0 +1,10 @@
+No,itemId,itemName,nameJP,nameTrans,itemType,itemSubtype,buttonType,dataType,required,format,minLength,maxLength,defaultValue,validationNote,description,userAction,transitionNote,databaseTable,databaseColumn,databaseNote,qa
+"A","666:9601","Dropdown-List","ドロップダウンリスト","Dropdown List","others","dropdown_menu",,,"false",,,,,,"Mục đích và Ngữ cảnh: Container dropdown menu cho tài khoản người dùng; xuất hiện khi click vào avatar trên header
+Thành phần hiển thị: Nền tối; 2 mục menu: Profile (icon user; nền sáng và glow) và Logout (text với chevron phải)
+Chức năng & Logic: Click avatar: mở/đóng menu (không có animation); Click 'Profile': không có sự kiện; Click 'Logout': logout ngay và điều hướng về Homepage SAA; Click ngoài vùng: đóng menu","on_click","Không có animation; click ngoài vùng dropdown sẽ đóng menu",,,,
+"A.1","I666:9601;563:7844","Profile","プロフィール","Profile","button",,"icon_text",,"false",,,,,,"Mục đích và Ngữ cảnh: Mục menu 'Profile' trong dropdown tài khoản; hiển thị active khi người dùng đang ở trang hồ sơ
+Thành phần hiển thị: Label 'Profile'; icon user bên phải; nền highlight và hiệu ứng glow khi active; kích thước 119x56px
+Chức năng & Logic: Click: không có sự kiện (trang Profile không được triển khai); Hover/focus: hiệu ứng nổi nền sáng; State active: nền sáng glow nhẹ; cursor pointer","on_click","Click không có sự kiện (trang Profile không được triển khai)",,,,
+"A.2","I666:9601;563:7868","Logout","ログアウト","Logout","button",,"icon_text",,"false",,,,,,"Mục đích và Ngữ cảnh: Mục menu 'Logout' trong dropdown tài khoản để đăng xuất khỏi hệ thống
+Thành phần hiển thị: Label 'Logout'; icon chevron phải
+Chức năng & Logic: Click: logout ngay (không có confirmation dialog) và đóng dropdown; điều hướng về trang Homepage SAA; Hover: highlight nền","on_click","Logout ngay (không có confirmation dialog); điều hướng về trang Homepage SAA",,,,

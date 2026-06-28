@@ -1,3 +1,6 @@
 {
-  "codingLevel": 2
+  "codingLevel": 1,
+  "takumi": {
+    "sddMode": "on"
+  }
 }

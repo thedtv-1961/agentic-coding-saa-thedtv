@@ -1,0 +1,13 @@
+No,itemId,itemName,nameJP,nameTrans,itemType,itemSubtype,buttonType,dataType,required,format,minLength,maxLength,defaultValue,validationNote,description,userAction,transitionNote,databaseTable,databaseColumn,databaseNote,qa
+"A","I313:9140;214:3799","Button thể lệ","規約ボタン","Rules Button","button",,"icon_text",,"false",,,,,,,"Mục đích và Ngữ cảnh: Button phụ của nhóm FAB cho phép người dùng xem thể lệ SAA dạng drawer bên phải.
+Thành phần Hiển thị: Icon đỏ-đen (thể lệ SAA) bên trái; label 'Thể lệ'; kích thước 149x64px; nền vàng nhạt; bo góc.
+Chức năng & Logic: Click mở drawer bên phải với animation nhanh (slide-in từ phải); có backdrop; đóng bằng click ngoài hoặc nhấn Esc (slide-out sang phải); không có active state khi drawer mở; hover tăng nhẹ shadow.","on_click","Mở drawer bên phải màn hình (frame 3204:6051); slide-in từ phải; có backdrop; đóng khi click ngoài hoặc nhấn Esc; slide-out sang phải",,,,,
+"B","I313:9140;214:3732","Button viết kudos","クドス作成ボタン","Write Kudos Button","button",,"icon_text",,"false",,,,,,,"Mục đích và Ngữ cảnh: Button phụ của nhóm FAB cho phép người dùng soạn và gửi lời khen kudos cho đồng nghiệp.
+Thành phần Hiển thị: Icon và label 'Viết KUDOS'; nền vàng; có shadow.
+Chức năng & Logic: Click mở modal/khung soạn KUDOS; hover tăng bóng nhẹ và đổi độ sáng.","on_click","Mở màn hình ""Viết Kudo"" (frame 520:11602)",,,,,"- Mở modal overlay hay điều hướng sang trang mới?
+- Kích thước button (px)?
+- Trạng thái khi người dùng chưa có quyền viết kudos?"
+"C","I313:9140;214:3827","Button hủy","キャンセルボタン","Cancel Button","button",,"icon_only",,"false",,,,,,,"Mục đích và Ngữ cảnh: Nút nổi tròn chỉ có icon × để đóng nhóm FAB và trở về trạng thái ban đầu.
+Thành phần Hiển thị: Hình tròn 56x56px; màu đỏ; icon '×' trắng ở trung tâm; không có label text; có shadow nhẹ.
+Chức năng & Logic: Click thu gọn FAB với animation; ẩn các sub-button; quay về trạng thái nút nổi ban đầu (Screen 1).","on_click","Thu gọn FAB; ẩn 2 sub-button với animation; trả về trạng thái ban đầu (Screen 1)",,,,,"- Chi tiết animation thu gọn FAB (duration; easing)?
+- Nút × chỉ hiển thị khi FAB đang mở?"

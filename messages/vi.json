@@ -8,5 +8,8 @@
     "language_label_vn": "VN",
     "language_label_en": "EN",
     "error_message": "Đăng nhập thất bại. Vui lòng thử lại."
+  },
+  "todo": {
+    "coming_soon": "Tính năng đang được phát triển."
   }
 }

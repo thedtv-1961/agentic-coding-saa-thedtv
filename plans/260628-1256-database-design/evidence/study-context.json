@@ -1,0 +1,28 @@
+{
+  "task": "Design and implement the complete SAA 2025 database schema: 9 tables (profiles, kudos, hashtags, kudos_hashtags, kudos_images, awards, app_settings, nomination_periods, nominations, audit_logs), RLS policies, triggers, seed data, performance indexes, and TypeScript types",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "supabase db reset applies all 7 migrations without errors",
+    "All 9 tables have RLS enabled",
+    "nominations INSERT blocked outside nomination period at DB level",
+    "anonymous kudos sender_id not leaked in audit logs",
+    "hero_level updated automatically after kudos insert",
+    "npm run build passes with no TypeScript errors",
+    "src/types/database.types.ts exports all tables and views"
+  ],
+  "touchpoints": [
+    "supabase/migrations/",
+    "src/types/database.types.ts",
+    "package.json",
+    "docs/features/F001_DatabaseDesignSaa2025/"
+  ],
+  "blastRadius": [
+    "No existing app code uses database types yet — new file, no regressions possible",
+    "package.json scripts: added gen:types only"
+  ],
+  "contracts": [
+    "Supabase Auth: profiles.id FK → auth.users(id) ON DELETE CASCADE",
+    "RLS: authenticated role required for all table access",
+    "Triggers: SECURITY DEFINER set search_path = '' on all trigger functions"
+  ]
+}
