@@ -11,5 +11,12 @@
   },
   "todo": {
     "coming_soon": "Tính năng đang được phát triển."
+  },
+  "countdown": {
+    "title": "Sự kiện sẽ bắt đầu sau",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "launched": "Sự kiện đã bắt đầu!"
   }
 }

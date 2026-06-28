@@ -1,0 +1,30 @@
+{
+  "score": 8.5,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "PRELAUNCH_MODE=true redirects all routes to /countdown without loop — verified: middleware gate uses === 'true' check; /countdown excluded from redirect; post-fix build confirmed no loop",
+    "/countdown route is accessible without authentication — verified: prelaunch gate runs before auth guard in middleware.ts",
+    "countdown_date is fetched from app_settings table via service role — verified: get-countdown-date.ts uses SUPABASE_SERVICE_ROLE_KEY with createClient",
+    "fallback date used when Supabase is unreachable — verified: get-countdown-date.ts returns FALLBACK_DATE on error or missing data",
+    "Days/Hours/Minutes displayed as 2-digit zero-padded LED blocks — verified: countdown-digit-block.tsx uses padStart(2,'0') and clamps at 99; unit tests confirm",
+    "timer updates every second via setInterval with cleanup — verified: countdown-timer.tsx setInterval(1000) with return () => clearInterval(tick)",
+    "when countdown reaches 0, launched state is shown instead of redirect loop — verified: isLaunched state shows i18n 'launched' message; router.push removed",
+    "SUPABASE_SERVICE_ROLE_KEY never exposed to client bundle — verified: used only in server-only async function get-countdown-date.ts, no NEXT_PUBLIC_ prefix",
+    "all text uses next-intl i18n — no hardcoded strings — verified: countdown-title uses getTranslations; countdown-timer uses useTranslations; all labels from messages/",
+    "force-dynamic on CountdownPage prevents static rendering — verified: export const dynamic = 'force-dynamic' added to app/countdown/page.tsx",
+    "unit tests pass for calcTimeLeft and CountdownDigitBlock — verified: 7/7 countdown tests pass (3 calcTimeLeft, 4 CountdownDigitBlock)",
+    "npm run build passes with 0 TypeScript errors — verified: build exit 0, /countdown route shown as ƒ Dynamic",
+    "npm run lint passes with 0 errors — verified: lint exit 0, 0 errors"
+  ],
+  "regressionChecked": [
+    "/login route — prelaunch gate has isAuthRoute guard; /login still reachable without PRELAUNCH_MODE redirect",
+    "auth flow — middleware order preserved: prelaunch gate → auth guard → session update",
+    "existing 22 login tests — all still pass after middleware changes",
+    "app_settings RLS — service role usage is server-side only; anon/authenticated paths unchanged"
+  ],
+  "contractStatus": "VERIFIED",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'DSEG7Classic';
+  src: url('/fonts/DSEG7Classic-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
 /* ============================================================
    SAA Design Tokens — nguồn: Figma variable collection "Color"
    fileKey: 9ypp4enmFmdK3YAFJLIu6C

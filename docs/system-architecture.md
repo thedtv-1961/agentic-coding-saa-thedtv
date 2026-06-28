@@ -7,7 +7,8 @@ Next.js 15 App Router + Supabase Auth + Cloudflare Workers.
 ```
 Browser
   └─ Next.js App Router (Cloudflare Workers)
-       ├─ middleware.ts         — auth check + i18n locale redirect
+       ├─ middleware.ts         — prelaunch gate (PRELAUNCH_MODE) → auth check → i18n locale redirect
+       ├─ app/countdown/        — prelaunch countdown page (public, server-rendered)
        ├─ app/[locale]/         — localised routes (EN/VI)
        │   ├─ layout.tsx        — root layout + NextIntlClientProvider
        │   ├─ page.tsx          — home (protected)
@@ -18,6 +19,10 @@ Browser
             ├─ server.ts        — server client (createServerClient)
             └─ middleware.ts    — session refresh helper
 ```
+
+## Prelaunch Gate
+
+Khi `PRELAUNCH_MODE=true` (env var), middleware redirect **mọi request** về `/countdown` (trừ `/countdown` chính nó và static assets). Trang `/countdown` là Server Component, fetch `countdown_date` từ `app_settings` table qua Supabase service role client (bypass RLS).
 
 ## Auth Flow
 

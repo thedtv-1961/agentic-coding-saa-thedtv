@@ -11,5 +11,12 @@
   },
   "todo": {
     "coming_soon": "Feature is under development."
+  },
+  "countdown": {
+    "title": "The event will start in",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "launched": "The event has started!"
   }
 }
