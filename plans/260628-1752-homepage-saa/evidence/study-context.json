@@ -1,0 +1,47 @@
+{
+  "task": "Implement Homepage SAA 2025: sticky header with hamburger nav, hero section with countdown, root-further section, awards grid from Supabase DB, kudos promo, footer, widget button FAB, auth guard on / route, i18n keys for vi/en",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "Header renders on desktop: logo + 3 nav links + bell + lang switcher + user avatar",
+    "Header mobile: hamburger icon opens drawer with nav links",
+    "Footer renders: logo, 4 nav links, copyright text",
+    "Widget button renders as yellow pill fixed bottom-right",
+    "Hero section renders with ROOT FURTHER heading, countdown timer, event info, 2 CTA buttons",
+    "Root Further section renders with decorative background text and quote",
+    "Awards section fetches 6 awards from Supabase and renders 3-col grid on desktop",
+    "Award card links to /awards#slug with correct slug per category",
+    "Kudos section renders with 2-col layout on desktop",
+    "Unauthenticated user accessing / is redirected to /login",
+    "Authenticated user accessing / sees the full homepage",
+    "All text goes through i18n keys in vi.json and en.json",
+    "npm run build passes with 0 errors",
+    "npm run test passes with all tests green",
+    "npm run lint passes with 0 errors"
+  ],
+  "touchpoints": [
+    "app/page.tsx",
+    "app/components/shared/header.tsx",
+    "app/components/shared/header-nav.tsx",
+    "app/components/shared/footer.tsx",
+    "app/components/shared/widget-button.tsx",
+    "app/components/home/hero-section.tsx",
+    "app/components/home/root-further-section.tsx",
+    "app/components/home/awards-section.tsx",
+    "app/components/home/award-card.tsx",
+    "app/components/home/kudos-section.tsx",
+    "types/awards.ts",
+    "middleware.ts",
+    "messages/vi.json",
+    "messages/en.json"
+  ],
+  "blastRadius": [
+    "middleware.ts: changes affect all routes — /login redirect logic preserved, / auth guard added",
+    "messages/*.json: adding keys only — no existing keys modified"
+  ],
+  "contracts": [
+    "CountdownTimer(targetDate: string) — reused from countdown page, no changes",
+    "LanguageSwitcher() — reused from login page, no changes",
+    "createClient() from utils/supabase/server — unchanged server helper",
+    "awards table: id, category, title, description, year columns"
+  ]
+}

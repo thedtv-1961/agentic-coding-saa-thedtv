@@ -1,0 +1,25 @@
+{
+  "commands": [
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Next.js 15 build — 0 errors, 3 pre-existing warnings in login test files",
+      "ts": "2026-06-28T18:17:36+07:00"
+    },
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Vitest — 39 passed, 0 failed across 9 test files",
+      "ts": "2026-06-28T18:17:36+07:00"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "ESLint — 0 errors, 3 pre-existing warnings in login test files (not in new code)",
+      "ts": "2026-06-28T18:17:36+07:00"
+    }
+  ]
+}

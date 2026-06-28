@@ -22,38 +22,55 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Auth guard: redirect authenticated users away from /login
-  if (pathname === "/login") {
-    let response = NextResponse.next({ request });
-
-    const supabase = createServerClient(
+  // Helper: create a lightweight Supabase client for auth checks in middleware
+  function makeSupabaseClient(req: NextRequest, res: { current: NextResponse }) {
+    return createServerClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_PUBLISHABLE_KEY!,
       {
         cookies: {
-          getAll: () => request.cookies.getAll(),
+          getAll: () => req.cookies.getAll(),
           setAll: (cookiesToSet) => {
             cookiesToSet.forEach(({ name, value }) =>
-              request.cookies.set(name, value),
+              req.cookies.set(name, value),
             );
-            response = NextResponse.next({ request });
+            res.current = NextResponse.next({ request: req });
             cookiesToSet.forEach(({ name, value, options }) =>
-              response.cookies.set(name, value, options),
+              res.current.cookies.set(name, value, options),
             );
           },
         },
       },
     );
+  }
 
+  // Auth guard: redirect authenticated users away from /login
+  if (pathname === "/login") {
+    const res = { current: NextResponse.next({ request }) };
+    const supabase = makeSupabaseClient(request, res);
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (user) {
       return NextResponse.redirect(new URL("/todo", request.url));
     }
+    // Return intlMiddleware response so locale headers/cookies are applied
+    return intlMiddleware(request);
+  }
 
-    intlMiddleware(request);
-    return response;
+  // Auth guard: protect homepage — unauthenticated users go to /login.
+  // When authenticated, return the session-refreshed response directly to
+  // avoid a second Supabase client call via updateSession.
+  if (pathname === "/") {
+    const res = { current: NextResponse.next({ request }) };
+    const supabase = makeSupabaseClient(request, res);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    return res.current;
   }
 
   // All other routes: refresh Supabase session

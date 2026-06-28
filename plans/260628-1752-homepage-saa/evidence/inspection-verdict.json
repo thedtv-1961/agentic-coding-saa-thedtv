@@ -1,0 +1,36 @@
+{
+  "score": 9,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "Header renders on desktop: logo + 3 nav links + bell + lang switcher + user avatar",
+    "Header mobile: hamburger icon opens drawer with nav links",
+    "Footer renders: logo, 4 nav links, copyright text",
+    "Widget button renders as yellow pill fixed bottom-right",
+    "Hero section renders with ROOT FURTHER heading, countdown timer, event info, 2 CTA buttons",
+    "Root Further section renders with decorative background text and quote",
+    "Awards section fetches 6 awards from Supabase and renders 3-col grid on desktop",
+    "Award card links to /awards#slug with correct slug per category",
+    "Kudos section renders with 2-col layout on desktop",
+    "Unauthenticated user accessing / is redirected to /login",
+    "Authenticated user accessing / sees the full homepage",
+    "All text goes through i18n keys in vi.json and en.json",
+    "npm run build passes with 0 errors",
+    "npm run test passes with all tests green",
+    "npm run lint passes with 0 errors"
+  ],
+  "regressionChecked": [
+    "middleware.ts: /login guard still redirects authenticated users to /todo — logic unchanged",
+    "middleware.ts: PRELAUNCH gate still fires before auth guards — order preserved",
+    "middleware.ts: /countdown redirect still works when PRELAUNCH_MODE=false",
+    "middleware.ts: intlMiddleware return now correctly returned for /login branch (fix applied)",
+    "middleware.ts: double Supabase client eliminated — / returns session-refreshed response directly (fix applied)",
+    "messages/*.json: all existing login/countdown/todo keys unchanged — no key renames",
+    "CountdownTimer: used as-is with targetDate prop — no modification to existing component",
+    "LanguageSwitcher: imported directly, no changes to existing component"
+  ],
+  "contractStatus": "VERIFIED",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

@@ -33,7 +33,7 @@ Thực hành nội bộ Sun* sử dụng MoMorph + Claude Code để generate co
 - [x] i18n keys EN/VI
 
 ### Phase 2 — Core Features 🔄 In Progress
-- [ ] Home page sau khi đăng nhập
+- [x] Home page sau khi đăng nhập (Hero/Keyvisual, Root Further, Awards, Kudos sections; shared Header/Footer/Widget Button)
 - [ ] User profile
 - [ ] Navigation / layout chính
 
