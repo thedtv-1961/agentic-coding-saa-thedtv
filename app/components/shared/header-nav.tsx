@@ -17,9 +17,9 @@ export default function HeaderNav({ userAvatarUrl }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "/about", label: t("nav_about") },
+    { href: "/", label: t("nav_about") },
     { href: "/awards", label: t("nav_awards") },
-    { href: "/kudos", label: t("nav_kudos") },
+    { href: "", label: t("nav_kudos") },
   ];
 
   return (

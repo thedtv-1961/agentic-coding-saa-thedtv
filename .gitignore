@@ -79,3 +79,4 @@ my-docs/
 CLAUDE.local.md
 !.claude/settings.json
 !.claude/.tkm.json
+!.claude/rules/ui-implementation-checklist.md

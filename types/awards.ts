@@ -9,6 +9,17 @@ export type Award = {
     | "mvp";
   title: string;
   description: string;
+  award_value?: string;
+  recipient_count?: number;
+};
+
+export const CATEGORY_ORDER: Record<Award["category"], number> = {
+  top_talent: 0,
+  top_project: 1,
+  top_project_leader: 2,
+  best_manager: 3,
+  signature_creator: 4,
+  mvp: 5,
 };
 
 export const AWARD_META: Record<

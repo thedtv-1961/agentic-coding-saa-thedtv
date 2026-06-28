@@ -83,10 +83,8 @@ export async function middleware(request: NextRequest) {
     return intlMiddleware(request);
   }
 
-  // Auth guard: protect homepage — unauthenticated users go to /login.
-  // When authenticated, return the session-refreshed response directly to
-  // avoid a second Supabase client call via updateSession.
-  if (pathname === "/") {
+  // Auth guard: protect homepage and awards page — unauthenticated users go to /login.
+  if (pathname === "/" || pathname.startsWith("/awards")) {
     const res = { current: NextResponse.next({ request }) };
     const supabase = makeSupabaseClient(request, res);
     const {

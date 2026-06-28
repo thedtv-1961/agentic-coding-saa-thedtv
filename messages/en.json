@@ -29,6 +29,15 @@
     "language_label": "Language",
     "account_label": "Account"
   },
+  "awards": {
+    "caption": "Sun* Annual Awards 2025",
+    "section_title": "SAA 2025 Award System",
+    "hero_subtitle": "Sun* Annual Award 2025",
+    "quantity_label": "Number of awards",
+    "value_label": "Award value",
+    "nav_label": "Award categories",
+    "nav_placeholder": "Select a category"
+  },
   "home": {
     "hero_title": "ROOT FURTHER",
     "hero_coming_soon": "Comming soon",

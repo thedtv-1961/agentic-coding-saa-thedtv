@@ -2,16 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/utils/supabase/server";
 import AwardCard from "./award-card";
 import type { Award } from "@/types/awards";
-
-// Display order matches Figma design
-const CATEGORY_ORDER: Record<Award["category"], number> = {
-  top_talent: 0,
-  top_project: 1,
-  top_project_leader: 2,
-  best_manager: 3,
-  signature_creator: 4,
-  mvp: 5,
-};
+import { CATEGORY_ORDER } from "@/types/awards";
 
 export default async function AwardsSection() {
   const [t, supabase] = await Promise.all([
