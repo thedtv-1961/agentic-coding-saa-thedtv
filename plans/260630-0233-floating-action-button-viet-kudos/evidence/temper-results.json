@@ -1,0 +1,18 @@
+{
+  "commands": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "78 passed across 14 test files (image-upload: 5, submit-kudos-validation: 9, widget-button: 9, plus 55 existing tests)",
+      "ts": "2026-06-30T03:00:33.000Z"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Next.js build completed with 0 errors — pages: /, /awards, /countdown, /login, /todo, /auth/callback all compiled",
+      "ts": "2026-06-30T03:01:15.000Z"
+    }
+  ]
+}

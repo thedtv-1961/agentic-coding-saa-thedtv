@@ -38,6 +38,37 @@
     "nav_label": "Danh mục giải thưởng",
     "nav_placeholder": "Chọn hạng mục"
   },
+  "drawer": {
+    "close": "Đóng",
+    "write_kudos": "Viết KUDOS",
+    "the_le_title": "Thể lệ SAA 2025"
+  },
+  "fab": {
+    "rules_label": "Thể lệ",
+    "write_kudos_label": "Viết KUDOS",
+    "cancel_label": "Đóng",
+    "menu_label": "Menu"
+  },
+  "kudos": {
+    "modal_title": "Gửi lời cám ơn và ghi nhận đến đồng đội",
+    "recipient_label": "Người nhận",
+    "recipient_placeholder": "Tìm kiếm",
+    "recipient_required": "Vui lòng chọn người nhận",
+    "content_placeholder": "Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!",
+    "content_required": "Vui lòng nhập nội dung lời cảm ơn",
+    "content_hint": "Bạn có thể \"@ + tên\" để nhắc tới đồng nghiệp khác",
+    "hashtag_label": "Hashtag",
+    "hashtag_add": "+ Hashtag",
+    "hashtag_max": "Tối đa 5",
+    "hashtag_required": "Vui lòng thêm ít nhất 1 hashtag",
+    "image_label": "Image",
+    "image_add": "+ Image",
+    "image_max": "Tối đa 5",
+    "anonymous_label": "Gửi lời cám ơn và ghi nhận ẩn danh",
+    "cancel": "Hủy",
+    "submit": "Gửi",
+    "community_standards": "Tiêu chuẩn cộng đồng"
+  },
   "home": {
     "hero_title": "ROOT FURTHER",
     "hero_coming_soon": "Comming soon",

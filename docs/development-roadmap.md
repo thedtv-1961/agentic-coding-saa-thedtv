@@ -34,6 +34,11 @@ Thực hành nội bộ Sun* sử dụng MoMorph + Claude Code để generate co
 
 ### Phase 2 — Core Features 🔄 In Progress
 - [x] Home page sau khi đăng nhập (Hero/Keyvisual, Root Further, Awards, Kudos sections; shared Header/Footer/Widget Button)
+- [x] FAB + Thể Lệ drawer (layout-level cho tất cả protected pages)
+- [x] Viết KUDOS modal — form submit kudos với recipient autocomplete, rich text editor, hashtag picker, image upload, anonymous toggle
+- [x] Server actions: search profiles, get hashtags, submit kudos
+- [x] Supabase Storage bucket `kudos-images`
+- [x] `(protected)` route group — auth-guarded layout với FAB
 - [ ] User profile
 - [ ] Navigation / layout chính
 

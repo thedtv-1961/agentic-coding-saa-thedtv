@@ -1,0 +1,37 @@
+{
+  "score": 8,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "FAB displays at bottom-right on homepage and awards page",
+    "Click collapsed button expands FAB showing 3 sub-buttons with animation",
+    "Click × collapses FAB back to collapsed state",
+    "Click outside FAB while expanded collapses it",
+    "Click Thể Lệ opens right-side drawer, FAB closes",
+    "Thể Lệ drawer slides in from right with animation",
+    "Escape key closes Thể Lệ drawer",
+    "Click backdrop closes Thể Lệ drawer",
+    "Viết KUDOS button in FAB opens modal, FAB closes",
+    "Viết KUDOS button in drawer footer closes drawer and opens modal",
+    "Kudos modal has recipient autocomplete searching profiles table",
+    "Kudos modal has rich text editor with B/I/S/OL/Link/Quote toolbar",
+    "Kudos modal has hashtag picker: min 1, max 5, from hashtags table",
+    "Kudos modal has image upload: max 5, JPG/PNG/WEBP, max 5MB each",
+    "Kudos modal has anonymous toggle that sets sender_id to null",
+    "Submit button disabled until recipient + content + at least 1 hashtag filled",
+    "Submit calls submitKudos action inserting kudos + kudos_hashtags + kudos_images",
+    "Success toast appears after submit",
+    "npm run test passes: 78 unit tests pass",
+    "npm run build passes with 0 errors"
+  ],
+  "regressionChecked": [
+    "existing homepage tests still pass",
+    "existing awards tests still pass",
+    "existing login tests still pass",
+    "route URLs unchanged (/ and /awards)"
+  ],
+  "contractStatus": "OK",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

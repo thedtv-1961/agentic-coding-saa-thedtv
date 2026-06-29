@@ -38,6 +38,37 @@
     "nav_label": "Award categories",
     "nav_placeholder": "Select a category"
   },
+  "drawer": {
+    "close": "Close",
+    "write_kudos": "Write KUDOS",
+    "the_le_title": "SAA 2025 Rules"
+  },
+  "fab": {
+    "rules_label": "Rules",
+    "write_kudos_label": "Write KUDOS",
+    "cancel_label": "Close",
+    "menu_label": "Menu"
+  },
+  "kudos": {
+    "modal_title": "Send appreciation and recognition to your teammates",
+    "recipient_label": "Recipient",
+    "recipient_placeholder": "Search",
+    "recipient_required": "Please select a recipient",
+    "content_placeholder": "Share your appreciation and recognition for your teammate here!",
+    "content_required": "Please enter a message",
+    "content_hint": "You can type \"@ + name\" to mention another colleague",
+    "hashtag_label": "Hashtag",
+    "hashtag_add": "+ Hashtag",
+    "hashtag_max": "Max 5",
+    "hashtag_required": "Please add at least 1 hashtag",
+    "image_label": "Image",
+    "image_add": "+ Image",
+    "image_max": "Max 5",
+    "anonymous_label": "Send appreciation and recognition anonymously",
+    "cancel": "Cancel",
+    "submit": "Send",
+    "community_standards": "Community Standards"
+  },
   "home": {
     "hero_title": "ROOT FURTHER",
     "hero_coming_soon": "Comming soon",
