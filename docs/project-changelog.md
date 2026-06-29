@@ -10,6 +10,7 @@
 - `viet-kudos-modal.tsx`: fixed `content_label` i18n key bug (wrong key referenced for content field label)
 
 ### Changed
+- `kudos-hashtag-field.tsx`: redesigned dropdown with dark theme (bg `#00070C`), toggle selection (all hashtags always visible with selected/unselected states), `IconCheck` SVG indicator, disabled state enforced at 5-hashtag limit
 - `kudos-rich-text-editor.tsx`: replaced `window.prompt()` URL dialog with inline link dialog component
 - `kudos-rich-text-editor.tsx`: added community standards link to editor toolbar
 

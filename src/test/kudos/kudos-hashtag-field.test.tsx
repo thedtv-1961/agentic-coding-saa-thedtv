@@ -133,18 +133,9 @@ describe("KudosHashtagField", () => {
     expect(screen.getByText(errorMsg)).toBeInTheDocument();
   });
 
-  it("does not allow adding duplicate hashtag", () => {
+  it("clicking selected hashtag in dropdown deselects it", () => {
     const onChange = vi.fn();
-    const { rerender } = render(
-      <KudosHashtagField
-        value={["h1"]}
-        onChange={onChange}
-        hashtags={mockHashtags}
-      />
-    );
-
-    // Rerender with updated value to show selected state
-    rerender(
+    render(
       <KudosHashtagField
         value={["h1"]}
         onChange={onChange}
@@ -155,10 +146,15 @@ describe("KudosHashtagField", () => {
     const addBtn = screen.getByTestId("hashtag-add-btn");
     fireEvent.click(addBtn);
 
-    // h1 (teamwork) should NOT be in available options
+    // All hashtags shown — h1 (teamwork) is visible as a selected item
     const options = screen.getAllByTestId("hashtag-option");
-    const teamworkOption = options.find((opt) => opt.textContent === "#teamwork");
-    expect(teamworkOption).toBeUndefined();
+    expect(options).toHaveLength(mockHashtags.length);
+
+    // Click on the selected #teamwork option → should deselect
+    const teamworkOption = options.find((opt) => opt.textContent?.includes("teamwork"));
+    fireEvent.click(teamworkOption!);
+
+    expect(onChange).toHaveBeenCalledWith([]);
   });
 
   it("closes dropdown when option selected", () => {
@@ -230,7 +226,7 @@ describe("KudosHashtagField", () => {
     });
   });
 
-  it("filters out selected hashtags from dropdown options", () => {
+  it("shows all hashtags in dropdown — selected and unselected", () => {
     const onChange = vi.fn();
     render(
       <KudosHashtagField
@@ -243,14 +239,13 @@ describe("KudosHashtagField", () => {
     const addBtn = screen.getByTestId("hashtag-add-btn");
     fireEvent.click(addBtn);
 
-    // Should only show 4 options (6 - 2 selected)
+    // All 6 hashtags shown (not filtered)
     const options = screen.getAllByTestId("hashtag-option");
-    expect(options).toHaveLength(4);
+    expect(options).toHaveLength(mockHashtags.length);
 
-    // Selected items should not be in dropdown options (they appear as chips, not options)
-    const allOptions = screen.getAllByTestId("hashtag-option");
-    expect(allOptions.find((o) => o.textContent === "#teamwork")).toBeUndefined();
-    expect(allOptions.find((o) => o.textContent === "#support")).toBeUndefined();
+    // Selected items appear in the dropdown (for deselection)
+    expect(options.find((o) => o.textContent?.includes("teamwork"))).toBeDefined();
+    expect(options.find((o) => o.textContent?.includes("support"))).toBeDefined();
   });
 
   it("handles adding multiple hashtags sequentially", () => {
@@ -263,7 +258,7 @@ describe("KudosHashtagField", () => {
       />
     );
 
-    // Add first hashtag
+    // Open dropdown and add first hashtag
     const addBtn = screen.getByTestId("hashtag-add-btn");
     fireEvent.click(addBtn);
     const firstOption = screen.getAllByTestId("hashtag-option")[0];
@@ -271,7 +266,7 @@ describe("KudosHashtagField", () => {
 
     expect(onChange).toHaveBeenCalledWith(["h1"]);
 
-    // Simulate state update and add second
+    // Simulate state update — dropdown stays open, directly select second item
     onChange.mockClear();
     rerender(
       <KudosHashtagField
@@ -281,9 +276,10 @@ describe("KudosHashtagField", () => {
       />
     );
 
-    fireEvent.click(addBtn);
-    const secondOption = screen.getAllByTestId("hashtag-option")[0]; // Will be h2 now
-    fireEvent.click(secondOption);
+    // Dropdown is still open — find unselected h2 (second in list, first is now selected h1)
+    const allOptions = screen.getAllByTestId("hashtag-option");
+    const h2Option = allOptions.find((o) => o.textContent?.includes("support"));
+    fireEvent.click(h2Option!);
 
     expect(onChange).toHaveBeenCalledWith(["h1", "h2"]);
   });
@@ -338,6 +334,28 @@ describe("KudosHashtagField", () => {
 
     // onChange should never be called since button doesn't exist
     expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("unselected items enabled when below max, disabled when dropdown opens at 5 via chip removal", () => {
+    const onChange = vi.fn();
+    // With 4 selected, unselected items are still enabled in dropdown
+    render(
+      <KudosHashtagField
+        value={["h1", "h2", "h3", "h4"]}
+        onChange={onChange}
+        hashtags={mockHashtags}
+      />
+    );
+
+    const addBtn = screen.getByTestId("hashtag-add-btn");
+    fireEvent.click(addBtn);
+
+    const options = screen.getAllByTestId("hashtag-option");
+    // unselected h5/h6 should be enabled (can still add one more)
+    const h5 = options.find((o) => o.textContent?.includes("leadership"));
+    const h6 = options.find((o) => o.textContent?.includes("collaboration"));
+    expect(h5).not.toBeDisabled();
+    expect(h6).not.toBeDisabled();
   });
 
   it("displays error with red styling", () => {

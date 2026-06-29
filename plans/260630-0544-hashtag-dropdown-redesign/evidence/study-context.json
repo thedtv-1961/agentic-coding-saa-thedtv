@@ -1,0 +1,22 @@
+{
+  "task": "Redesign KudosHashtagField dropdown theo Figma spec 'Dropdown list hashtag' (MoMorph screen p9zO-c4a4x) — dark theme (#00070C), all-hashtags toggle states, IconCheck SVG",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "Dropdown hiển thị TẤT CẢ hashtags (không filter selected)",
+    "Selected rows có bg rgba(255,234,158,0.20) và IconCheck SVG 24×24",
+    "Unselected rows disabled khi đã chọn đủ 5 hashtags",
+    "Click toggle: unselected → add, selected → remove",
+    "Dark container #00070C, border #998C5F",
+    "Text Montserrat 700 16px white",
+    "npm run build pass (0 errors)",
+    "npm run test — 125/130 pass (5 failures pre-existing trong widget-button.test.tsx)"
+  ],
+  "touchpoints": [
+    "app/components/kudos/kudos-hashtag-field.tsx",
+    "src/test/kudos/kudos-hashtag-field.test.tsx",
+    "src/test/kudos/submit-kudos-validation.test.ts",
+    "src/test/kudos/viet-kudos-modal.test.tsx"
+  ],
+  "blastRadius": "low — UI-only component change, props interface unchanged, no API/DB impact",
+  "contracts": []
+}

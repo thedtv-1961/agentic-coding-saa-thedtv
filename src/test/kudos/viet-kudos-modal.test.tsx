@@ -166,6 +166,10 @@ describe("VietKudosModal", () => {
     const recipientInput = screen.getByTestId("recipient-input");
     fireEvent.change(recipientInput, { target: { value: "John" } });
 
+    // Fill title (danh hiệu)
+    const titleInput = screen.getByTestId("kudos-title-input");
+    fireEvent.change(titleInput, { target: { value: "Hero của tôi" } });
+
     // Fill content
     const editorInput = screen.getByTestId("editor-input");
     fireEvent.change(editorInput, { target: { value: "Great work!" } });
@@ -290,6 +294,9 @@ describe("VietKudosModal", () => {
     // Fill form completely
     const recipientInput = screen.getByTestId("recipient-input");
     fireEvent.change(recipientInput, { target: { value: "John" } });
+
+    const titleInput = screen.getByTestId("kudos-title-input");
+    fireEvent.change(titleInput, { target: { value: "Hero của tôi" } });
 
     const editorInput = screen.getByTestId("editor-input");
     fireEvent.change(editorInput, { target: { value: "Great work!" } });

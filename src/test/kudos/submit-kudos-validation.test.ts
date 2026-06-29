@@ -54,6 +54,7 @@ describe("submitKudos validation", () => {
   it("returns error when receiverId is empty", async () => {
     const result = await submitKudos({
       receiverId: "",
+      title: "Hero của tôi",
       content: "Cảm ơn bạn!",
       hashtagIds: ["tag-1"],
       imageUrls: [],
@@ -67,6 +68,7 @@ describe("submitKudos validation", () => {
   it("returns error when content is empty", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "",
       hashtagIds: ["tag-1"],
       imageUrls: [],
@@ -80,6 +82,7 @@ describe("submitKudos validation", () => {
   it("returns error when content is only whitespace", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "   \n  \t  ",
       hashtagIds: ["tag-1"],
       imageUrls: [],
@@ -93,6 +96,7 @@ describe("submitKudos validation", () => {
   it("returns error when hashtagIds is empty array", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "Cảm ơn bạn!",
       hashtagIds: [],
       imageUrls: [],
@@ -106,6 +110,7 @@ describe("submitKudos validation", () => {
   it("returns error when hashtagIds has more than 5 items", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "Cảm ơn bạn!",
       hashtagIds: ["tag-1", "tag-2", "tag-3", "tag-4", "tag-5", "tag-6"],
       imageUrls: [],
@@ -119,6 +124,7 @@ describe("submitKudos validation", () => {
   it("returns error when imageUrls has more than 5 items", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "Cảm ơn bạn!",
       hashtagIds: ["tag-1"],
       imageUrls: [
@@ -139,6 +145,7 @@ describe("submitKudos validation", () => {
   it("passes validation and returns data with valid inputs", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "Cảm ơn bạn đã hỗ trợ!",
       hashtagIds: ["tag-1", "tag-2"],
       imageUrls: ["url-1"],
@@ -152,6 +159,7 @@ describe("submitKudos validation", () => {
   it("allows up to 5 hashtags (boundary test)", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "Cảm ơn bạn!",
       hashtagIds: ["tag-1", "tag-2", "tag-3", "tag-4", "tag-5"],
       imageUrls: [],
@@ -164,6 +172,7 @@ describe("submitKudos validation", () => {
   it("allows up to 5 images (boundary test)", async () => {
     const result = await submitKudos({
       receiverId: "user-123",
+      title: "Hero của tôi",
       content: "Cảm ơn bạn!",
       hashtagIds: ["tag-1"],
       imageUrls: ["url-1", "url-2", "url-3", "url-4", "url-5"],
