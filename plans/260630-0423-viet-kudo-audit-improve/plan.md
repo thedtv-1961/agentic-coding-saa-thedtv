@@ -1,7 +1,7 @@
 ---
 title: "Viết Kudo — Audit & Cải thiện"
 description: "Audit implementation Viết Kudo so với MoMorph spec, fix bugs, hoàn thiện UX còn thiếu, và viết unit tests."
-status: in_progress
+status: completed
 priority: P1
 effort: "~3h"
 branch: create_kudo
@@ -38,10 +38,10 @@ Implementation Viết Kudo đã có trong codebase (merged qua PR #12). Plan nà
 
 | Phase | Title | Status |
 |-------|-------|--------|
-| [Phase 01](phase-01-bug-fixes.md) | Bug fixes + missing UI | todo |
-| [Phase 02](phase-02-link-dialog.md) | Link dialog UX (thay window.prompt) | todo |
-| [Phase 03](phase-03-unit-tests.md) | Unit tests cho form components | todo |
-| [Phase 04](phase-04-build-verify.md) | Build + lint verification | todo |
+| [Phase 01](phase-01-bug-fixes.md) | Bug fixes + missing UI | ✅ completed |
+| [Phase 02](phase-02-link-dialog.md) | Link dialog UX (thay window.prompt) | ✅ completed |
+| [Phase 03](phase-03-unit-tests.md) | Unit tests cho form components | ✅ completed |
+| [Phase 04](phase-04-build-verify.md) | Build + lint verification | ✅ completed |
 
 ## Key Files
 

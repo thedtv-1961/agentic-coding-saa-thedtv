@@ -4,6 +4,22 @@
 
 ---
 
+## [0.6.1] — 2026-06-30
+
+### Fixed
+- `viet-kudos-modal.tsx`: fixed `content_label` i18n key bug (wrong key referenced for content field label)
+
+### Changed
+- `kudos-rich-text-editor.tsx`: replaced `window.prompt()` URL dialog with inline link dialog component
+- `kudos-rich-text-editor.tsx`: added community standards link to editor toolbar
+
+### Added
+- `fab-controller.tsx`: added `data-testid="success-toast"` for E2E testability
+- i18n keys `content_label`, `submitting` to `messages/vi.json` and `messages/en.json`
+- Unit tests: `viet-kudos-modal.test.tsx`, `kudos-hashtag-field.test.tsx`, `kudos-recipient-field.test.tsx`
+
+---
+
 ## [0.6.0] — 2026-06-30
 
 ### Added
