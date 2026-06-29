@@ -29,6 +29,15 @@
     "language_label": "Ngôn ngữ",
     "account_label": "Tài khoản"
   },
+  "awards": {
+    "caption": "Sun* Annual Awards 2025",
+    "section_title": "Hệ thống giải thưởng SAA 2025",
+    "hero_subtitle": "Sun* Annual Award 2025",
+    "quantity_label": "Số lượng giải thưởng",
+    "value_label": "Giá trị giải thưởng",
+    "nav_label": "Danh mục giải thưởng",
+    "nav_placeholder": "Chọn hạng mục"
+  },
   "home": {
     "hero_title": "ROOT FURTHER",
     "hero_coming_soon": "Comming soon",

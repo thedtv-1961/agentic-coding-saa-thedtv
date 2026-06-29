@@ -6,7 +6,7 @@ import LanguageSwitcher from "./language-switcher";
 export default async function LoginHeader() {
   const t = await getTranslations("login");
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-0 py-4">
       <Link href="/" aria-label={t("logo_alt")}>
         <Image
           src="/images/saa-logo.png"

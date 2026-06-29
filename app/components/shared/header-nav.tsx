@@ -17,14 +17,14 @@ export default function HeaderNav({ userAvatarUrl }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "/about", label: t("nav_about") },
+    { href: "/", label: t("nav_about") },
     { href: "/awards", label: t("nav_awards") },
-    { href: "/kudos", label: t("nav_kudos") },
+    { href: "", label: t("nav_kudos") },
   ];
 
   return (
     <div className="relative">
-      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+      <nav className="flex items-center justify-between px-0 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <Link href="/" aria-label="SAA 2025">
           <Image
@@ -38,20 +38,24 @@ export default function HeaderNav({ userAvatarUrl }: Props) {
 
         {/* Desktop nav links */}
         <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map(({ href, label }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className={`text-sm font-medium transition-colors hover:text-yellow-400 ${
-                  pathname === href
-                    ? "text-yellow-400 underline underline-offset-4"
-                    : "text-white"
-                }`}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map(({ href, label }) => {
+            const isActive = pathname === href;
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`relative text-sm font-medium transition-colors hover:text-[#FFEA9E] ${
+                    isActive
+                      ? "text-[#FFEA9E] after:content-[''] after:absolute after:bottom-[-16px] after:left-[-8px] after:right-[-8px] after:h-[2px] after:bg-[#FFEA9E] after:shadow-[0_0_6px_#FAE287]"
+                      : "text-white"
+                  }`}
+                  style={isActive ? { textShadow: "0 0 8px #FAE287" } : undefined}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Actions */}
@@ -162,19 +166,23 @@ export default function HeaderNav({ userAvatarUrl }: Props) {
       {menuOpen && (
         <div className="absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md md:hidden border-t border-white/10">
           <ul className="flex flex-col px-6 py-4 gap-4">
-            {navLinks.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={`text-base font-medium block transition-colors hover:text-yellow-400 ${
-                    pathname === href ? "text-yellow-400" : "text-white"
-                  }`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map(({ href, label }) => {
+              const isActive = pathname === href;
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={`text-base font-medium block transition-colors hover:text-[#FFEA9E] ${
+                      isActive ? "text-[#FFEA9E]" : "text-white"
+                    }`}
+                    style={isActive ? { textShadow: "0 0 8px #FAE287" } : undefined}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

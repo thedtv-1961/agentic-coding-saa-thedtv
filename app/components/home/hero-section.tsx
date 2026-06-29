@@ -10,9 +10,9 @@ export default async function HeroSection() {
   const t = await getTranslations("home");
 
   return (
-    <section className="relative min-h-screen bg-[#0d1520] overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Key visual image — right side, absolutely positioned */}
-      <div className="absolute inset-y-0 right-0 w-full md:w-3/5 pointer-events-none">
+      <div className="absolute inset-y-0 right-0 w-full  pointer-events-none">
         <Image
           src="/images/countdown-bg.jpg"
           alt=""
@@ -21,19 +21,17 @@ export default async function HeroSection() {
           priority
           aria-hidden="true"
         />
-        {/* Gradient mask to blend left edge with background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d1520] via-[#0d1520]/60 to-transparent" />
       </div>
 
-      {/* Left content */}
-      <div className="relative z-10 flex flex-col gap-8 px-8 md:px-16 lg:px-24 pt-36 pb-20 max-w-2xl">
+      {/* Left content — bounded within max-w-7xl container */}
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-0 pt-36 pb-20">
+      <div className="flex flex-col gap-8 max-w-xl">
         {/* Title — ROOT FURTHER image from Figma */}
         <Image
           src="/images/homepage/root-further.png"
           alt="Root Further"
-          width={600}
-          height={266}
-          className="max-w-full w-auto max-h-56 md:max-h-72"
+          width={451}
+          height={200}
           priority
         />
 
@@ -69,6 +67,7 @@ export default async function HeroSection() {
             {t("cta_kudos")} <span aria-hidden="true">↗</span>
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );

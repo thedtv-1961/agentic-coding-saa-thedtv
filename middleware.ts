@@ -1,16 +1,12 @@
-import createIntlMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
-import { routing } from "./i18n/routing";
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { updateSession } from "@/utils/supabase/middleware";
 
-const intlMiddleware = createIntlMiddleware(routing);
-
 async function isLaunchDatePassed(): Promise<boolean> {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return false;
+  if (!url || !key) return true; // no DB → assume launched
 
   const supabase = createClient(url, key);
   const { data, error } = await supabase
@@ -19,30 +15,26 @@ async function isLaunchDatePassed(): Promise<boolean> {
     .eq("key", "countdown_date")
     .single();
 
-  if (error || !data?.value) return false;
-  return new Date(data.value as string).getTime() <= Date.now();
+  if (error || !data?.value) return true; // no record → assume launched
+  return new Date((data.value as string).trim()).getTime() <= Date.now();
 }
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Prelaunch gate — runs BEFORE auth guard so /countdown is public
-  const isPrelaunch = process.env.PRELAUNCH_MODE === "true";
   const isCountdownRoute = pathname === "/countdown";
-  const isAuthRoute =
-    pathname.startsWith("/auth") || pathname === "/login";
+  const isAuthRoute = pathname.startsWith("/auth") || pathname === "/login";
 
-  if (isPrelaunch && !isCountdownRoute && !isAuthRoute) {
-    // If launch date has already passed, bypass the prelaunch gate
+  // Prelaunch gate — based solely on countdown_date in DB
+  if (!isCountdownRoute && !isAuthRoute) {
     const launched = await isLaunchDatePassed();
     if (!launched) {
       return NextResponse.redirect(new URL("/countdown", request.url));
     }
   }
   if (isCountdownRoute) {
-    // Redirect away from /countdown when prelaunch is off OR launch date passed
-    const shouldBypass = !isPrelaunch || (await isLaunchDatePassed());
-    if (shouldBypass) {
+    const launched = await isLaunchDatePassed();
+    if (launched) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
@@ -77,16 +69,13 @@ export async function middleware(request: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser();
     if (user) {
-      return NextResponse.redirect(new URL("/todo", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
-    // Return intlMiddleware response so locale headers/cookies are applied
-    return intlMiddleware(request);
+    return res.current;
   }
 
-  // Auth guard: protect homepage — unauthenticated users go to /login.
-  // When authenticated, return the session-refreshed response directly to
-  // avoid a second Supabase client call via updateSession.
-  if (pathname === "/") {
+  // Auth guard: protect homepage and awards page — unauthenticated users go to /login.
+  if (pathname === "/" || pathname.startsWith("/awards")) {
     const res = { current: NextResponse.next({ request }) };
     const supabase = makeSupabaseClient(request, res);
     const {

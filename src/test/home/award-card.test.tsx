@@ -1,11 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import AwardCard from "@/app/components/home/award-card";
-import { AWARD_META } from "@/types/awards";
-import type { Award } from "@/types/awards";
+import { nameToSlug } from "@/types/awards";
+import type { AwardCategory } from "@/types/awards";
 
 vi.mock("next-intl/server", () => ({
   getTranslations: vi.fn(() => (key: string) => key),
+}));
+
+vi.mock("next/image", () => ({
+  default: ({ src, alt }: { src: string; alt: string }) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={alt} />
+  ),
 }));
 
 vi.mock("next/link", () => ({
@@ -18,63 +25,67 @@ vi.mock("next/link", () => ({
   }) => <a href={href}>{children}</a>,
 }));
 
-const mockAward: Award = {
-  id: "1",
-  category: "top_talent",
-  title: "Top Talent Award",
+const mockCategory: AwardCategory = {
+  id: 1,
+  name: "Top Talent",
+  title: "Top Talent",
   description: "Awarded to the most talented individual",
+  content: "",
+  image_url: "/images/awards/top-talent.png",
+  is_active: true,
 };
 
 describe("AwardCard", () => {
-  it("renders award title", async () => {
-    const jsx = await AwardCard({ award: mockAward });
+  it("renders category name", async () => {
+    const jsx = await AwardCard({ category: mockCategory });
     render(jsx);
-    // Title appears in both the medal circle and the card heading
-    const titleElements = screen.getAllByText("Top Talent Award");
-    expect(titleElements.length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Top Talent")).toBeInTheDocument();
   });
 
-  it("renders award description", async () => {
-    const jsx = await AwardCard({ award: mockAward });
+  it("renders description", async () => {
+    const jsx = await AwardCard({ category: mockCategory });
     render(jsx);
-    expect(
-      screen.getByText("Awarded to the most talented individual"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Awarded to the most talented individual")).toBeInTheDocument();
   });
 
-  it("detail link points to /awards#slug", async () => {
-    const jsx = await AwardCard({ award: mockAward });
+  it("detail link points to /awards#slug derived from name", async () => {
+    const jsx = await AwardCard({ category: mockCategory });
     render(jsx);
-    const slug = AWARD_META["top_talent"].slug;
+    const slug = nameToSlug("Top Talent");
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("href", `/awards#${slug}`);
   });
 
   it("renders detail label from i18n", async () => {
-    const jsx = await AwardCard({ award: mockAward });
+    const jsx = await AwardCard({ category: mockCategory });
     render(jsx);
     expect(screen.getByText(/award_detail/)).toBeInTheDocument();
   });
 
-  it("uses correct slug for each category", async () => {
-    const categories: Award["category"][] = [
-      "top_talent",
-      "top_project",
-      "top_project_leader",
-      "best_manager",
-      "signature_creator",
-      "mvp",
-    ];
-    for (const category of categories) {
-      const award: Award = { ...mockAward, id: category, category };
-      const jsx = await AwardCard({ award });
-      const { unmount } = render(jsx);
-      const link = screen.getByRole("link");
-      expect(link).toHaveAttribute(
-        "href",
-        `/awards#${AWARD_META[category].slug}`,
-      );
-      unmount();
-    }
+  it("renders image from category.image_url", async () => {
+    const jsx = await AwardCard({ category: mockCategory });
+    render(jsx);
+    expect(screen.getByAltText("Top Talent")).toHaveAttribute(
+      "src",
+      "/images/awards/top-talent.png",
+    );
+  });
+
+  it("uses nameToSlug for the link href", async () => {
+    const category: AwardCategory = {
+      ...mockCategory,
+      id: 6,
+      name: "MVP (Most Valuable Person)",
+      title: "MVP (Most Valuable Person)",
+      image_url: "/images/awards/mvp.png",
+    };
+    const jsx = await AwardCard({ category });
+    const { unmount } = render(jsx);
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute(
+      "href",
+      `/awards#${nameToSlug("MVP (Most Valuable Person)")}`,
+    );
+    unmount();
   });
 });

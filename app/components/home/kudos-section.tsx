@@ -6,7 +6,7 @@ export default async function KudosSection() {
   const t = await getTranslations("home");
 
   return (
-    <section className="relative bg-black py-20 px-6 overflow-hidden">
+    <section id="kudos" className="relative bg-black py-20 px-6 overflow-hidden scroll-mt-16">
       {/* Background image */}
       <div className="absolute inset-0" aria-hidden="true">
         <Image
