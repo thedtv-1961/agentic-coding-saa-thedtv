@@ -30,13 +30,14 @@ const HERO_BADGES = [
   },
 ] as const;
 
+// icon-*.png = circular icon only (no embedded text); label rendered separately per Figma spec
 const COLLECTION_BADGES = [
-  { name: "REVIVAL", src: "/images/the-le/revival.png" },
-  { name: "TOUCH OF LIGHT", src: "/images/the-le/touch-of-light.png" },
-  { name: "STAY GOLD", src: "/images/the-le/stay-gold.png" },
-  { name: "FLOW TO HORIZON", src: "/images/the-le/flow-to-horizon.png" },
-  { name: "BEYOND THE BOUNDARY", src: "/images/the-le/beyond-the-boundary.png" },
-  { name: "ROOT FURTHER", src: "/images/the-le/root-further.png" },
+  { name: "REVIVAL", src: "/images/the-le/icon-revival.png" },
+  { name: "TOUCH OF LIGHT", src: "/images/the-le/icon-touch-of-light.png" },
+  { name: "STAY GOLD", src: "/images/the-le/icon-stay-gold.png" },
+  { name: "FLOW TO HORIZON", src: "/images/the-le/icon-flow-to-horizon.png" },
+  { name: "BEYOND THE BOUNDARY", src: "/images/the-le/icon-beyond-the-boundary.png" },
+  { name: "ROOT FURTHER", src: "/images/the-le/icon-root-further.png" },
 ] as const;
 
 export default function TheLEContent() {
@@ -85,16 +86,20 @@ export default function TheLEContent() {
         </p>
 
         {/* 3×2 badge grid */}
-        <div className="grid grid-cols-3 gap-4">
+        {/* 3×2 grid — icon 64×64, label Montserrat 700 12px per Figma spec */}
+        <div className="grid grid-cols-3 gap-x-4 gap-y-3">
           {COLLECTION_BADGES.map((badge) => (
             <div key={badge.name} className="flex flex-col items-center gap-2">
               <Image
                 src={badge.src}
                 alt={badge.name}
-                width={80}
-                height={80}
-                className="object-contain"
+                width={64}
+                height={64}
+                className="object-contain rounded-full"
               />
+              <p className="text-[12px] font-bold text-white text-center leading-4 tracking-[0.5px]">
+                {badge.name}
+              </p>
             </div>
           ))}
         </div>
