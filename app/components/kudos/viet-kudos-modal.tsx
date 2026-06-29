@@ -21,6 +21,7 @@ interface VietKudosModalProps {
 interface KudosFormState {
   recipientId: string;
   recipientName: string;
+  title: string;
   content: string;
   hashtagIds: string[];
   imageFiles: File[];
@@ -30,6 +31,7 @@ interface KudosFormState {
 
 interface FormErrors {
   recipient?: string;
+  title?: string;
   content?: string;
   hashtag?: string;
 }
@@ -37,6 +39,7 @@ interface FormErrors {
 const EMPTY_FORM: KudosFormState = {
   recipientId: "",
   recipientName: "",
+  title: "",
   content: "",
   hashtagIds: [],
   imageFiles: [],
@@ -47,6 +50,7 @@ const EMPTY_FORM: KudosFormState = {
 function hasData(form: KudosFormState): boolean {
   return (
     !!form.recipientId ||
+    !!form.title.trim() ||
     !!form.content.trim() ||
     form.hashtagIds.length > 0 ||
     form.imageUrls.length > 0
@@ -66,7 +70,6 @@ export default function VietKudosModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hashtags, setHashtags] = useState<HashtagResult[]>([]);
 
-  // Fetch hashtag list once when modal opens
   useEffect(() => {
     if (!isOpen) return;
     getHashtags().then((res) => {
@@ -74,7 +77,6 @@ export default function VietKudosModal({
     });
   }, [isOpen]);
 
-  // Reset form when modal closes
   useEffect(() => {
     if (!isOpen) {
       setForm(EMPTY_FORM);
@@ -83,7 +85,6 @@ export default function VietKudosModal({
     }
   }, [isOpen]);
 
-  // Escape key closes modal (with confirm if dirty)
   useEffect(() => {
     if (!isOpen) return;
     function handleKeyDown(e: KeyboardEvent) {
@@ -104,6 +105,7 @@ export default function VietKudosModal({
   function validate(): boolean {
     const next: FormErrors = {};
     if (!form.recipientId) next.recipient = t("recipient_required");
+    if (!form.title.trim()) next.title = t("title_required");
     if (!form.content.trim()) next.content = t("content_required");
     if (form.hashtagIds.length === 0) next.hashtag = t("hashtag_required");
     setErrors(next);
@@ -120,6 +122,7 @@ export default function VietKudosModal({
     try {
       const result = await submitKudos({
         receiverId: form.recipientId,
+        title: form.title,
         content: form.content,
         hashtagIds: form.hashtagIds,
         imageUrls: form.imageUrls,
@@ -145,6 +148,7 @@ export default function VietKudosModal({
   const isSubmitDisabled =
     isSubmitting ||
     !form.recipientId ||
+    !form.title.trim() ||
     !form.content.trim() ||
     form.hashtagIds.length === 0;
 
@@ -162,31 +166,31 @@ export default function VietKudosModal({
     >
       <div
         data-testid="kudos-modal"
-        className="bg-white rounded-2xl max-w-2xl w-full mx-4 max-h-[90vh] flex flex-col shadow-2xl"
+        className="bg-[#FFF8E1] rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] flex flex-col shadow-2xl relative"
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
-          <h2
-            id="kudos-modal-title"
-            className="text-base font-bold text-gray-900 leading-snug"
-          >
-            {t("modal_title")}
-          </h2>
-          <button
-            type="button"
-            onClick={handleClose}
-            aria-label={t("cancel")}
-            className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors text-xl leading-none"
-          >
-            ×
-          </button>
-        </div>
+        {/* Close button — absolute top-right */}
+        <button
+          type="button"
+          onClick={handleClose}
+          aria-label={t("cancel")}
+          className="absolute top-5 right-5 w-9 h-9 flex items-center justify-center text-gray-500 hover:text-gray-800 rounded-full hover:bg-black/10 transition-colors text-2xl leading-none z-10"
+        >
+          ×
+        </button>
 
-        {/* Scrollable body */}
+        {/* Centered title */}
+        <h2
+          id="kudos-modal-title"
+          className="text-[28px] font-bold text-[#00101A] text-center px-16 pt-10 pb-0 shrink-0 leading-tight"
+        >
+          {t("modal_title")}
+        </h2>
+
+        {/* Scrollable form body */}
         <form
           id="kudos-form"
           onSubmit={handleSubmit}
-          className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-5"
+          className="flex-1 overflow-y-auto px-10 py-6 flex flex-col gap-6"
         >
           <KudosRecipientField
             recipientId={form.recipientId}
@@ -197,17 +201,40 @@ export default function VietKudosModal({
             error={errors.recipient}
           />
 
-          <div className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-gray-700">
-              {t("content_label")}
+          {/* Danh hiệu */}
+          <div className="flex flex-row items-center gap-4">
+            <label
+              htmlFor="kudos-title"
+              className="text-[22px] font-bold text-[#00101A] shrink-0 w-36 leading-tight"
+            >
+              {t("title_label")}
               <span className="text-red-500 ml-0.5">*</span>
-            </span>
-            <KudosRichTextEditor
-              value={form.content}
-              onChange={(html) => setForm((f) => ({ ...f, content: html }))}
-              error={errors.content}
-            />
+            </label>
+            <div className="flex-1 flex flex-col gap-1">
+              <input
+                id="kudos-title"
+                type="text"
+                value={form.title}
+                onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+                placeholder={t("title_placeholder")}
+                maxLength={100}
+                data-testid="kudos-title-input"
+                className={`w-full h-14 border rounded-lg px-4 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+                  errors.title ? "border-red-500" : "border-[#998C5F]"
+                }`}
+              />
+              <p className="text-xs text-gray-400">{t("title_hint")}</p>
+              {errors.title && (
+                <p className="text-xs text-red-500">{errors.title}</p>
+              )}
+            </div>
           </div>
+
+          <KudosRichTextEditor
+            value={form.content}
+            onChange={(html) => setForm((f) => ({ ...f, content: html }))}
+            error={errors.content}
+          />
 
           <KudosHashtagField
             value={form.hashtagIds}
@@ -234,13 +261,13 @@ export default function VietKudosModal({
           )}
         </form>
 
-        {/* Sticky footer */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100 shrink-0 gap-3">
+        {/* Footer — no border separator */}
+        <div className="flex items-center px-10 pb-10 pt-2 shrink-0 gap-4">
           <button
             type="button"
             data-testid="kudos-cancel-btn"
             onClick={handleClose}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 px-5 py-3 border border-gray-400 rounded-xl text-sm font-medium text-gray-700 hover:bg-black/5 transition-colors"
           >
             <span className="text-base leading-none">×</span>
             {t("cancel")}
@@ -251,7 +278,7 @@ export default function VietKudosModal({
             form="kudos-form"
             data-testid="kudos-submit-btn"
             disabled={isSubmitDisabled}
-            className="px-6 py-2 bg-[#FFEA9E] text-[#00101A] rounded-xl text-sm font-bold hover:bg-yellow-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex-1 py-3 bg-[#FFEA9E] text-[#00101A] rounded-xl text-sm font-bold hover:bg-yellow-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {isSubmitting ? t("submitting") : t("submit")}
           </button>

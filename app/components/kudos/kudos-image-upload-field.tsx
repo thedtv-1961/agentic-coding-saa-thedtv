@@ -114,14 +114,15 @@ export default function KudosImageUploadField({
   const canAdd = entries.length < MAX_KUDOS_IMAGES;
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-1">
-        <span className="text-sm font-medium text-gray-700">{t("image_label")}</span>
-        <span className="text-xs text-gray-400 ml-1">
+    <div className="flex flex-row items-start gap-4">
+      <span className="text-[22px] font-bold text-[#00101A] w-36 shrink-0 pt-2 leading-tight">
+        {t("image_label")}
+        <span className="text-xs font-normal text-gray-400 ml-1">
           ({entries.length}/{MAX_KUDOS_IMAGES})
         </span>
-      </div>
+      </span>
 
+      <div className="flex-1 flex flex-col gap-2">
       <div className="flex flex-wrap gap-2">
         {/* Thumbnails */}
         {entries.map((entry, idx) => (
@@ -183,6 +184,7 @@ export default function KudosImageUploadField({
       {!canAdd && (
         <p className="text-xs text-gray-400">{t("image_max")}</p>
       )}
+      </div>
 
       {/* Hidden file input */}
       <input
@@ -200,4 +202,5 @@ export default function KudosImageUploadField({
       <input type="hidden" value={imageUrls.join(",")} />
     </div>
   );
+
 }

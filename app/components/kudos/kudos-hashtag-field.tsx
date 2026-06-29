@@ -54,13 +54,14 @@ export default function KudosHashtagField({
   const selected = hashtags.filter((h) => value.includes(h.id));
 
   return (
-    <div ref={containerRef} className="flex flex-col gap-1">
-      <div className="flex items-center gap-1 flex-wrap">
-        <span className="text-sm font-medium text-gray-700 mr-1">
-          {t("hashtag_label")}
-          <span className="text-red-500 ml-0.5">*</span>
-        </span>
+    <div ref={containerRef} className="flex flex-row items-start gap-4">
+      <span className="text-[22px] font-bold text-[#00101A] w-36 shrink-0 pt-1 leading-tight">
+        {t("hashtag_label")}
+        <span className="text-red-500 ml-0.5">*</span>
+      </span>
 
+      <div className="flex-1 flex flex-col gap-1">
+      <div className="flex items-center gap-1 flex-wrap">
         {/* Selected chips */}
         {selected.map((h) => (
           <span
@@ -122,6 +123,7 @@ export default function KudosHashtagField({
       </div>
 
       {error && <p className="text-xs text-red-500">{error}</p>}
+      </div>
     </div>
   );
 }

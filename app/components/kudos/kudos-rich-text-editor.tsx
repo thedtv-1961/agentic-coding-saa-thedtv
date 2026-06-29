@@ -129,7 +129,7 @@ export default function KudosRichTextEditor({
         ))}
         <a
           href="#"
-          className="ml-auto text-xs text-blue-500 hover:underline whitespace-nowrap"
+          className="ml-auto text-xs text-[#D4271D] hover:underline whitespace-nowrap"
           target="_blank"
           rel="noopener noreferrer"
         >
