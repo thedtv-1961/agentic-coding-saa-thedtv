@@ -4,6 +4,21 @@
 
 ---
 
+## [0.6.0] — 2026-06-30
+
+### Added
+- FAB (Floating Action Button): `widget-button.tsx`, `fab-sub-button.tsx`, `fab-controller.tsx` — layout-level for all protected pages
+- Thể Lệ right slide drawer: `the-le-drawer.tsx`, `the-le-content.tsx` — accessible via FAB sub-button
+- Viết KUDOS modal: `viet-kudos-modal.tsx` — full kudos submission form
+- Kudos form fields: `kudos-recipient-field.tsx` (autocomplete), `kudos-rich-text-editor.tsx`, `kudos-hashtag-field.tsx`, `kudos-image-upload-field.tsx`, `kudos-anonymous-toggle.tsx`
+- Server actions: `search-profiles.ts`, `get-hashtags.ts`, `submit-kudos.ts`
+- Image upload utility: `app/lib/kudos/image-upload.ts`
+- Supabase Storage bucket `kudos-images` (migration `20260630000015_kudos_images_storage.sql`)
+- `(protected)` route group: `app/(protected)/layout.tsx` — mounts FAB for all auth-protected pages
+- Moved homepage to `app/(protected)/page.tsx`, awards to `app/(protected)/awards/page.tsx`
+
+---
+
 ## [0.5.1] — 2026-06-28
 
 ### Fixed

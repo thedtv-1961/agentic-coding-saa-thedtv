@@ -1,0 +1,26 @@
+{
+  "score": 9.5,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "Panel background is #00070C (dark theme) — confirmed via Playwright: drawer className includes bg-[#00070C]",
+    "Panel width is 553px — confirmed via Playwright: drawer className includes w-[553px]",
+    "4 hero badge pills with correct thresholds and colors (green, blue, purple, gold) — confirmed via Playwright snapshot showing New Hero (green), Rising Hero (blue), Super Hero (purple), Legend Hero (gold) pills with correct threshold text",
+    "6-icon collection grid renders (REVIVAL image + gradient placeholders) — confirmed via Playwright snapshot: REVIVAL image + 5 gradient color circles in 3×2 grid",
+    "Kudos Quốc Dân section visible — confirmed via Playwright snapshot: heading and body text present",
+    "Đóng button closes drawer — confirmed via JS click: drawer className changed to translate-x-full",
+    "Viết KUDOS button closes drawer and opens kudos modal — confirmed: drawerClosed=true, modalVisible=true after click",
+    "Escape key closes drawer — confirmed via keyboard.press('Escape'): drawer className changed to translate-x-full",
+    "Backdrop click closes drawer — confirmed via backdrop.click(): drawer className changed to translate-x-full"
+  ],
+  "regressionChecked": [
+    "FAB expand/collapse behavior unchanged — sub-buttons still appear/disappear correctly",
+    "Kudos modal opens from both FAB write-kudos button and drawer footer Viết KUDOS button",
+    "npm run build — 0 TypeScript/ESLint errors, no regressions in existing components",
+    "npm run lint — 0 errors after removing unused variable in e2e/fab-kudos.spec.ts"
+  ],
+  "contractStatus": "SATISFIED",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

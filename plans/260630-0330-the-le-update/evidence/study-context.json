@@ -1,0 +1,27 @@
+{
+  "task": "Update Thể Lệ drawer to dark theme with correct content matching Figma design (screenId: b1Filzi9i6, fileKey: 9ypp4enmFmdK3YAFJLIu6C)",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "Panel background is #00070C (dark theme)",
+    "Panel width is 553px",
+    "4 hero badge pills with correct thresholds and colors (green, blue, purple, gold)",
+    "6-icon collection grid renders (REVIVAL image + gradient placeholders)",
+    "Kudos Quốc Dân section visible",
+    "Đóng button closes drawer",
+    "Viết KUDOS button closes drawer and opens kudos modal",
+    "Escape key closes drawer",
+    "Backdrop click closes drawer"
+  ],
+  "touchpoints": [
+    "app/components/shared/the-le-content.tsx",
+    "app/components/shared/the-le-drawer.tsx",
+    "public/images/the-le/revival.png",
+    "e2e/fab-kudos.spec.ts"
+  ],
+  "blastRadius": [
+    "FAB widget expand/collapse",
+    "Thể Lệ drawer open/close",
+    "Kudos modal integration"
+  ],
+  "contracts": []
+}

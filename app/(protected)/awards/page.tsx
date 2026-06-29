@@ -1,7 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import Header from "@/app/components/shared/header";
 import Footer from "@/app/components/shared/footer";
-import WidgetButton from "@/app/components/shared/widget-button";
 import AwardsHero from "@/app/components/awards/awards-hero";
 import AwardsDetailList from "@/app/components/awards/awards-detail-list";
 import AwardsNav from "@/app/components/awards/awards-nav";
@@ -68,7 +67,6 @@ export default async function AwardsPage() {
 
       <KudosSection />
       <Footer />
-      <WidgetButton />
     </main>
   );
 }

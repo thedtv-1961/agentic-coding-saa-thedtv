@@ -7,17 +7,20 @@ Next.js 15 App Router + Supabase Auth + Cloudflare Workers.
 ```
 Browser
   └─ Next.js App Router (Cloudflare Workers)
-       ├─ middleware.ts         — prelaunch gate (PRELAUNCH_MODE) → auth check → i18n locale redirect
-       ├─ app/countdown/        — prelaunch countdown page (public, server-rendered)
-       ├─ app/[locale]/         — localised routes (EN/VI)
-       │   ├─ layout.tsx        — root layout + NextIntlClientProvider
-       │   ├─ page.tsx          — home (protected)
-       │   └─ login/            — public login page
-       ├─ app/auth/callback/    — Supabase OAuth callback
-       └─ utils/supabase/       — Supabase client helpers
-            ├─ client.ts        — browser client (createBrowserClient)
-            ├─ server.ts        — server client (createServerClient)
-            └─ middleware.ts    — session refresh helper
+       ├─ middleware.ts              — prelaunch gate (PRELAUNCH_MODE) → auth check → i18n locale redirect
+       ├─ app/countdown/             — prelaunch countdown page (public, server-rendered)
+       ├─ app/[locale]/              — localised routes (EN/VI)
+       │   ├─ layout.tsx             — root layout + NextIntlClientProvider
+       │   ├─ (protected)/           — auth-guarded route group
+       │   │   ├─ layout.tsx         — mounts FAB (widget-button + fab-controller) for all protected pages
+       │   │   ├─ page.tsx           — home page
+       │   │   └─ awards/page.tsx    — awards page
+       │   └─ login/                 — public login page
+       ├─ app/auth/callback/         — Supabase OAuth callback
+       └─ utils/supabase/            — Supabase client helpers
+            ├─ client.ts             — browser client (createBrowserClient)
+            ├─ server.ts             — server client (createServerClient)
+            └─ middleware.ts         — session refresh helper
 ```
 
 ## Prelaunch Gate
@@ -46,6 +49,7 @@ Messages: `messages/en.json`, `messages/vi.json`.
 - Server components dùng `createServerClient` (cookie-based session)
 - Client components dùng `createBrowserClient`
 - Migrations: `supabase/migrations/`
+- **Supabase Storage**: bucket `kudos-images` — lưu ảnh đính kèm kudos (public read, authenticated upload)
 
 ## Database Schema
 
