@@ -65,8 +65,10 @@
     "image_add": "+ Image",
     "image_max": "Max 5",
     "anonymous_label": "Send appreciation and recognition anonymously",
+    "content_label": "Message",
     "cancel": "Cancel",
     "submit": "Send",
+    "submitting": "Sending...",
     "community_standards": "Community Standards"
   },
   "home": {

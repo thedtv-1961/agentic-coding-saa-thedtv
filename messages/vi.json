@@ -65,8 +65,10 @@
     "image_add": "+ Image",
     "image_max": "Tối đa 5",
     "anonymous_label": "Gửi lời cám ơn và ghi nhận ẩn danh",
+    "content_label": "Lời cảm ơn",
     "cancel": "Hủy",
     "submit": "Gửi",
+    "submitting": "Đang gửi...",
     "community_standards": "Tiêu chuẩn cộng đồng"
   },
   "home": {

@@ -199,7 +199,7 @@ export default function VietKudosModal({
 
           <div className="flex flex-col gap-1">
             <span className="text-sm font-medium text-gray-700">
-              {t("content_placeholder").slice(0, 10)}…
+              {t("content_label")}
               <span className="text-red-500 ml-0.5">*</span>
             </span>
             <KudosRichTextEditor
@@ -253,7 +253,7 @@ export default function VietKudosModal({
             disabled={isSubmitDisabled}
             className="px-6 py-2 bg-[#FFEA9E] text-[#00101A] rounded-xl text-sm font-bold hover:bg-yellow-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? "..." : t("submit")}
+            {isSubmitting ? t("submitting") : t("submit")}
           </button>
         </div>
       </div>

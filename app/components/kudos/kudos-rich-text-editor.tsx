@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 interface KudosRichTextEditorProps {
@@ -36,6 +36,9 @@ export default function KudosRichTextEditor({
 }: KudosRichTextEditorProps) {
   const t = useTranslations("kudos");
   const editorRef = useRef<HTMLDivElement>(null);
+  const [linkDialogOpen, setLinkDialogOpen] = useState(false);
+  const [linkUrl, setLinkUrl] = useState("");
+  const savedRangeRef = useRef<Range | null>(null);
 
   // Sync external value into editor only on mount (avoid cursor jumping)
   useEffect(() => {
@@ -56,11 +59,38 @@ export default function KudosRichTextEditor({
     onChange(editorRef.current.innerHTML);
   }
 
+  function saveSelection(): Range | null {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0) return sel.getRangeAt(0).cloneRange();
+    return null;
+  }
+
+  function restoreSelection(range: Range | null) {
+    if (!range) return;
+    const sel = window.getSelection();
+    if (sel) {
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+  }
+
+  function handleLinkSubmit() {
+    const url = linkUrl.trim();
+    if (!url) return;
+    restoreSelection(savedRangeRef.current);
+    document.execCommand("createLink", false, url);
+    editorRef.current?.focus();
+    handleInput();
+    setLinkDialogOpen(false);
+    setLinkUrl("");
+    savedRangeRef.current = null;
+  }
+
   function execCommand(command: ExecCommandKey, arg?: string) {
     if (command === "createLink") {
-      const url = window.prompt("Enter URL:");
-      if (!url) return;
-      document.execCommand("createLink", false, url);
+      savedRangeRef.current = saveSelection();
+      setLinkDialogOpen(true);
+      return;
     } else if (arg) {
       document.execCommand(command, false, arg);
     } else {
@@ -97,7 +127,46 @@ export default function KudosRichTextEditor({
             {btn.label}
           </button>
         ))}
+        <a
+          href="#"
+          className="ml-auto text-xs text-blue-500 hover:underline whitespace-nowrap"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("community_standards")}
+        </a>
       </div>
+
+      {linkDialogOpen && (
+        <div className="flex items-center gap-2 border border-gray-300 bg-white rounded-lg px-3 py-2 shadow-sm">
+          <input
+            type="url"
+            value={linkUrl}
+            onChange={(e) => setLinkUrl(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") { e.preventDefault(); handleLinkSubmit(); }
+              if (e.key === "Escape") { setLinkDialogOpen(false); setLinkUrl(""); }
+            }}
+            placeholder="https://..."
+            autoFocus
+            className="flex-1 text-sm outline-none min-w-0"
+          />
+          <button
+            type="button"
+            onMouseDown={(e) => { e.preventDefault(); handleLinkSubmit(); }}
+            className="text-xs px-2 py-1 bg-yellow-400 rounded text-gray-800 font-medium hover:bg-yellow-300 transition-colors shrink-0"
+          >
+            Áp dụng
+          </button>
+          <button
+            type="button"
+            onMouseDown={(e) => { e.preventDefault(); setLinkDialogOpen(false); setLinkUrl(""); }}
+            className="text-xs text-gray-400 hover:text-gray-600 transition-colors shrink-0"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {/* Editor */}
       <div

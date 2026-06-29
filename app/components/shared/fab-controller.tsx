@@ -53,6 +53,7 @@ export function FabController({ userId }: FabControllerProps) {
       />
       {showSuccessToast && (
         <div
+          data-testid="success-toast"
           role="status"
           aria-live="polite"
           className="fixed bottom-24 right-6 z-[80] bg-green-600 text-white px-4 py-3 rounded-lg shadow-lg text-sm font-medium"
