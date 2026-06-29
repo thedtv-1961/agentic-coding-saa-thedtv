@@ -5,29 +5,34 @@ export default async function AwardsHero() {
   const t = await getTranslations("awards");
 
   return (
-    <section className="relative h-[500px] overflow-hidden bg-[#0d1520]">
-      <Image
-        src="/images/homepage/keyvisual.png"
-        alt="Keyvisual Sun* Annual Award 2025"
-        fill
-        className="object-cover object-center"
-        priority
-      />
-      <div className="absolute inset-0 bg-black/50" />
-
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center gap-6 px-6">
+    <section className="relative overflow-hidden">
+      {/* Background image — fills right side */}
+      <div className="absolute inset-y-0 right-0 w-full  pointer-events-none">
         <Image
-          src="/images/homepage/root-further.png"
-          alt="Root Further"
-          width={520}
-          height={230}
-          className="w-auto max-h-40 md:max-h-52"
+          src="/images/homepage/keyvisual.png"
+          alt=""
+          fill
+          className="object-cover object-left"
           priority
+          aria-hidden="true"
         />
-        <p className="text-white/80 text-base md:text-lg font-semibold tracking-widest">
+      </div>
+
+      {/* Left content — bounded within max-w-7xl container */}
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-0 pt-32">
+        <div className="flex flex-col gap-4  pb-36">
+          <Image
+            src="/images/homepage/root-further.png"
+            alt="Root Further"
+            width={338}
+            height={150}
+            priority
+          />
+        </div>
+        <p className="text-white/80 text-sm md:text-base font-semibold tracking-widest capitalize text-center">
           {t("hero_subtitle")}
         </p>
-        <p className="text-[#FFEA9E] text-xl md:text-2xl font-black tracking-wide">
+        <p className="text-[#FFEA9E] text-2xl md:text-4xl font-black tracking-wide leading-tight text-center pb-0">
           {t("section_title")}
         </p>
       </div>
