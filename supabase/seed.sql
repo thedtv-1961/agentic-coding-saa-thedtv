@@ -2,10 +2,11 @@
 -- Seed data mặc định cho: app_settings, hashtags, award_categories, awards, profiles
 
 -- ── app_settings ──────────────────────────────────────────────────────────────
+-- DO UPDATE để đảm bảo seed value luôn thắng migration value
 INSERT INTO public.app_settings (key, value) VALUES
-  ('countdown_date',     '2026-12-20T00:00:00+07:00'),
+  ('countdown_date',     '2025-12-20T00:00:00+07:00'),
   ('nomination_enabled', 'false')
-ON CONFLICT (key) DO NOTHING;
+ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 
 -- ── hashtags ──────────────────────────────────────────────────────────────────
 INSERT INTO public.hashtags (name) VALUES

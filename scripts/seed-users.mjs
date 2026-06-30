@@ -56,7 +56,7 @@ const SEED_HASHTAGS = [
 ];
 
 const SEED_APP_SETTINGS = [
-  { key: "countdown_date", value: "2026-12-20T00:00:00+07:00" },
+  { key: "countdown_date", value: "2025-12-20T00:00:00+07:00" },
   { key: "nomination_enabled", value: "false" },
 ];
 
