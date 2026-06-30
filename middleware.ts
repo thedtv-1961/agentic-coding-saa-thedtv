@@ -17,7 +17,7 @@ async function isLaunchDatePassed(): Promise<boolean> {
       .single();
     // Timeout 3s — tránh treo Worker khi DB cold-start
     const timeoutPromise = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error("db_timeout")), 3000),
+      setTimeout(() => reject(new Error("db_timeout")), 800),
     );
     const { data, error } = await Promise.race([queryPromise, timeoutPromise]);
     if (error || !data?.value) return true;
