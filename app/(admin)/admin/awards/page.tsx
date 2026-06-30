@@ -74,7 +74,7 @@ export default async function AdminAwardsPage() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {awards.map((award) => (
-            <AwardCard key={award.id} award={award} />
+            <AwardCard key={award.id} award={award} categories={categories} />
           ))}
         </div>
       )}

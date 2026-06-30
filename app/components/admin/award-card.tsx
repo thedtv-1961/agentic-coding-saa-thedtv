@@ -1,8 +1,18 @@
 "use client";
 
 import { useTransition, useState } from "react";
-import { updateAward } from "@/app/actions/admin/update-award";
+import { updateAward, deleteAward } from "@/app/actions/admin/update-award";
 import type { AwardRow } from "@/app/(admin)/admin/awards/page";
+
+interface CategoryOption {
+  id: string;
+  name: string;
+}
+
+interface Props {
+  award: AwardRow;
+  categories: CategoryOption[];
+}
 
 const WINNER_UNITS = [
   { value: 1, label: "Cá nhân" },
@@ -14,8 +24,9 @@ function winnerUnitLabel(unit: number | null): string {
   return WINNER_UNITS.find((u) => u.value === unit)?.label ?? "N/A";
 }
 
-export function AwardCard({ award }: { award: AwardRow }) {
+export function AwardCard({ award, categories }: Props) {
   const [isEditing, setIsEditing] = useState(false);
+  const [categoryId, setCategoryId] = useState(award.category_id);
   const [numberOfWinners, setNumberOfWinners] = useState(String(award.number_of_winners));
   const [winnerUnit, setWinnerUnit] = useState(award.winner_unit ?? 1);
   const [prizeValue, setPrizeValue] = useState(String(award.prize_value));
@@ -23,6 +34,7 @@ export function AwardCard({ award }: { award: AwardRow }) {
   const [isPending, startTransition] = useTransition();
 
   function handleCancel() {
+    setCategoryId(award.category_id);
     setNumberOfWinners(String(award.number_of_winners));
     setWinnerUnit(award.winner_unit ?? 1);
     setPrizeValue(String(award.prize_value));
@@ -31,11 +43,13 @@ export function AwardCard({ award }: { award: AwardRow }) {
   }
 
   function handleSave() {
+    if (!categoryId) { setError("Vui lòng chọn danh mục."); return; }
     setError(null);
     startTransition(async () => {
       try {
         await updateAward({
           awardId: award.id,
+          categoryId,
           numberOfWinners: Math.max(1, parseInt(numberOfWinners, 10) || 1),
           winnerUnit,
           prizeValue,
@@ -47,35 +61,74 @@ export function AwardCard({ award }: { award: AwardRow }) {
     });
   }
 
+  function handleDelete() {
+    if (!confirm("Xoá giải thưởng này? Hành động không thể hoàn tác.")) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        await deleteAward(award.id);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Lỗi không xác định.");
+      }
+    });
+  }
+
+  const sel = "w-full bg-[#0d1117] border border-white/20 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60 disabled:opacity-50";
+  const inp = "w-full bg-white/5 border border-white/20 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60 disabled:opacity-50";
+
   return (
     <div className="bg-black/30 border border-white/10 rounded-lg p-4 flex flex-col gap-3">
-      {/* Category label */}
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-xs text-white/40 uppercase tracking-widest font-medium">
-          {award.category_name}
-        </span>
+        {isEditing ? (
+          <label className="text-xs text-white/40 uppercase tracking-widest font-medium">
+            Danh mục
+          </label>
+        ) : (
+          <span className="text-xs text-white/40 uppercase tracking-widest font-medium">
+            {award.category_name}
+          </span>
+        )}
         {!isEditing && (
-          <button
-            onClick={() => setIsEditing(true)}
-            className="px-3 py-1 text-xs rounded border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-colors"
-          >
-            Chỉnh sửa
-          </button>
+          <div className="flex gap-1">
+            <button
+              onClick={() => setIsEditing(true)}
+              className="px-3 py-1 text-xs rounded border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-colors"
+            >
+              Sửa
+            </button>
+            <button
+              onClick={handleDelete}
+              disabled={isPending}
+              className="px-3 py-1 text-xs rounded bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 disabled:opacity-30 transition-colors"
+            >
+              Xoá
+            </button>
+          </div>
         )}
       </div>
+
+      {/* Category combobox (edit only) */}
+      {isEditing && (
+        <select
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.value)}
+          disabled={isPending}
+          className={sel}
+        >
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>{c.name}</option>
+          ))}
+        </select>
+      )}
 
       {/* Số người thắng */}
       <div>
         <p className="text-xs text-white/40 mb-1">Số người thắng</p>
         {isEditing ? (
-          <input
-            type="number"
-            min={1}
-            value={numberOfWinners}
+          <input type="number" min={1} value={numberOfWinners}
             onChange={(e) => setNumberOfWinners(e.target.value)}
-            disabled={isPending}
-            className="w-full bg-white/5 border border-white/20 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60"
-          />
+            disabled={isPending} className={inp} />
         ) : (
           <p className="text-white font-medium text-sm">{award.number_of_winners}</p>
         )}
@@ -85,12 +138,8 @@ export function AwardCard({ award }: { award: AwardRow }) {
       <div>
         <p className="text-xs text-white/40 mb-1">Đơn vị</p>
         {isEditing ? (
-          <select
-            value={winnerUnit}
-            onChange={(e) => setWinnerUnit(Number(e.target.value))}
-            disabled={isPending}
-            className="w-full bg-[#0d1117] border border-white/20 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60"
-          >
+          <select value={winnerUnit} onChange={(e) => setWinnerUnit(Number(e.target.value))}
+            disabled={isPending} className={sel}>
             {WINNER_UNITS.map((u) => (
               <option key={u.value} value={u.value}>{u.label}</option>
             ))}
@@ -100,18 +149,13 @@ export function AwardCard({ award }: { award: AwardRow }) {
         )}
       </div>
 
-      {/* Giá trị giải thưởng */}
+      {/* Giá trị */}
       <div>
         <p className="text-xs text-white/40 mb-1">Giá trị giải thưởng (VNĐ)</p>
         {isEditing ? (
-          <input
-            type="text"
-            value={prizeValue}
+          <input type="text" value={prizeValue}
             onChange={(e) => setPrizeValue(e.target.value)}
-            placeholder="VD: 7000000"
-            disabled={isPending}
-            className="w-full bg-white/5 border border-white/20 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60"
-          />
+            placeholder="VD: 7000000" disabled={isPending} className={inp} />
         ) : (
           <p className="text-[#FFEA9E] font-medium text-sm">
             {award.prize_value
@@ -125,18 +169,12 @@ export function AwardCard({ award }: { award: AwardRow }) {
 
       {isEditing && (
         <div className="flex gap-2 pt-1">
-          <button
-            onClick={handleSave}
-            disabled={isPending}
-            className="px-4 py-1.5 text-sm rounded bg-[#FFEA9E] text-black font-medium hover:bg-[#FFEA9E]/80 disabled:opacity-50 transition-colors"
-          >
+          <button onClick={handleSave} disabled={isPending}
+            className="px-4 py-1.5 text-sm rounded bg-[#FFEA9E] text-black font-medium hover:bg-[#FFEA9E]/80 disabled:opacity-50 transition-colors">
             {isPending ? "Đang lưu..." : "Lưu"}
           </button>
-          <button
-            onClick={handleCancel}
-            disabled={isPending}
-            className="px-4 py-1.5 text-sm rounded border border-white/20 text-white/60 hover:text-white disabled:opacity-50 transition-colors"
-          >
+          <button onClick={handleCancel} disabled={isPending}
+            className="px-4 py-1.5 text-sm rounded border border-white/20 text-white/60 hover:text-white disabled:opacity-50 transition-colors">
             Hủy
           </button>
         </div>
