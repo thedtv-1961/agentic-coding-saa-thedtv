@@ -66,6 +66,7 @@
     "recipient_label": "Recipient",
     "recipient_placeholder": "Search",
     "recipient_required": "Please select a recipient",
+    "recipient_not_found": "Recipient not found in the system",
     "content_placeholder": "Share your appreciation and recognition for your teammate here!",
     "content_required": "Please enter a message",
     "content_hint": "You can type \"@ + name\" to mention another colleague",

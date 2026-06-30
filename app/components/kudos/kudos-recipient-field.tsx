@@ -26,8 +26,16 @@ export default function KudosRecipientField({
   const [results, setResults] = useState<ProfileResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  // Lỗi tự phát hiện ở field: đã gõ tên nhưng không chọn được ai trong DB.
+  const [notFoundError, setNotFoundError] = useState("");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Mirror giá trị mới nhất để đọc trong setTimeout của onBlur (tránh stale closure).
+  const recipientIdRef = useRef(recipientId);
+  recipientIdRef.current = recipientId;
+  const queryRef = useRef(query);
+  queryRef.current = query;
 
   // Sync displayed name when parent clears selection
   useEffect(() => {
@@ -74,6 +82,7 @@ export default function KudosRecipientField({
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     setQuery(value);
+    setNotFoundError(""); // gõ lại thì xóa lỗi cũ
     // Clear selection if user types after picking
     if (recipientId) onSelect("", "");
 
@@ -84,9 +93,22 @@ export default function KudosRecipientField({
   function handleSelect(profile: ProfileResult) {
     onSelect(profile.id, profile.full_name);
     setQuery(profile.full_name);
+    setNotFoundError("");
     setIsOpen(false);
     setResults([]);
   }
+
+  function handleBlur() {
+    // Đợi một nhịp để click chọn option (nếu có) kịp set recipientId trước khi kiểm tra.
+    setTimeout(() => {
+      if (!recipientIdRef.current && queryRef.current.trim()) {
+        setNotFoundError(t("recipient_not_found"));
+      }
+    }, 200);
+  }
+
+  // Lỗi từ submit (parent) ưu tiên, nếu không thì dùng lỗi tự phát hiện ở field.
+  const shownError = error || notFoundError;
 
   return (
     <div className="flex flex-row items-center gap-4">
@@ -101,12 +123,13 @@ export default function KudosRecipientField({
             type="text"
             value={query}
             onChange={handleChange}
+            onBlur={handleBlur}
             onFocus={() => results.length > 0 && setIsOpen(true)}
             placeholder={t("recipient_placeholder")}
             autoComplete="off"
             data-testid="recipient-search"
             className={`w-full h-14 border rounded-lg px-4 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
-              error ? "border-red-500" : "border-[#998C5F]"
+              shownError ? "border-red-500" : "border-[#998C5F]"
             } ${recipientId ? "bg-yellow-50" : "bg-white"}`}
           />
           {isLoading && (
@@ -116,7 +139,11 @@ export default function KudosRecipientField({
           )}
         </div>
 
-        {error && <p className="text-xs text-red-500">{error}</p>}
+        {shownError && (
+          <p className="text-xs text-red-500" data-testid="recipient-error">
+            {shownError}
+          </p>
+        )}
 
         {isOpen && results.length > 0 && (
           <ul className="absolute top-[calc(100%+4px)] left-0 right-0 z-10 bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">

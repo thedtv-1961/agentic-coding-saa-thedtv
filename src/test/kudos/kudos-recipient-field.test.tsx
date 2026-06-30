@@ -8,6 +8,7 @@ vi.mock("next-intl", () => ({
     const translations: Record<string, string> = {
       recipient_label: "Người nhận",
       recipient_placeholder: "Tìm kiếm...",
+      recipient_not_found: "Không tìm thấy người nhận này trong hệ thống",
     };
     return translations[key] || key;
   }),
@@ -388,6 +389,79 @@ describe("KudosRecipientField", () => {
     );
     const input = screen.getByTestId("recipient-search");
     expect(input).toHaveClass("border-red-500");
+  });
+
+  it("shows not-found error on blur when name typed but nobody selected", async () => {
+    render(
+      <KudosRecipientField recipientId="" recipientName="" onSelect={vi.fn()} />
+    );
+
+    const input = screen.getByTestId("recipient-search");
+    fireEvent.change(input, { target: { value: "Khong Ton Tai" } });
+    await advanceDebounce(300);
+
+    fireEvent.blur(input);
+    await act(async () => {
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(
+      screen.getByText("Không tìm thấy người nhận này trong hệ thống")
+    ).toBeInTheDocument();
+    expect(input).toHaveClass("border-red-500");
+  });
+
+  it("does not show not-found error on blur when a recipient is selected", async () => {
+    render(
+      <KudosRecipientField
+        recipientId="u1"
+        recipientName="Nguyen Van A"
+        onSelect={vi.fn()}
+      />
+    );
+
+    const input = screen.getByTestId("recipient-search");
+    fireEvent.blur(input);
+    await act(async () => {
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(
+      screen.queryByText("Không tìm thấy người nhận này trong hệ thống")
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not show not-found error on blur when input is empty", async () => {
+    render(
+      <KudosRecipientField recipientId="" recipientName="" onSelect={vi.fn()} />
+    );
+
+    const input = screen.getByTestId("recipient-search");
+    fireEvent.blur(input);
+    await act(async () => {
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(screen.queryByTestId("recipient-error")).not.toBeInTheDocument();
+  });
+
+  it("clears not-found error once the user types again", async () => {
+    render(
+      <KudosRecipientField recipientId="" recipientName="" onSelect={vi.fn()} />
+    );
+
+    const input = screen.getByTestId("recipient-search");
+    fireEvent.change(input, { target: { value: "Khong Ton Tai" } });
+    await advanceDebounce(300);
+    fireEvent.blur(input);
+    await act(async () => {
+      vi.advanceTimersByTime(200);
+    });
+    expect(screen.getByTestId("recipient-error")).toBeInTheDocument();
+
+    // Typing again should clear the error immediately
+    fireEvent.change(input, { target: { value: "Khong Ton Tai N" } });
+    expect(screen.queryByTestId("recipient-error")).not.toBeInTheDocument();
   });
 
   it("opens dropdown when input focused and results available", async () => {
