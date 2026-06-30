@@ -1,4 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
+import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
+import { redirect } from "next/navigation";
 import { SettingsTable } from "@/app/components/admin/settings-table";
 
 const EDITABLE_KEYS = ["countdown_date"] as const;
@@ -9,6 +11,9 @@ interface SettingRow {
 }
 
 export default async function AdminSettingsPage() {
+  const { isAdmin } = await getUserWithRole();
+  if (!isAdmin) redirect("/admin");
+
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("app_settings")

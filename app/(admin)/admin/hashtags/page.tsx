@@ -1,4 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
+import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
+import { redirect } from "next/navigation";
 import { HashtagsManager } from "@/app/components/admin/hashtags-manager";
 
 interface HashtagRow {
@@ -8,6 +10,9 @@ interface HashtagRow {
 }
 
 export default async function AdminHashtagsPage() {
+  const { isAdmin } = await getUserWithRole();
+  if (!isAdmin) redirect("/admin");
+
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("hashtags")

@@ -9,11 +9,11 @@
     "language_label_en": "EN",
     "error_message": "Đăng nhập thất bại. Vui lòng thử lại.",
     "admin_login_title": "Đăng nhập Admin",
-    "admin_email_placeholder": "Email",
+    "admin_username_placeholder": "Tên đăng nhập",
     "admin_password_placeholder": "Mật khẩu",
     "admin_login_button": "Đăng nhập",
     "admin_login_loading": "Đang đăng nhập...",
-    "admin_error_invalid": "Email hoặc mật khẩu không đúng.",
+    "admin_error_invalid": "Tên đăng nhập hoặc mật khẩu không đúng.",
     "admin_error_not_admin": "Tài khoản không có quyền admin."
   },
   "todo": {

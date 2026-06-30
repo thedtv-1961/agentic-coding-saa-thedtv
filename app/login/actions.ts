@@ -30,10 +30,17 @@ export type AdminSignInResult =
   | { error: "invalid_credentials" | "not_admin" | "unknown" }
   | never;
 
+const USERNAME_EMAIL_MAP: Record<string, string> = {
+  admin: "admin@sun-asterisk.com",
+};
+
 export async function signInAsAdmin(
-  email: string,
+  username: string,
   password: string
 ): Promise<AdminSignInResult> {
+  const email = USERNAME_EMAIL_MAP[username.toLowerCase().trim()];
+  if (!email) return { error: "invalid_credentials" };
+
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -45,5 +52,5 @@ export async function signInAsAdmin(
     return { error: "not_admin" };
   }
 
-  redirect("/admin");
+  redirect("/admin/kudos");
 }

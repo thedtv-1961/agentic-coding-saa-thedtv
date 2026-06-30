@@ -9,11 +9,11 @@
     "language_label_en": "EN",
     "error_message": "Login failed. Please try again.",
     "admin_login_title": "Admin Login",
-    "admin_email_placeholder": "Email",
+    "admin_username_placeholder": "Username",
     "admin_password_placeholder": "Password",
     "admin_login_button": "Login",
     "admin_login_loading": "Logging in...",
-    "admin_error_invalid": "Invalid email or password.",
+    "admin_error_invalid": "Invalid username or password.",
     "admin_error_not_admin": "This account does not have admin access."
   },
   "todo": {

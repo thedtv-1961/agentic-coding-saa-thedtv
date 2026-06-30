@@ -1,4 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
+import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
+import { redirect } from "next/navigation";
 import { AwardCard } from "@/app/components/admin/award-card";
 
 interface AwardRow {
@@ -17,6 +19,9 @@ interface CategoryRow {
 }
 
 export default async function AdminAwardsPage() {
+  const { isAdmin } = await getUserWithRole();
+  if (!isAdmin) redirect("/admin");
+
   const supabase = await createClient();
 
   const { data, error } = await supabase

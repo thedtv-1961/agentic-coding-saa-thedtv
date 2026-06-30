@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import LoginButton from "./login-button";
-import AdminLoginForm from "./admin-login-form";
 
 interface LoginHeroProps {
   errorMessage?: string;
@@ -31,7 +30,6 @@ export default async function LoginHero({ errorMessage }: LoginHeroProps) {
       )}
 
       <LoginButton label={t("login_button")} />
-      <AdminLoginForm />
     </section>
   );
 }

@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
 import { AdminSidebar } from "@/app/components/admin/admin-sidebar";
 
@@ -8,7 +7,11 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const { isAdmin } = await getUserWithRole();
-  if (!isAdmin) redirect("/");
+
+  if (!isAdmin) {
+    // Non-admin: render children without sidebar (login page)
+    return <>{children}</>;
+  }
 
   return (
     <div className="flex min-h-screen bg-[#00070C] text-white">

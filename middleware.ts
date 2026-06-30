@@ -74,8 +74,8 @@ export async function middleware(request: NextRequest) {
     return res.current;
   }
 
-  // Auth guard: protect homepage, awards, and admin — unauthenticated users go to /login.
-  if (pathname === "/" || pathname.startsWith("/awards") || pathname.startsWith("/admin")) {
+  // Auth guard: protect homepage and awards — unauthenticated users go to /login.
+  if (pathname === "/" || pathname.startsWith("/awards")) {
     const res = { current: NextResponse.next({ request }) };
     const supabase = makeSupabaseClient(request, res);
     const {
@@ -83,6 +83,20 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser();
     if (!user) {
       return NextResponse.redirect(new URL("/login", request.url));
+    }
+    return res.current;
+  }
+
+  // Admin sub-routes: unauthenticated users → /admin (login form).
+  // /admin root itself is always accessible (it IS the admin login page).
+  if (pathname.startsWith("/admin/")) {
+    const res = { current: NextResponse.next({ request }) };
+    const supabase = makeSupabaseClient(request, res);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.redirect(new URL("/admin", request.url));
     }
     return res.current;
   }

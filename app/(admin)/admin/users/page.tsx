@@ -1,9 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
+import { redirect } from "next/navigation";
 import UsersTable from "@/app/components/admin/users-table";
 
 export default async function AdminUsersPage() {
-  const { user } = await getUserWithRole();
+  const { user, isAdmin } = await getUserWithRole();
+  if (!isAdmin) redirect("/admin");
   const supabase = await createClient();
 
   const { data: rows, error } = await supabase

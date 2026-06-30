@@ -1,4 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
+import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
+import { redirect } from "next/navigation";
 import { KudosTable } from "@/app/components/admin/kudos-table";
 
 const PAGE_SIZE = 20;
@@ -20,6 +22,9 @@ interface PageProps {
 }
 
 export default async function AdminKudosPage({ searchParams }: PageProps) {
+  const { isAdmin } = await getUserWithRole();
+  if (!isAdmin) redirect("/admin");
+
   const params = await (searchParams ?? Promise.resolve({ page: undefined }));
   const page = Math.max(1, Number(params.page ?? 1));
   const offset = (page - 1) * PAGE_SIZE;
