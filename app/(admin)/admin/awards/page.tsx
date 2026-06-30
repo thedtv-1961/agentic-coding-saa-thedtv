@@ -2,7 +2,8 @@ import { createClient } from "@/utils/supabase/server";
 import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
 import { redirect } from "next/navigation";
 import { AwardCard } from "@/app/components/admin/award-card";
-import { AddAwardCategoryForm } from "@/app/components/admin/add-award-category-form";
+import { AddAwardForm } from "@/app/components/admin/add-award-form";
+import Link from "next/link";
 
 interface AwardRow {
   id: string;
@@ -25,34 +26,49 @@ export default async function AdminAwardsPage() {
 
   const supabase = await createClient();
 
-  const { data, error } = await supabase
-    .from("award_categories")
-    .select(
-      "id, name, description, image_url, awards(id, number_of_winners, winner_unit, prize_value)"
-    )
-    .order("created_at");
+  const [categoriesRes, awardsRes] = await Promise.all([
+    supabase
+      .from("award_categories")
+      .select("id, name")
+      .order("created_at"),
+    supabase
+      .from("award_categories")
+      .select(
+        "id, name, description, image_url, awards(id, number_of_winners, winner_unit, prize_value)"
+      )
+      .order("created_at"),
+  ]);
 
-  if (error) {
-    console.error("Awards fetch error:", error.message);
+  if (awardsRes.error) {
+    console.error("Awards fetch error:", awardsRes.error.message);
     return (
       <div className="text-red-400 p-4">
-        Lỗi tải dữ liệu: {error.message}
+        Lỗi tải dữ liệu: {awardsRes.error.message}
       </div>
     );
   }
 
-  const categories = (data as unknown as CategoryRow[]) ?? [];
+  const categories = (categoriesRes.data as { id: string; name: string }[]) ?? [];
+  const awardsData = (awardsRes.data as unknown as CategoryRow[]) ?? [];
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white mb-6">Quản lý Giải thưởng</h1>
-      <AddAwardCategoryForm />
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold text-white">Quản lý Giải thưởng</h1>
+        <Link
+          href="/admin/awards/categories"
+          className="text-sm text-white/50 hover:text-[#FFEA9E] transition-colors"
+        >
+          Quản lý danh mục →
+        </Link>
+      </div>
+      <AddAwardForm categories={categories} />
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {categories.map((cat) => (
+        {awardsData.map((cat) => (
           <AwardCard key={cat.id} category={cat} />
         ))}
       </div>
-      {categories.length === 0 && (
+      {awardsData.length === 0 && (
         <p className="text-white/40 text-sm">Chưa có dữ liệu giải thưởng.</p>
       )}
     </div>

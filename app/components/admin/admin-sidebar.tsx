@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { href: "/admin/kudos", labelKey: "kudos" },
   { href: "/admin/users", labelKey: "users" },
   { href: "/admin/awards", labelKey: "awards" },
+  { href: "/admin/awards/categories", labelKey: "award_categories" },
   { href: "/admin/hashtags", labelKey: "hashtags" },
   { href: "/admin/settings", labelKey: "settings" },
 ] as const;
@@ -22,7 +23,10 @@ export function AdminSidebar() {
         Admin
       </p>
       {NAV_ITEMS.map(({ href, labelKey }) => {
-        const isActive = pathname.startsWith(href);
+        const isActive =
+          href === "/admin/awards"
+            ? pathname === "/admin/awards"
+            : pathname.startsWith(href);
         return (
           <Link
             key={href}
