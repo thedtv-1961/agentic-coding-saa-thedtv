@@ -8,7 +8,7 @@ interface Award {
   id: string;
   number_of_winners: number;
   winner_unit: number | null;
-  prize_value: string;
+  prize_value: number;
 }
 
 interface AwardCategory {
@@ -37,7 +37,7 @@ export function AwardCard({ category }: Props) {
   const [name, setName] = useState(category.name);
   const [description, setDescription] = useState(category.description);
   const [imageUrl, setImageUrl] = useState(category.image_url);
-  const [prizeValue, setPrizeValue] = useState(award?.prize_value ?? "");
+  const [prizeValue, setPrizeValue] = useState(String(award?.prize_value ?? ""));
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -50,7 +50,7 @@ export function AwardCard({ category }: Props) {
     setName(category.name);
     setDescription(category.description);
     setImageUrl(category.image_url);
-    setPrizeValue(award?.prize_value ?? "");
+    setPrizeValue(String(award?.prize_value ?? ""));
     setError(null);
     setIsEditing(false);
   }

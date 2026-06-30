@@ -10,7 +10,7 @@ export interface UpdateAwardInput {
   name: string;
   description: string;
   imageUrl: string;
-  prizeValue: string;
+  prizeValue: string | number;
 }
 
 export async function updateAward(
@@ -35,9 +35,10 @@ export async function updateAward(
 
   if (catError) throw new Error(catError.message);
 
+  const prizeNum = Number(String(input.prizeValue).replace(/\D/g, "")) || 0;
   const { error: awardError } = await supabase
     .from("awards")
-    .update({ prize_value: input.prizeValue.trim() })
+    .update({ prize_value: prizeNum })
     .eq("id", input.awardId);
 
   if (awardError) throw new Error(awardError.message);

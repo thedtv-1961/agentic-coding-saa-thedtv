@@ -2,12 +2,13 @@ import { createClient } from "@/utils/supabase/server";
 import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
 import { redirect } from "next/navigation";
 import { AwardCard } from "@/app/components/admin/award-card";
+import { AddAwardCategoryForm } from "@/app/components/admin/add-award-category-form";
 
 interface AwardRow {
   id: string;
   number_of_winners: number;
   winner_unit: number | null;
-  prize_value: string;
+  prize_value: number;
 }
 
 interface CategoryRow {
@@ -45,6 +46,7 @@ export default async function AdminAwardsPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-white mb-6">Quản lý Giải thưởng</h1>
+      <AddAwardCategoryForm />
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {categories.map((cat) => (
           <AwardCard key={cat.id} category={cat} />
