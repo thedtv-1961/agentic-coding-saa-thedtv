@@ -72,10 +72,23 @@ export default async function AdminAwardsPage() {
       {awards.length === 0 ? (
         <p className="text-white/40 text-sm">Chưa có dữ liệu giải thưởng.</p>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {awards.map((award) => (
-            <AwardCard key={award.id} award={award} categories={categories} />
-          ))}
+        <div className="overflow-x-auto rounded-xl border border-white/10">
+          <table className="w-full text-sm text-white">
+            <thead>
+              <tr className="border-b border-white/10 bg-white/5">
+                <th className="px-4 py-3 text-left text-white/60 font-medium">Danh mục</th>
+                <th className="px-4 py-3 text-left text-white/60 font-medium">Số người thắng</th>
+                <th className="px-4 py-3 text-left text-white/60 font-medium">Đơn vị</th>
+                <th className="px-4 py-3 text-left text-white/60 font-medium">Giá trị giải thưởng</th>
+                <th className="px-4 py-3 text-right text-white/60 font-medium">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              {awards.map((award) => (
+                <AwardCard key={award.id} award={award} categories={categories} />
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
