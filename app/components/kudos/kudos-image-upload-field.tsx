@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
@@ -32,12 +32,14 @@ export default function KudosImageUploadField({
   const inputRef = useRef<HTMLInputElement>(null);
   const [entries, setEntries] = useState<ImageEntry[]>([]);
 
-  function syncUrls(updated: ImageEntry[]) {
-    const uploaded = updated
-      .filter((e) => e.publicUrl !== null)
+  // Sync uploaded public URLs to parent whenever entries change
+  useEffect(() => {
+    const uploaded = entries
+      .filter((e) => e.publicUrl !== null && !e.uploading)
       .map((e) => e.publicUrl as string);
     onUrlsChange(uploaded);
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entries]);
 
   async function handleFiles(files: FileList) {
     const remaining = MAX_KUDOS_IMAGES - entries.length;
@@ -75,12 +77,7 @@ export default function KudosImageUploadField({
           const url = await uploadKudosImage(file, userId);
           setEntries((prev) => {
             const updated = [...prev];
-            updated[idx] = {
-              ...updated[idx],
-              publicUrl: url,
-              uploading: false,
-            };
-            syncUrls(updated);
+            updated[idx] = { ...updated[idx], publicUrl: url, uploading: false };
             return updated;
           });
         } catch (err) {
@@ -105,23 +102,22 @@ export default function KudosImageUploadField({
     setEntries((prev) => {
       const entry = prev[idx];
       URL.revokeObjectURL(entry.previewUrl);
-      const updated = prev.filter((_, i) => i !== idx);
-      syncUrls(updated);
-      return updated;
+      return prev.filter((_, i) => i !== idx);
     });
   }
 
   const canAdd = entries.length < MAX_KUDOS_IMAGES;
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-1">
-        <span className="text-sm font-medium text-gray-700">{t("image_label")}</span>
-        <span className="text-xs text-gray-400 ml-1">
+    <div className="flex flex-row items-start gap-4">
+      <span className="text-[22px] font-bold text-[#00101A] w-36 shrink-0 pt-2 leading-tight">
+        {t("image_label")}
+        <span className="text-xs font-normal text-gray-400 ml-1">
           ({entries.length}/{MAX_KUDOS_IMAGES})
         </span>
-      </div>
+      </span>
 
+      <div className="flex-1 flex flex-col gap-2">
       <div className="flex flex-wrap gap-2">
         {/* Thumbnails */}
         {entries.map((entry, idx) => (
@@ -172,10 +168,13 @@ export default function KudosImageUploadField({
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
-            className="w-20 h-20 rounded-lg border-2 border-dashed border-gray-300 text-gray-400 text-xs flex flex-col items-center justify-center gap-1 hover:border-yellow-400 hover:text-yellow-500 transition-colors shrink-0"
+            className="inline-flex items-center gap-2 px-2 h-12 border border-[#998C5F] bg-white text-gray-900 text-[11px] font-bold rounded-lg hover:border-yellow-500 hover:text-yellow-600 transition-colors tracking-[0.5px] shrink-0"
           >
-            <span className="text-xl leading-none">+</span>
-            <span>{t("image_add")}</span>
+            <span className="text-lg leading-none">+</span>
+            <span className="flex flex-col items-start">
+              <span>{t("image_add")}</span>
+              <span className="text-[9px] font-normal opacity-60">{t("image_max")}</span>
+            </span>
           </button>
         )}
       </div>
@@ -183,6 +182,7 @@ export default function KudosImageUploadField({
       {!canAdd && (
         <p className="text-xs text-gray-400">{t("image_max")}</p>
       )}
+      </div>
 
       {/* Hidden file input */}
       <input
@@ -200,4 +200,5 @@ export default function KudosImageUploadField({
       <input type="hidden" value={imageUrls.join(",")} />
     </div>
   );
+
 }

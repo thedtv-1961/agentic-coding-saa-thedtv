@@ -4,6 +4,7 @@ import { createClient } from '@/utils/supabase/server'
 
 export interface SubmitKudosPayload {
   receiverId: string
+  title: string
   content: string
   hashtagIds: string[]
   imageUrls: string[]
@@ -15,6 +16,7 @@ type SubmitKudosResult = { data: { id: string } } | { error: string }
 export async function submitKudos(payload: SubmitKudosPayload): Promise<SubmitKudosResult> {
   // Validate inputs before hitting DB
   if (!payload.receiverId) return { error: 'Vui lòng chọn người nhận' }
+  if (!payload.title.trim()) return { error: 'Vui lòng nhập danh hiệu' }
   if (!payload.content.trim()) return { error: 'Vui lòng nhập nội dung lời cảm ơn' }
   if (payload.hashtagIds.length === 0) return { error: 'Vui lòng thêm ít nhất 1 hashtag' }
   if (payload.hashtagIds.length > 5) return { error: 'Tối đa 5 hashtag' }
@@ -32,6 +34,7 @@ export async function submitKudos(payload: SubmitKudosPayload): Promise<SubmitKu
     .insert({
       sender_id: payload.isAnonymous ? null : user.id,
       receiver_id: payload.receiverId,
+      title: payload.title.trim(),
       content: payload.content.trim(),
       is_anonymous: payload.isAnonymous,
     })

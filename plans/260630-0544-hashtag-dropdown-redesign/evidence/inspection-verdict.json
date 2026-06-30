@@ -1,0 +1,25 @@
+{
+  "score": 9.5,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "Dropdown hiển thị TẤT CẢ hashtags (không filter selected) — verified: test 'shows all hashtags in dropdown — selected and unselected' passes",
+    "Selected rows có bg rgba(255,234,158,0.20) và IconCheck SVG 24×24 — verified: component code + test 'clicking selected hashtag in dropdown deselects it'",
+    "Unselected rows disabled khi đã chọn đủ 5 hashtags — verified: test 'unselected items enabled when below max...' passes",
+    "Click toggle: unselected → add, selected → remove — verified: handleToggle logic + tests 'adds hashtag chip when option selected' and 'removes hashtag chip when × clicked'",
+    "Dark container #00070C, border #998C5F — verified: component source bg-[#00070C] border-[#998C5F]",
+    "Text Montserrat 700 16px white — verified: font-bold text-base text-white in component source",
+    "npm run build pass (0 errors) — verified: exit 0",
+    "npm run test — 125/130 pass (5 failures pre-existing trong widget-button.test.tsx) — verified: npx vitest run --exclude widget-button exits 0 with 121 tests"
+  ],
+  "regressionChecked": [
+    "viet-kudos-modal.test.tsx: 13/13 pass — modal integration unbroken",
+    "kudos-recipient-field.test.tsx: all pass — unrelated component unaffected",
+    "submit-kudos-validation.test.ts: 9/9 pass — server action validation unaffected",
+    "widget-button.test.tsx: 5 failures confirmed pre-existing (unchanged vs git stash baseline)"
+  ],
+  "contractStatus": "unchanged",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

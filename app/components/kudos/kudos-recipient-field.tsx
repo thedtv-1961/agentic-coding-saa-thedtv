@@ -89,63 +89,65 @@ export default function KudosRecipientField({
   }
 
   return (
-    <div ref={containerRef} className="relative flex flex-col gap-1">
-      <label className="text-sm font-medium text-gray-700">
+    <div className="flex flex-row items-center gap-4">
+      <label className="text-[22px] font-bold text-[#00101A] w-36 shrink-0 leading-tight">
         {t("recipient_label")}
         <span className="text-red-500 ml-0.5">*</span>
       </label>
 
-      <div className="relative">
-        <input
-          type="text"
-          value={query}
-          onChange={handleChange}
-          onFocus={() => results.length > 0 && setIsOpen(true)}
-          placeholder={t("recipient_placeholder")}
-          autoComplete="off"
-          data-testid="recipient-search"
-          className={`w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
-            error ? "border-red-500" : "border-gray-300"
-          } ${recipientId ? "bg-yellow-50" : "bg-white"}`}
-        />
-        {isLoading && (
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">
-            ...
-          </span>
+      <div ref={containerRef} className="relative flex-1 flex flex-col gap-1">
+        <div className="relative">
+          <input
+            type="text"
+            value={query}
+            onChange={handleChange}
+            onFocus={() => results.length > 0 && setIsOpen(true)}
+            placeholder={t("recipient_placeholder")}
+            autoComplete="off"
+            data-testid="recipient-search"
+            className={`w-full h-14 border rounded-lg px-4 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+              error ? "border-red-500" : "border-[#998C5F]"
+            } ${recipientId ? "bg-yellow-50" : "bg-white"}`}
+          />
+          {isLoading && (
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">
+              ...
+            </span>
+          )}
+        </div>
+
+        {error && <p className="text-xs text-red-500">{error}</p>}
+
+        {isOpen && results.length > 0 && (
+          <ul className="absolute top-[calc(100%+4px)] left-0 right-0 z-10 bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+            {results.map((profile) => (
+              <li key={profile.id}>
+                <button
+                  type="button"
+                  data-testid="recipient-option"
+                  onClick={() => handleSelect(profile)}
+                  className="w-full flex items-center gap-3 px-3 py-2 hover:bg-yellow-50 text-left transition-colors"
+                >
+                  {profile.avatar_url ? (
+                    <Image
+                      src={profile.avatar_url}
+                      alt={profile.full_name}
+                      width={32}
+                      height={32}
+                      className="rounded-full object-cover shrink-0"
+                    />
+                  ) : (
+                    <span className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
+                      {profile.full_name.charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                  <span className="text-sm text-gray-800">{profile.full_name}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
-
-      {error && <p className="text-xs text-red-500">{error}</p>}
-
-      {isOpen && results.length > 0 && (
-        <ul className="absolute top-full left-0 right-0 z-10 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">
-          {results.map((profile) => (
-            <li key={profile.id}>
-              <button
-                type="button"
-                data-testid="recipient-option"
-                onClick={() => handleSelect(profile)}
-                className="w-full flex items-center gap-3 px-3 py-2 hover:bg-yellow-50 text-left transition-colors"
-              >
-                {profile.avatar_url ? (
-                  <Image
-                    src={profile.avatar_url}
-                    alt={profile.full_name}
-                    width={32}
-                    height={32}
-                    className="rounded-full object-cover shrink-0"
-                  />
-                ) : (
-                  <span className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
-                    {profile.full_name.charAt(0).toUpperCase()}
-                  </span>
-                )}
-                <span className="text-sm text-gray-800">{profile.full_name}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }
