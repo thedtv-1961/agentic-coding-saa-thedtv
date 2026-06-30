@@ -25,8 +25,27 @@ function errorMessage(err: unknown): string {
   }
 }
 
+// countdown_date is stored as ISO 8601 with +07:00 timezone.
+// datetime-local input uses YYYY-MM-DDTHH:mm — strip timezone for display,
+// reattach +07:00 when saving.
+const DATETIME_KEYS = new Set(["countdown_date"]);
+
+function toDatetimeLocal(iso: string): string {
+  // Take the first 16 chars: "2025-12-20T00:00"
+  return iso.slice(0, 16);
+}
+
+function toIsoVietnam(datetimeLocal: string): string {
+  return `${datetimeLocal}:00+07:00`;
+}
+
 function EditableRow({ row }: { row: SettingRow }) {
-  const [value, setValue] = useState(row.value ?? "");
+  const isDatetime = DATETIME_KEYS.has(row.key);
+  const initialValue = isDatetime && row.value
+    ? toDatetimeLocal(row.value)
+    : (row.value ?? "");
+
+  const [value, setValue] = useState(initialValue);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -34,15 +53,19 @@ function EditableRow({ row }: { row: SettingRow }) {
   function handleSave() {
     setError(null);
     setSaved(false);
+    const saveValue = isDatetime ? toIsoVietnam(value) : value;
     startTransition(async () => {
       try {
-        await updateSetting(row.key, value);
+        await updateSetting(row.key, saveValue);
         setSaved(true);
       } catch (err) {
         setError(errorMessage(err));
       }
     });
   }
+
+  const inputClass =
+    "w-full px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-sm focus:outline-none focus:border-white/40 disabled:opacity-50";
 
   return (
     <tr className="border-b border-white/5 hover:bg-white/5 transition-colors last:border-0">
@@ -51,17 +74,23 @@ function EditableRow({ row }: { row: SettingRow }) {
       </td>
       <td className="px-4 py-3 align-top">
         <div className="flex flex-col gap-1">
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              setSaved(false);
-              setError(null);
-            }}
-            className="w-full px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white text-sm focus:outline-none focus:border-white/40"
-            disabled={isPending}
-          />
+          {isDatetime ? (
+            <input
+              type="datetime-local"
+              value={value}
+              onChange={(e) => { setValue(e.target.value); setSaved(false); setError(null); }}
+              className={inputClass}
+              disabled={isPending}
+            />
+          ) : (
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => { setValue(e.target.value); setSaved(false); setError(null); }}
+              className={inputClass}
+              disabled={isPending}
+            />
+          )}
           {error && <p className="text-red-400 text-xs">{error}</p>}
           {saved && <p className="text-green-400 text-xs">Đã lưu.</p>}
         </div>
