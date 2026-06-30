@@ -73,7 +73,29 @@
     "cancel": "Cancel",
     "submit": "Send",
     "submitting": "Sending...",
-    "community_standards": "Community Standards"
+    "community_standards": "Community Standards",
+    "confirm_cancel": "Do you want to cancel the kudos you are composing?",
+    "submit_error": "Submission failed, please try again.",
+    "apply": "Apply",
+    "send_success": "Kudos sent successfully!"
+  },
+  "the_le": {
+    "title": "Rules",
+    "section1_title": "Kudos Recipients: Hero Badges for Positive Influence",
+    "section1_body": "Based on the number of teammates who send you Kudos, you will earn the corresponding Hero Badge, displayed directly next to your profile name",
+    "hero_new_threshold": "1–4 people sent you Kudos",
+    "hero_new_desc": "Your journey of spreading kindness begins — the first words of appreciation and recognition have found you.",
+    "hero_rising_threshold": "5–9 people sent you Kudos",
+    "hero_rising_desc": "Your image is growing in your teammates' hearts through your kindness and dedication.",
+    "hero_super_threshold": "10–20 people sent you Kudos",
+    "hero_super_desc": "You have become a trusted and beloved symbol, always ready to support and remembered by many teammates.",
+    "hero_legend_threshold": "More than 20 people sent you Kudos",
+    "hero_legend_desc": "You have become a legend — someone who has left an unforgettable mark on the team through their heart and actions.",
+    "section2_title": "Kudos Senders: Collect all 6 icons and receive a mystery gift",
+    "section2_body1": "Each Kudos you send will be posted on the system and receive ❤️ from the Sunner community. Every 5 ❤️ received, you will unlock 1 Secret Box, with a chance to receive one of 6 exclusive SAA icons.",
+    "section2_body2": "Sunners who collect all 6 icons will receive a mystery gift from SAA 2025.",
+    "section3_title": "Top Kudos",
+    "section3_body": "The 5 Kudos receiving the most ❤️ across all of Sun* will officially become the Top Kudos and receive a special gift from SAA 2025: Root Further."
   },
   "home": {
     "hero_title": "ROOT FURTHER",

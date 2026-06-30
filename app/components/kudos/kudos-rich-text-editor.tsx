@@ -183,7 +183,7 @@ export default function KudosRichTextEditor({
             onMouseDown={(e) => { e.preventDefault(); handleLinkSubmit(); }}
             className="text-xs px-2 py-1 bg-yellow-400 rounded text-gray-800 font-medium hover:bg-yellow-300 transition-colors shrink-0"
           >
-            Áp dụng
+            {t("apply")}
           </button>
           <button
             type="button"

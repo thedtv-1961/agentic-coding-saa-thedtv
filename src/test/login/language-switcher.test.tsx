@@ -5,11 +5,6 @@ vi.mock("next-intl", () => ({
   useLocale: () => "vi",
 }));
 
-const mockRefresh = vi.fn();
-vi.mock("next/navigation", () => ({
-  useRouter: () => ({ refresh: mockRefresh }),
-}));
-
 vi.mock("next/image", () => ({
   default: ({ alt, ...props }: { alt: string; [key: string]: unknown }) => (
     // eslint-disable-next-line @next/next/no-img-element
@@ -47,7 +42,7 @@ describe("LanguageSwitcher", () => {
     expect(screen.getAllByRole("option")).toHaveLength(2);
   });
 
-  it("shows both VN and EN options when open", () => {
+  it("shows both language code options when open", () => {
     render(<LanguageSwitcher />);
     fireEvent.click(screen.getByRole("button"));
     const options = screen.getAllByRole("option");
@@ -66,5 +61,33 @@ describe("LanguageSwitcher", () => {
     const enOption = screen.getAllByRole("option")[1];
     fireEvent.click(enOption);
     expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+  });
+
+  it("closes dropdown without reload when clicking current locale", () => {
+    const reloadMock = vi.fn();
+    Object.defineProperty(window, "location", {
+      value: { reload: reloadMock },
+      writable: true,
+    });
+    render(<LanguageSwitcher />);
+    fireEvent.click(screen.getByRole("button"));
+    const vnOption = screen.getAllByRole("option")[0];
+    fireEvent.click(vnOption);
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    expect(reloadMock).not.toHaveBeenCalled();
+  });
+
+  it("marks current locale option as selected", () => {
+    render(<LanguageSwitcher />);
+    fireEvent.click(screen.getByRole("button"));
+    const options = screen.getAllByRole("option");
+    expect(options[0]).toHaveAttribute("aria-selected", "true");
+    expect(options[1]).toHaveAttribute("aria-selected", "false");
+  });
+
+  it("does not render chevron arrow", () => {
+    const { container } = render(<LanguageSwitcher />);
+    const svgs = container.querySelectorAll("svg");
+    expect(svgs).toHaveLength(0);
   });
 });
