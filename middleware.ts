@@ -23,12 +23,14 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isCountdownRoute = pathname === "/countdown";
-  const isAuthRoute = pathname.startsWith("/auth") || pathname === "/login";
-  const isAdminRoute = pathname.startsWith("/admin");
+  // Admin routes are auth routes — admin login must be accessible regardless of launch status
+  const isAuthRoute =
+    pathname.startsWith("/auth") ||
+    pathname === "/login" ||
+    pathname.startsWith("/admin");
 
   // Prelaunch gate — based solely on countdown_date in DB
-  // Admin routes are always accessible regardless of launch status
-  if (!isCountdownRoute && !isAuthRoute && !isAdminRoute) {
+  if (!isCountdownRoute && !isAuthRoute) {
     const launched = await isLaunchDatePassed();
     if (!launched) {
       return NextResponse.redirect(new URL("/countdown", request.url));
