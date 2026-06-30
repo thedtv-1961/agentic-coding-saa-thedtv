@@ -203,7 +203,7 @@ export default function KudosRichTextEditor({
         onInput={handleInput}
         data-testid="kudos-content"
         data-placeholder={t("content_placeholder")}
-        className={`min-h-[120px] border-x border-b rounded-b-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm text-gray-800 bg-[#FFF8E1] ${
+        className={`min-h-[120px] border-x border-b rounded-b-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm text-gray-800 bg-white ${
           error ? "border-red-500" : "border-[#998C5F]/40"
         } [&:empty]:before:content-[attr(data-placeholder)] [&:empty]:before:text-gray-400 [&:empty]:before:pointer-events-none`}
       />

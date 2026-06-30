@@ -105,7 +105,7 @@ export default function KudosRecipientField({
             placeholder={t("recipient_placeholder")}
             autoComplete="off"
             data-testid="recipient-search"
-            className={`w-full h-14 border rounded-lg px-4 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+            className={`w-full h-14 border rounded-lg px-4 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
               error ? "border-red-500" : "border-[#998C5F]"
             } ${recipientId ? "bg-yellow-50" : "bg-white"}`}
           />

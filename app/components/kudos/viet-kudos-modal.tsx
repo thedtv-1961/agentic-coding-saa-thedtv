@@ -219,7 +219,7 @@ export default function VietKudosModal({
                 placeholder={t("title_placeholder")}
                 maxLength={100}
                 data-testid="kudos-title-input"
-                className={`w-full h-14 border rounded-lg px-4 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+                className={`w-full h-14 border rounded-lg px-4 text-sm bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
                   errors.title ? "border-red-500" : "border-[#998C5F]"
                 }`}
               />

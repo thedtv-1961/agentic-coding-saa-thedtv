@@ -29,7 +29,7 @@ create policy "kudos_insert"
 
 -- hashtags
 create policy "hashtags_select_all"
-  on public.hashtags for select to authenticated using (true);
+  on public.hashtags for select to anon, authenticated using (true);
 
 create policy "hashtags_admin_write"
   on public.hashtags for all to authenticated

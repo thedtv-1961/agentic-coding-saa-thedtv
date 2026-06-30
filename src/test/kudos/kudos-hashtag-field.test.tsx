@@ -15,12 +15,12 @@ vi.mock("next-intl", () => ({
 }));
 
 const mockHashtags = [
-  { id: "h1", name: "teamwork" },
-  { id: "h2", name: "support" },
-  { id: "h3", name: "innovation" },
-  { id: "h4", name: "excellence" },
-  { id: "h5", name: "leadership" },
-  { id: "h6", name: "collaboration" },
+  { id: "h1", name: "#teamwork" },
+  { id: "h2", name: "#support" },
+  { id: "h3", name: "#innovation" },
+  { id: "h4", name: "#excellence" },
+  { id: "h5", name: "#leadership" },
+  { id: "h6", name: "#collaboration" },
 ];
 
 describe("KudosHashtagField", () => {
@@ -222,7 +222,7 @@ describe("KudosHashtagField", () => {
     expect(options).toHaveLength(mockHashtags.length);
 
     mockHashtags.forEach((tag) => {
-      expect(screen.getByText(`#${tag.name}`)).toBeInTheDocument();
+      expect(screen.getByText(tag.name)).toBeInTheDocument();
     });
   });
 
