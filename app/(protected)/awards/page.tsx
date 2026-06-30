@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { createClient } from "@/utils/supabase/server";
 import Header from "@/app/components/shared/header";
 import Footer from "@/app/components/shared/footer";

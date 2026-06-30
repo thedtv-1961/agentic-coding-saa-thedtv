@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import Header from "@/app/components/shared/header";
 import HeroSection from "@/app/components/home/hero-section";
 import RootFurtherSection from "@/app/components/home/root-further-section";

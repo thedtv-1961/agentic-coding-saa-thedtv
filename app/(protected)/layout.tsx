@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { FabController } from "@/app/components/shared/fab-controller";
