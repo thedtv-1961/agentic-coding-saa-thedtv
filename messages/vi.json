@@ -7,7 +7,14 @@
     "logo_alt": "Sun* Annual Awards 2025",
     "language_label_vn": "VN",
     "language_label_en": "EN",
-    "error_message": "Đăng nhập thất bại. Vui lòng thử lại."
+    "error_message": "Đăng nhập thất bại. Vui lòng thử lại.",
+    "admin_login_title": "Đăng nhập Admin",
+    "admin_email_placeholder": "Email",
+    "admin_password_placeholder": "Mật khẩu",
+    "admin_login_button": "Đăng nhập",
+    "admin_login_loading": "Đang đăng nhập...",
+    "admin_error_invalid": "Email hoặc mật khẩu không đúng.",
+    "admin_error_not_admin": "Tài khoản không có quyền admin."
   },
   "todo": {
     "coming_soon": "Tính năng đang được phát triển."

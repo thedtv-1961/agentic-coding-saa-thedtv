@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
@@ -23,4 +24,26 @@ export async function signInWithGoogle() {
   if (data.url) {
     redirect(data.url);
   }
+}
+
+export type AdminSignInResult =
+  | { error: "invalid_credentials" | "not_admin" | "unknown" }
+  | never;
+
+export async function signInAsAdmin(
+  email: string,
+  password: string
+): Promise<AdminSignInResult> {
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) return { error: "invalid_credentials" };
+
+  const { isAdmin } = await getUserWithRole();
+  if (!isAdmin) {
+    await supabase.auth.signOut();
+    return { error: "not_admin" };
+  }
+
+  redirect("/admin");
 }

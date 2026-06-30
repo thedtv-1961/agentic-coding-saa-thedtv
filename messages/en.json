@@ -7,7 +7,14 @@
     "logo_alt": "Sun* Annual Awards 2025",
     "language_label_vn": "VN",
     "language_label_en": "EN",
-    "error_message": "Login failed. Please try again."
+    "error_message": "Login failed. Please try again.",
+    "admin_login_title": "Admin Login",
+    "admin_email_placeholder": "Email",
+    "admin_password_placeholder": "Password",
+    "admin_login_button": "Login",
+    "admin_login_loading": "Logging in...",
+    "admin_error_invalid": "Invalid email or password.",
+    "admin_error_not_admin": "This account does not have admin access."
   },
   "todo": {
     "coming_soon": "Feature is under development."
