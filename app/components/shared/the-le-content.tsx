@@ -1,34 +1,10 @@
+"use client";
+
 // Static presentational content for Thể Lệ SAA 2025 — dark theme v2
 // Text content sourced from MoMorph node tree (screenId: b1Filzi9i6)
 
 import Image from "next/image";
-
-const HERO_BADGES = [
-  {
-    name: "New Hero",
-    src: "/images/the-le/new-hero.png",
-    threshold: "Có 1-4 người gửi Kudos cho bạn",
-    desc: "Hành trình lan tỏa điều tốt đẹp bắt đầu – những lời cảm ơn và ghi nhận đầu tiên đã tìm đến bạn.",
-  },
-  {
-    name: "Rising Hero",
-    src: "/images/the-le/rising-hero.png",
-    threshold: "Có 5-9 người gửi Kudos cho bạn",
-    desc: "Hình ảnh bạn đang lớn dần trong trái tim đồng đội bằng sự tử tế và cống hiến của mình.",
-  },
-  {
-    name: "Super Hero",
-    src: "/images/the-le/super-hero.png",
-    threshold: "Có 10–20 người gửi Kudos cho bạn",
-    desc: "Bạn đã trở thành biểu tượng được tin tưởng và yêu quý, người luôn sẵn sàng hỗ trợ và được nhiều đồng đội nhớ đến.",
-  },
-  {
-    name: "Legend Hero",
-    src: "/images/the-le/legend-hero.png",
-    threshold: "Có hơn 20 người gửi Kudos cho bạn",
-    desc: "Bạn đã trở thành huyền thoại – người để lại dấu ấn khó quên trong tập thể bằng trái tim và hành động của mình.",
-  },
-] as const;
+import { useTranslations } from "next-intl";
 
 // icon-*.png = circular icon only (no embedded text); label rendered separately per Figma spec
 const COLLECTION_BADGES = [
@@ -41,19 +17,47 @@ const COLLECTION_BADGES = [
 ] as const;
 
 export default function TheLEContent() {
+  const t = useTranslations("the_le");
+
+  const HERO_BADGES = [
+    {
+      name: "New Hero",
+      src: "/images/the-le/new-hero.png",
+      threshold: t("hero_new_threshold"),
+      desc: t("hero_new_desc"),
+    },
+    {
+      name: "Rising Hero",
+      src: "/images/the-le/rising-hero.png",
+      threshold: t("hero_rising_threshold"),
+      desc: t("hero_rising_desc"),
+    },
+    {
+      name: "Super Hero",
+      src: "/images/the-le/super-hero.png",
+      threshold: t("hero_super_threshold"),
+      desc: t("hero_super_desc"),
+    },
+    {
+      name: "Legend Hero",
+      src: "/images/the-le/legend-hero.png",
+      threshold: t("hero_legend_threshold"),
+      desc: t("hero_legend_desc"),
+    },
+  ];
+
   return (
     <div className="px-10 pt-6 pb-4 space-y-6 text-white">
       {/* Title */}
-      <h1 className="text-3xl font-bold text-white">Thể lệ</h1>
+      <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
 
       {/* Section 1: Người nhận Kudos */}
       <section className="space-y-4">
         <h2 className="text-xs font-bold uppercase tracking-wide text-[#FFEA9E]">
-          Người nhận Kudos: Huy hiệu Hero cho những ảnh hưởng tích cực
+          {t("section1_title")}
         </h2>
         <p className="text-sm text-white/80 leading-relaxed">
-          Dựa trên số lượng đồng đội gửi trao Kudos, bạn sẽ sở hữu Huy hiệu Hero tương ứng, được
-          hiển thị trực tiếp cạnh tên profile
+          {t("section1_body")}
         </p>
         <div className="space-y-3">
           {HERO_BADGES.map((badge) => (
@@ -77,12 +81,10 @@ export default function TheLEContent() {
       {/* Section 2: Người gửi Kudos */}
       <section className="space-y-4">
         <h2 className="text-xs font-bold uppercase tracking-wide text-[#FFEA9E]">
-          Người gửi Kudos: Sưu tập trọn bộ 6 icon, nhận ngay phần quà bí ẩn
+          {t("section2_title")}
         </h2>
         <p className="text-sm text-white/80 leading-relaxed">
-          Mỗi lời Kudos bạn gửi sẽ được đăng tải trên hệ thống và nhận về những lượt ❤️ từ cộng
-          đồng Sunner. Cứ mỗi 5 lượt ❤️, bạn sẽ được mở 1 Secret Box, với cơ hội nhận về một
-          trong 6 icon độc quyền của SAA.
+          {t("section2_body1")}
         </p>
 
         {/* 3×2 badge grid */}
@@ -105,18 +107,17 @@ export default function TheLEContent() {
         </div>
 
         <p className="text-xs text-white/60 leading-relaxed">
-          Những Sunner thu thập trọn bộ 6 icon sẽ nhận về một phần quà bí ẩn từ SAA 2025.
+          {t("section2_body2")}
         </p>
       </section>
 
       {/* Section 3: Kudos Quốc Dân */}
       <section className="space-y-2">
         <h2 className="text-xs font-bold uppercase tracking-wide text-[#FFEA9E]">
-          Kudos Quốc Dân
+          {t("section3_title")}
         </h2>
         <p className="text-sm text-white/80 leading-relaxed">
-          5 Kudos nhận về nhiều ❤️ nhất toàn Sun* sẽ chính thức trở thành Kudos Quốc Dân và được
-          trao phần quà đặc biệt từ SAA 2025: Root Further.
+          {t("section3_body")}
         </p>
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import WidgetButton from "@/app/components/shared/widget-button";
 import TheLEDrawer from "@/app/components/shared/the-le-drawer";
 import VietKudosModal from "@/app/components/kudos/viet-kudos-modal";
@@ -10,6 +11,7 @@ interface FabControllerProps {
 }
 
 export function FabController({ userId }: FabControllerProps) {
+  const t = useTranslations("kudos");
   const [fabExpanded, setFabExpanded] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -58,7 +60,7 @@ export function FabController({ userId }: FabControllerProps) {
           aria-live="polite"
           className="fixed bottom-24 right-6 z-[80] bg-green-600 text-white px-4 py-3 rounded-lg shadow-lg text-sm font-medium"
         >
-          Kudos đã được gửi thành công!
+          {t("send_success")}
         </div>
       )}
     </>

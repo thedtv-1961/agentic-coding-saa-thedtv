@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useLocale } from "next-intl";
 
 const LOCALES = [
-  { code: "vi", label: "VN", flag: "/icons/flag-vn.svg" },
-  { code: "en", label: "EN", flag: "/icons/flag-en.svg" },
+  { code: "vi", label: "VN", name: "Tiếng Việt", flag: "/icons/flag-vn.svg" },
+  { code: "en", label: "EN", name: "Tiếng Anh", flag: "/icons/flag-en.svg" },
 ] as const;
 
 export default function LanguageSwitcher() {
@@ -16,8 +16,9 @@ export default function LanguageSwitcher() {
   const current = LOCALES.find((l) => l.code === currentLocale) ?? LOCALES[0];
 
   function selectLocale(code: string) {
-    document.cookie = `NEXT_LOCALE=${code}; path=/; max-age=31536000`;
     setOpen(false);
+    if (code === currentLocale) return;
+    document.cookie = `NEXT_LOCALE=${code}; path=/; max-age=31536000`;
     window.location.reload();
   }
 
@@ -28,55 +29,38 @@ export default function LanguageSwitcher() {
         className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors"
         aria-expanded={open}
         aria-haspopup="listbox"
+        aria-label="Select language"
       >
-        <Image
-          src={current.flag}
-          alt={current.label}
-          width={24}
-          height={16}
-          unoptimized
-        />
+        <Image src={current.flag} alt={current.label} width={24} height={16} unoptimized />
         <span className="text-white text-sm font-medium">{current.label}</span>
-        <svg
-          className={`w-4 h-4 text-white transition-transform ${open ? "rotate-180" : ""}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
       </button>
 
       {open && (
         <ul
           role="listbox"
-          className="absolute right-0 mt-1 bg-[#1a1a2e] border border-white/20 rounded-lg overflow-hidden shadow-lg min-w-[100px]"
+          className="absolute right-0 mt-1 bg-[#00070C] border border-[#998C5F] rounded-lg shadow-lg p-[6px] flex flex-col min-w-[120px]"
         >
-          {LOCALES.map((locale) => (
-            <li key={locale.code}>
-              <button
+          {LOCALES.map((locale) => {
+            const isSelected = locale.code === currentLocale;
+            return (
+              <li
+                key={locale.code}
                 role="option"
-                aria-selected={locale.code === currentLocale}
+                aria-selected={isSelected}
+                tabIndex={0}
                 onClick={() => selectLocale(locale.code)}
-                className="flex items-center gap-2 px-4 py-2 w-full text-left text-white text-sm hover:bg-white/10 cursor-pointer transition-colors"
+                onKeyDown={(e) => e.key === "Enter" && selectLocale(locale.code)}
+                className={`flex items-center gap-2 px-4 h-14 w-full text-white text-sm cursor-pointer transition-colors ${
+                  isSelected
+                    ? "bg-[#FFEA9E]/20 rounded-sm"
+                    : "hover:bg-[#FFEA9E]/10"
+                }`}
               >
-                <Image
-                  src={locale.flag}
-                  alt={locale.label}
-                  width={24}
-                  height={16}
-                  unoptimized
-                />
+                <Image src={locale.flag} alt={locale.label} width={24} height={16} unoptimized />
                 <span>{locale.label}</span>
-              </button>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

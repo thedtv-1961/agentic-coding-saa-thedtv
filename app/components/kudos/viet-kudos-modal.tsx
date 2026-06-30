@@ -97,7 +97,7 @@ export default function VietKudosModal({
 
   const handleClose = useCallback(() => {
     if (hasData(form)) {
-      if (!window.confirm("Bạn có muốn hủy lời cảm ơn đang soạn không?")) return;
+      if (!window.confirm(t("confirm_cancel"))) return;
     }
     onClose();
   }, [form, onClose]);
@@ -138,7 +138,7 @@ export default function VietKudosModal({
       onClose();
     } catch (err) {
       setSubmitError(
-        err instanceof Error ? err.message : "Gửi thất bại, vui lòng thử lại.",
+        err instanceof Error ? err.message : t("submit_error"),
       );
     } finally {
       setIsSubmitting(false);
