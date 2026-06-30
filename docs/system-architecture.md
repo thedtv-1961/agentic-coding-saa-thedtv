@@ -14,13 +14,33 @@ Browser
        │   ├─ (protected)/           — auth-guarded route group
        │   │   ├─ layout.tsx         — mounts FAB (widget-button + fab-controller) for all protected pages
        │   │   ├─ page.tsx           — home page
-       │   │   └─ awards/page.tsx    — awards page
+       │   │   ├─ awards/page.tsx    — awards page
+       │   │   └─ admin/             — admin dashboard (role-gated; redirect → / if not admin)
+       │   │       ├─ layout.tsx     — assertAdmin gate + AdminSidebar shell
+       │   │       ├─ page.tsx       — admin home (redirect to /admin/kudos)
+       │   │       ├─ kudos/page.tsx — kudos moderation table
+       │   │       ├─ users/page.tsx — user role management
+       │   │       ├─ awards/page.tsx — award card editor
+       │   │       ├─ hashtags/page.tsx — hashtag CRUD
+       │   │       └─ settings/page.tsx — app_settings editor
        │   └─ login/                 — public login page
+       ├─ app/actions/auth/logout.ts — server action: sign out + redirect to /login
+       ├─ app/actions/admin/        — admin-only server actions (all call assertAdmin first)
+       │   ├─ assert-admin.ts       — shared guard: throws "FORBIDDEN" if not admin
+       │   ├─ delete-kudos.ts       — delete any kudos record
+       │   ├─ toggle-user-role.ts   — promote/demote user ↔ admin
+       │   ├─ update-award.ts       — edit award fields
+       │   ├─ manage-hashtags.ts    — create / delete hashtags
+       │   └─ update-setting.ts     — update app_settings key/value
        ├─ app/auth/callback/         — Supabase OAuth callback
+       ├─ app/components/shared/
+       │   ├─ header.tsx             — queries profiles.role; renders ProfileDropdown
+       │   └─ profile-dropdown.tsx   — user/admin variant dropdown (avatar, links, logout)
        └─ utils/supabase/            — Supabase client helpers
             ├─ client.ts             — browser client (createBrowserClient)
             ├─ server.ts             — server client (createServerClient)
-            └─ middleware.ts         — session refresh helper
+            ├─ middleware.ts         — session refresh helper
+            └─ get-user-with-role.ts — returns { user, isAdmin } by querying profiles.role
 ```
 
 ## Prelaunch Gate
@@ -36,6 +56,7 @@ User → /login → Google OAuth → Supabase Auth
 ```
 
 Middleware kiểm tra session trên mọi request. Unauthenticated → redirect `/login`.
+Routes được auth-guard: `/`, `/awards`, `/admin` (xem `middleware.ts` line 77–78).
 
 ## i18n
 
@@ -169,8 +190,9 @@ DB trigger cập nhật `profiles.hero_level` mỗi khi nhận kudos mới:
 
 - **Anonymous kudos**: `sender_id = NULL`, không lưu sender kể cả admin — data-level privacy
 - **Collections** (REVIVAL, TOUCH OF LIGHT...): hardcode trong code, không có table — display-only trong Thể lệ drawer
-- **Hashtags**: master data, admin seed một lần, không có CRUD UI
-- **Awards**: seed data, không thay đổi trong runtime
+- **Hashtags**: có CRUD UI cho admin (`/admin/hashtags`) — create/delete via `manage-hashtags.ts` server action
+- **Awards**: có edit UI cho admin (`/admin/awards`) — update fields via `update-award.ts` server action
+- **Admin gate**: double-layer — layout.tsx redirects non-admins at render time; each server action calls `assertAdmin()` independently (defense in depth)
 
 ## Deploy Target
 

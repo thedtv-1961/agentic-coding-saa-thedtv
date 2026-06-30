@@ -6,12 +6,14 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import LanguageSwitcher from "@/app/components/login/language-switcher";
+import ProfileDropdown from "@/app/components/shared/profile-dropdown";
 
 interface Props {
   userAvatarUrl?: string | null;
+  isAdmin: boolean;
 }
 
-export default function HeaderNav({ userAvatarUrl }: Props) {
+export default function HeaderNav({ userAvatarUrl, isAdmin }: Props) {
   const t = useTranslations("common");
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -84,40 +86,8 @@ export default function HeaderNav({ userAvatarUrl }: Props) {
 
           <LanguageSwitcher />
 
-          {/* User avatar */}
-          <Link
-            href="/login"
-            className="flex items-center"
-            aria-label={t("account_label")}
-          >
-            {userAvatarUrl ? (
-              <Image
-                src={userAvatarUrl}
-                alt="Avatar"
-                width={32}
-                height={32}
-                className="rounded-full"
-                unoptimized
-              />
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </div>
-            )}
-          </Link>
+          {/* User avatar → profile dropdown */}
+          <ProfileDropdown isAdmin={isAdmin} userAvatarUrl={userAvatarUrl} />
 
           {/* Hamburger - mobile only */}
           <button

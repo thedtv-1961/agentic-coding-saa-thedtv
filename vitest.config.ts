@@ -15,6 +15,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './'),
+      // server-only throws in jsdom test environment; mock it as a no-op
+      'server-only': path.resolve(__dirname, './src/test/__mocks__/server-only.ts'),
     },
   },
 })

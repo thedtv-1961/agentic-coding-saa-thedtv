@@ -74,8 +74,8 @@ export async function middleware(request: NextRequest) {
     return res.current;
   }
 
-  // Auth guard: protect homepage and awards page — unauthenticated users go to /login.
-  if (pathname === "/" || pathname.startsWith("/awards")) {
+  // Auth guard: protect homepage, awards, and admin — unauthenticated users go to /login.
+  if (pathname === "/" || pathname.startsWith("/awards") || pathname.startsWith("/admin")) {
     const res = { current: NextResponse.next({ request }) };
     const supabase = makeSupabaseClient(request, res);
     const {
