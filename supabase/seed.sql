@@ -10,9 +10,9 @@ ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 
 -- ── hashtags ──────────────────────────────────────────────────────────────────
 INSERT INTO public.hashtags (name) VALUES
-  ('#Teamwork'), ('#Innovation'), ('#Leadership'), ('#CustomerFirst'),
-  ('#Growth'), ('#Ownership'), ('#Excellence'), ('#Collaboration'),
-  ('#Integrity'), ('#Impact')
+  ('Teamwork'), ('Innovation'), ('Leadership'), ('CustomerFirst'),
+  ('Growth'), ('Ownership'), ('Excellence'), ('Collaboration'),
+  ('Integrity'), ('Impact')
 ON CONFLICT (name) DO NOTHING;
 
 -- ── award_categories ──────────────────────────────────────────────────────────

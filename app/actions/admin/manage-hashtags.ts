@@ -6,7 +6,7 @@ import { assertAdmin } from "./assert-admin";
 
 export async function addHashtag(name: string): Promise<{ ok: boolean }> {
   await assertAdmin();
-  const trimmed = name.trim();
+  const trimmed = name.trim().replace(/^#+/, "");
   if (!trimmed) throw new Error("EMPTY_NAME");
   const supabase = await createClient();
   const { error } = await supabase.from("hashtags").insert({ name: trimmed });
