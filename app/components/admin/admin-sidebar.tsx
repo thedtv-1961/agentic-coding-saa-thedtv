@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useTransition } from "react";
+import { adminLogout } from "@/app/actions/auth/admin-logout";
 
 const NAV_ITEMS = [
   { href: "/admin/kudos", labelKey: "kudos" },
@@ -16,6 +18,11 @@ const NAV_ITEMS = [
 export function AdminSidebar() {
   const pathname = usePathname();
   const t = useTranslations("admin.nav");
+  const [isPending, startTransition] = useTransition();
+
+  function handleLogout() {
+    startTransition(async () => { await adminLogout(); });
+  }
 
   return (
     <aside className="w-56 min-h-screen bg-black/40 border-r border-white/10 p-4 flex flex-col gap-1">
@@ -41,6 +48,16 @@ export function AdminSidebar() {
           </Link>
         );
       })}
+
+      <div className="mt-auto pt-4 border-t border-white/10">
+        <button
+          onClick={handleLogout}
+          disabled={isPending}
+          className="w-full px-3 py-2 rounded-md text-sm font-medium text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-colors text-left disabled:opacity-50"
+        >
+          {isPending ? "Đang đăng xuất..." : "Đăng xuất"}
+        </button>
+      </div>
     </aside>
   );
 }
