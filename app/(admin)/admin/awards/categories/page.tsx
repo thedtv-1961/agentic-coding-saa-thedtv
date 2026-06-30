@@ -12,7 +12,7 @@ export default async function AdminAwardCategoriesPage() {
 
   const { data, error } = await supabase
     .from("award_categories")
-    .select("id, name, title, description, image_url, awards(id)")
+    .select("id, name, title, description, content, image_url, is_active, awards(id)")
     .order("created_at");
 
   if (error) {
@@ -28,7 +28,9 @@ export default async function AdminAwardCategoriesPage() {
       name: string;
       title: string;
       description: string;
+      content: string;
       image_url: string;
+      is_active: boolean;
       awards: { id: string }[];
     }>) ?? []
   ).map((cat) => ({
@@ -36,7 +38,9 @@ export default async function AdminAwardCategoriesPage() {
     name: cat.name,
     title: cat.title ?? "",
     description: cat.description ?? "",
+    content: cat.content ?? "",
     image_url: cat.image_url ?? "",
+    is_active: cat.is_active ?? true,
     awardCount: Array.isArray(cat.awards) ? cat.awards.length : 0,
   }));
 

@@ -8,7 +8,9 @@ export interface AwardCategoryInput {
   name: string;
   title: string;
   description: string;
+  content: string;
   imageUrl: string;
+  isActive: boolean;
 }
 
 export async function addAwardCategory(
@@ -23,8 +25,9 @@ export async function addAwardCategory(
     name,
     title: input.title.trim() || name,
     description: input.description.trim(),
+    content: input.content.trim(),
     image_url: input.imageUrl.trim(),
-    is_active: true,
+    is_active: input.isActive,
   });
 
   if (error) throw new Error(error.message);
@@ -48,7 +51,10 @@ export async function updateAwardCategory(
       name,
       title: input.title.trim() || name,
       description: input.description.trim(),
+      content: input.content.trim(),
       image_url: input.imageUrl.trim(),
+      is_active: input.isActive,
+      updated_at: new Date().toISOString(),
     })
     .eq("id", id);
 

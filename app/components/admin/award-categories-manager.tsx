@@ -13,9 +13,15 @@ interface CategoryRow {
   name: string;
   title: string;
   description: string;
+  content: string;
   image_url: string;
+  is_active: boolean;
   awardCount: number;
 }
+
+const EMPTY_FORM: AwardCategoryInput = {
+  name: "", title: "", description: "", content: "", imageUrl: "", isActive: true,
+};
 
 function errMsg(err: unknown): string {
   if (!(err instanceof Error)) return "Lỗi không xác định.";
@@ -24,16 +30,70 @@ function errMsg(err: unknown): string {
   return err.message;
 }
 
+// ── Shared form fields ────────────────────────────────────────────────────────
+function FormFields({
+  form,
+  set,
+  disabled,
+}: {
+  form: AwardCategoryInput;
+  set: (k: keyof AwardCategoryInput, v: string | boolean) => void;
+  disabled: boolean;
+}) {
+  const inp = "w-full bg-white/5 border border-white/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60 disabled:opacity-50";
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <div>
+        <label className="block text-xs text-white/40 mb-1">Tên danh mục *</label>
+        <input value={form.name} onChange={(e) => set("name", e.target.value)}
+          placeholder="VD: Top Talent" disabled={disabled} className={inp} />
+      </div>
+      <div>
+        <label className="block text-xs text-white/40 mb-1">Tiêu đề hiển thị</label>
+        <input value={form.title} onChange={(e) => set("title", e.target.value)}
+          placeholder="Để trống = dùng tên" disabled={disabled} className={inp} />
+      </div>
+      <div>
+        <label className="block text-xs text-white/40 mb-1">URL hình ảnh</label>
+        <input value={form.imageUrl} onChange={(e) => set("imageUrl", e.target.value)}
+          placeholder="/images/awards/..." disabled={disabled} className={inp} />
+      </div>
+      <div>
+        <label className="block text-xs text-white/40 mb-1">Mô tả ngắn</label>
+        <input value={form.description} onChange={(e) => set("description", e.target.value)}
+          placeholder="Mô tả ngắn..." disabled={disabled} className={inp} />
+      </div>
+      <div className="sm:col-span-2">
+        <label className="block text-xs text-white/40 mb-1">Nội dung</label>
+        <textarea value={form.content} onChange={(e) => set("content", e.target.value)}
+          placeholder="Nội dung chi tiết..." rows={3} disabled={disabled}
+          className={`${inp} resize-none`} />
+      </div>
+      <div className="sm:col-span-2 flex items-center gap-2">
+        <input
+          id="isActive"
+          type="checkbox"
+          checked={form.isActive}
+          onChange={(e) => set("isActive", e.target.checked)}
+          disabled={disabled}
+          className="w-4 h-4 accent-[#FFEA9E]"
+        />
+        <label htmlFor="isActive" className="text-sm text-white/70 select-none">
+          Đang hoạt động
+        </label>
+      </div>
+    </div>
+  );
+}
+
 // ── Add form ──────────────────────────────────────────────────────────────────
 function AddCategoryForm() {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [form, setForm] = useState<AwardCategoryInput>({
-    name: "", title: "", description: "", imageUrl: "",
-  });
+  const [form, setForm] = useState<AwardCategoryInput>(EMPTY_FORM);
 
-  function set(k: keyof AwardCategoryInput, v: string) {
+  function set(k: keyof AwardCategoryInput, v: string | boolean) {
     setForm((f) => ({ ...f, [k]: v }));
   }
 
@@ -42,7 +102,7 @@ function AddCategoryForm() {
     startTransition(async () => {
       try {
         await addAwardCategory(form);
-        setForm({ name: "", title: "", description: "", imageUrl: "" });
+        setForm(EMPTY_FORM);
         setOpen(false);
       } catch (e) { setError(errMsg(e)); }
     });
@@ -50,10 +110,8 @@ function AddCategoryForm() {
 
   if (!open) {
     return (
-      <button
-        onClick={() => setOpen(true)}
-        className="mb-6 px-4 py-2 rounded-lg bg-[#FFEA9E]/20 text-[#FFEA9E] border border-[#FFEA9E]/30 text-sm font-medium hover:bg-[#FFEA9E]/30 transition-colors"
-      >
+      <button onClick={() => setOpen(true)}
+        className="mb-6 px-4 py-2 rounded-lg bg-[#FFEA9E]/20 text-[#FFEA9E] border border-[#FFEA9E]/30 text-sm font-medium hover:bg-[#FFEA9E]/30 transition-colors">
         + Thêm danh mục mới
       </button>
     );
@@ -62,32 +120,7 @@ function AddCategoryForm() {
   return (
     <div className="mb-6 bg-black/30 border border-white/20 rounded-xl p-5 flex flex-col gap-3">
       <h2 className="text-white font-semibold text-sm">Danh mục mới</h2>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div>
-          <label className="block text-xs text-white/40 mb-1">Tên danh mục *</label>
-          <input value={form.name} onChange={(e) => set("name", e.target.value)}
-            placeholder="VD: Top Talent" disabled={isPending}
-            className="w-full bg-white/5 border border-white/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60" />
-        </div>
-        <div>
-          <label className="block text-xs text-white/40 mb-1">Tiêu đề hiển thị</label>
-          <input value={form.title} onChange={(e) => set("title", e.target.value)}
-            placeholder="Để trống = dùng tên" disabled={isPending}
-            className="w-full bg-white/5 border border-white/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60" />
-        </div>
-        <div>
-          <label className="block text-xs text-white/40 mb-1">URL hình ảnh</label>
-          <input value={form.imageUrl} onChange={(e) => set("imageUrl", e.target.value)}
-            placeholder="/images/awards/..." disabled={isPending}
-            className="w-full bg-white/5 border border-white/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60" />
-        </div>
-        <div>
-          <label className="block text-xs text-white/40 mb-1">Mô tả ngắn</label>
-          <input value={form.description} onChange={(e) => set("description", e.target.value)}
-            placeholder="Mô tả..." disabled={isPending}
-            className="w-full bg-white/5 border border-white/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60" />
-        </div>
-      </div>
+      <FormFields form={form} set={set} disabled={isPending} />
       {error && <p className="text-red-400 text-xs">{error}</p>}
       <div className="flex gap-2">
         <button onClick={handleSave} disabled={isPending}
@@ -109,10 +142,15 @@ function CategoryRow({ row }: { row: CategoryRow }) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState<AwardCategoryInput>({
-    name: row.name, title: row.title, description: row.description, imageUrl: row.image_url,
+    name: row.name,
+    title: row.title,
+    description: row.description,
+    content: row.content,
+    imageUrl: row.image_url,
+    isActive: row.is_active,
   });
 
-  function set(k: keyof AwardCategoryInput, v: string) {
+  function set(k: keyof AwardCategoryInput, v: string | boolean) {
     setForm((f) => ({ ...f, [k]: v }));
   }
 
@@ -135,63 +173,61 @@ function CategoryRow({ row }: { row: CategoryRow }) {
     });
   }
 
+  if (editing) {
+    return (
+      <tr className="border-b border-white/5 last:border-0">
+        <td colSpan={6} className="px-4 py-4">
+          <div className="flex flex-col gap-3">
+            <FormFields form={form} set={set} disabled={isPending} />
+            {error && <p className="text-red-400 text-xs">{error}</p>}
+            <div className="flex gap-2">
+              <button onClick={handleSave} disabled={isPending}
+                className="px-3 py-1 rounded text-xs bg-[#FFEA9E] text-black font-medium hover:bg-[#FFEA9E]/80 disabled:opacity-50 transition-colors">
+                {isPending ? "..." : "Lưu"}
+              </button>
+              <button onClick={() => { setEditing(false); setError(null); setForm({ name: row.name, title: row.title, description: row.description, content: row.content, imageUrl: row.image_url, isActive: row.is_active }); }} disabled={isPending}
+                className="px-3 py-1 rounded text-xs border border-white/20 text-white/60 hover:text-white disabled:opacity-50 transition-colors">
+                Hủy
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    );
+  }
+
   return (
     <tr className="border-b border-white/5 hover:bg-white/5 transition-colors last:border-0">
-      {editing ? (
-        <>
-          <td className="px-4 py-3">
-            <input value={form.name} onChange={(e) => set("name", e.target.value)} disabled={isPending}
-              className="w-full bg-white/5 border border-white/20 rounded px-2 py-1 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60" />
-          </td>
-          <td className="px-4 py-3">
-            <input value={form.title} onChange={(e) => set("title", e.target.value)} disabled={isPending}
-              className="w-full bg-white/5 border border-white/20 rounded px-2 py-1 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60" />
-          </td>
-          <td className="px-4 py-3">
-            <input value={form.imageUrl} onChange={(e) => set("imageUrl", e.target.value)} disabled={isPending}
-              className="w-full bg-white/5 border border-white/20 rounded px-2 py-1 text-white text-sm focus:outline-none focus:border-[#FFEA9E]/60" />
-          </td>
-          <td className="px-4 py-3 text-white/50 text-xs tabular-nums">{row.awardCount}</td>
-          <td className="px-4 py-3">
-            <div className="flex flex-col gap-1 items-end">
-              <div className="flex gap-1">
-                <button onClick={handleSave} disabled={isPending}
-                  className="px-3 py-1 rounded text-xs bg-[#FFEA9E] text-black font-medium hover:bg-[#FFEA9E]/80 disabled:opacity-50 transition-colors">
-                  {isPending ? "..." : "Lưu"}
-                </button>
-                <button onClick={() => { setEditing(false); setError(null); setForm({ name: row.name, title: row.title, description: row.description, imageUrl: row.image_url }); }} disabled={isPending}
-                  className="px-3 py-1 rounded text-xs border border-white/20 text-white/60 hover:text-white disabled:opacity-50 transition-colors">
-                  Hủy
-                </button>
-              </div>
-              {error && <span className="text-red-400 text-xs">{error}</span>}
-            </div>
-          </td>
-        </>
-      ) : (
-        <>
-          <td className="px-4 py-3 text-white/90 font-medium text-sm">{row.name}</td>
-          <td className="px-4 py-3 text-white/60 text-sm">{row.title}</td>
-          <td className="px-4 py-3 text-white/40 text-xs font-mono truncate max-w-[160px]">{row.image_url || "—"}</td>
-          <td className="px-4 py-3 text-white/50 text-xs tabular-nums">{row.awardCount}</td>
-          <td className="px-4 py-3">
-            <div className="flex flex-col gap-1 items-end">
-              <div className="flex gap-1">
-                <button onClick={() => setEditing(true)}
-                  className="px-3 py-1 rounded text-xs border border-white/20 text-white/60 hover:text-white transition-colors">
-                  Sửa
-                </button>
-                <button onClick={handleDelete} disabled={isPending || row.awardCount > 0}
-                  title={row.awardCount > 0 ? "Còn giải thưởng trong danh mục" : undefined}
-                  className="px-3 py-1 rounded text-xs bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
-                  Xoá
-                </button>
-              </div>
-              {error && <span className="text-red-400 text-xs">{error}</span>}
-            </div>
-          </td>
-        </>
-      )}
+      <td className="px-4 py-3 text-white/90 font-medium text-sm">{row.name}</td>
+      <td className="px-4 py-3 text-white/60 text-sm">{row.title || "—"}</td>
+      <td className="px-4 py-3 text-white/50 text-xs max-w-[160px]">
+        <span className="block truncate" title={row.description}>{row.description || "—"}</span>
+      </td>
+      <td className="px-4 py-3 text-white/50 text-xs max-w-[160px]">
+        <span className="block truncate" title={row.content}>{row.content || "—"}</span>
+      </td>
+      <td className="px-4 py-3">
+        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${row.is_active ? "bg-green-500/20 text-green-400" : "bg-white/10 text-white/40"}`}>
+          {row.is_active ? "Hoạt động" : "Tắt"}
+        </span>
+      </td>
+      <td className="px-4 py-3 text-white/50 text-xs tabular-nums">{row.awardCount}</td>
+      <td className="px-4 py-3">
+        <div className="flex flex-col gap-1 items-end">
+          <div className="flex gap-1">
+            <button onClick={() => setEditing(true)}
+              className="px-3 py-1 rounded text-xs border border-white/20 text-white/60 hover:text-white transition-colors">
+              Sửa
+            </button>
+            <button onClick={handleDelete} disabled={isPending || row.awardCount > 0}
+              title={row.awardCount > 0 ? "Còn giải thưởng trong danh mục" : undefined}
+              className="px-3 py-1 rounded text-xs bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+              Xoá
+            </button>
+          </div>
+          {error && <span className="text-red-400 text-xs">{error}</span>}
+        </div>
+      </td>
     </tr>
   );
 }
@@ -210,7 +246,9 @@ export function AwardCategoriesManager({ rows }: { rows: CategoryRow[] }) {
               <tr className="border-b border-white/10 bg-white/5">
                 <th className="px-4 py-3 text-left text-white/60 font-medium">Tên</th>
                 <th className="px-4 py-3 text-left text-white/60 font-medium">Tiêu đề</th>
-                <th className="px-4 py-3 text-left text-white/60 font-medium">Hình ảnh</th>
+                <th className="px-4 py-3 text-left text-white/60 font-medium">Mô tả</th>
+                <th className="px-4 py-3 text-left text-white/60 font-medium">Nội dung</th>
+                <th className="px-4 py-3 text-left text-white/60 font-medium">Trạng thái</th>
                 <th className="px-4 py-3 text-left text-white/60 font-medium">Giải thưởng</th>
                 <th className="px-4 py-3 text-right text-white/60 font-medium">Hành động</th>
               </tr>
