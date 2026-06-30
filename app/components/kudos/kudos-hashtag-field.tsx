@@ -88,7 +88,7 @@ export default function KudosHashtagField({
               key={h.id}
               className="inline-flex items-center gap-1 px-2.5 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full"
             >
-              {h.name}
+              #{h.name}
               <button
                 type="button"
                 onClick={() => handleToggle(h.id)}
@@ -151,7 +151,7 @@ export default function KudosHashtagField({
                         : "bg-transparent hover:bg-white/5"
                     }`}
                 >
-                  <span>{h.name}</span>
+                  <span>#{h.name}</span>
                   <span className="w-6 h-6 flex items-center justify-center shrink-0">
                     {isSelected && <IconCheck />}
                   </span>

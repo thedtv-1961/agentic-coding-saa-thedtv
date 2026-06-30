@@ -1,0 +1,32 @@
+{
+  "commands": [
+    {
+      "command": "npx vitest run src/test/shared/profile-dropdown.test.tsx",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "10/10 tests pass — render, toggle, user/admin variants, click-outside, logout action",
+      "ts": "2026-06-30T04:01:46.000Z"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Build completes with 0 errors; /admin route generated",
+      "ts": "2026-06-30T04:01:22.000Z"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "0 lint errors",
+      "ts": "2026-06-30T04:02:10.000Z"
+    },
+    {
+      "command": "npx vitest run --coverage src/test/shared/profile-dropdown.test.tsx",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Coverage: 96.42% — all branches exercised except signOut error path (server-only)",
+      "ts": "2026-06-30T04:02:30.000Z"
+    }
+  ]
+}

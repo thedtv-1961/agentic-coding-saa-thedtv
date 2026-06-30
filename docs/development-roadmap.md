@@ -39,7 +39,10 @@ Thực hành nội bộ Sun* sử dụng MoMorph + Claude Code để generate co
 - [x] Server actions: search profiles, get hashtags, submit kudos
 - [x] Supabase Storage bucket `kudos-images`
 - [x] `(protected)` route group — auth-guarded layout với FAB
-- [ ] User profile
+- [x] Profile Dropdown Menu trên Header (user/admin variants, logout server action)
+- [x] Admin route `/admin` — auth-guarded, role-aware header
+- [x] `getUserWithRole()` shared util — role lookup từ `profiles` table
+- [ ] User profile page
 - [ ] Navigation / layout chính
 
 ### Phase 3 — Testing & Quality 📋 Planned

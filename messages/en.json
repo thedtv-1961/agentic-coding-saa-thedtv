@@ -7,7 +7,14 @@
     "logo_alt": "Sun* Annual Awards 2025",
     "language_label_vn": "VN",
     "language_label_en": "EN",
-    "error_message": "Login failed. Please try again."
+    "error_message": "Login failed. Please try again.",
+    "admin_login_title": "Admin Login",
+    "admin_username_placeholder": "Username",
+    "admin_password_placeholder": "Password",
+    "admin_login_button": "Login",
+    "admin_login_loading": "Logging in...",
+    "admin_error_invalid": "Invalid username or password.",
+    "admin_error_not_admin": "This account does not have admin access."
   },
   "todo": {
     "coming_soon": "Feature is under development."
@@ -27,7 +34,12 @@
     "copyright": "Copyright © Sun* 2025",
     "notification_label": "Notifications",
     "language_label": "Language",
-    "account_label": "Account"
+    "account_label": "Account",
+    "dropdown_profile": "Profile",
+    "dropdown_dashboard": "Dashboard",
+    "dropdown_logout": "Logout",
+    "admin_dashboard_title": "Admin Dashboard",
+    "admin_dashboard_wip": "This page is under construction."
   },
   "awards": {
     "caption": "Sun* Annual Awards 2025",
@@ -96,6 +108,103 @@
     "section2_body2": "Sunners who collect all 6 icons will receive a mystery gift from SAA 2025.",
     "section3_title": "Top Kudos",
     "section3_body": "The 5 Kudos receiving the most ❤️ across all of Sun* will officially become the Top Kudos and receive a special gift from SAA 2025: Root Further."
+  },
+  "admin": {
+    "nav": {
+      "kudos": "Kudos",
+      "users": "Users",
+      "awards": "Awards",
+      "award_categories": "Award Categories",
+      "hashtags": "Hashtags",
+      "settings": "Settings"
+    },
+    "kudos": {
+      "title": "Kudos Management",
+      "anonymous": "Anonymous",
+      "delete": "Delete",
+      "deleting": "Deleting…",
+      "confirm_delete": "Delete this kudos? This cannot be undone.",
+      "delete_failed": "Failed to delete kudos.",
+      "no_kudos": "No kudos found.",
+      "col_id": "ID",
+      "col_title": "Title",
+      "col_sender": "Sender",
+      "col_receiver": "Receiver",
+      "col_date": "Date",
+      "col_anon": "Anon",
+      "col_actions": "Actions",
+      "section_content": "Content",
+      "section_hashtags": "Hashtags",
+      "section_images": "Images",
+      "no_hashtags": "None",
+      "prev": "← Prev",
+      "next": "Next →"
+    },
+    "users": {
+      "title": "User Management",
+      "col_avatar": "Avatar",
+      "col_name": "Name",
+      "col_role": "Role",
+      "col_hero_level": "Hero Level",
+      "col_joined": "Joined",
+      "col_action": "Action",
+      "cannot_demote_self": "Cannot change your own role",
+      "toggle_to_user": "→ User",
+      "toggle_to_admin": "→ Admin",
+      "you_label": "(you)",
+      "unnamed": "Unnamed",
+      "no_users": "No users found.",
+      "pending": "…"
+    },
+    "awards": {
+      "title": "Awards Management",
+      "edit": "Edit",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "image_url": "Image URL",
+      "prize_value": "Prize Value",
+      "prize_placeholder": "e.g. 7,000,000 VND",
+      "empty": "No award data found.",
+      "empty_prize": "No value set",
+      "error_name_empty": "Award name cannot be empty.",
+      "error_no_award": "Award data not found.",
+      "error_unknown": "Unknown error.",
+      "winners_label": "{n} winner(s) · {unit}",
+      "unit_person": "Individual",
+      "unit_team": "Team",
+      "unit_unit": "Unit",
+      "unit_na": "N/A"
+    },
+    "hashtags": {
+      "title": "Hashtags",
+      "add_placeholder": "New hashtag name…",
+      "add_button": "Add",
+      "adding": "Adding…",
+      "col_name": "Name",
+      "col_usage": "Usage",
+      "col_action": "Action",
+      "empty": "No hashtags yet.",
+      "delete": "Delete",
+      "error_empty": "Hashtag name cannot be empty.",
+      "error_duplicate": "This hashtag already exists.",
+      "error_in_use": "Hashtag is used in kudos — cannot delete.",
+      "delete_confirm": "Delete this hashtag?",
+      "in_use_title": "Used in kudos"
+    },
+    "settings": {
+      "title": "App Settings",
+      "col_key": "Key",
+      "col_value": "Value",
+      "col_action": "Action",
+      "empty": "No settings found.",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved.",
+      "readonly_label": "Read-only",
+      "error_readonly": "This key cannot be edited.",
+      "error_invalid_date": "Invalid date. Please use ISO format."
+    }
   },
   "home": {
     "hero_title": "ROOT FURTHER",

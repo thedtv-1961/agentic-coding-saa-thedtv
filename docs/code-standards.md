@@ -40,6 +40,18 @@ const props: any = {}
 - Server actions / Route handlers: dùng `createServerClient` từ `utils/supabase/server.ts`
 - Client components: dùng `createBrowserClient` từ `utils/supabase/client.ts`
 - Không hard-code credentials — luôn dùng env vars
+- Cần kiểm tra role: dùng `getUserWithRole()` từ `utils/supabase/get-user-with-role.ts` — trả về `{ user, isAdmin }`, tránh duplicate query `profiles.role` rải rác khắp nơi
+- Admin server actions: import `assertAdmin()` từ `app/actions/admin/assert-admin.ts` — gọi ở dòng đầu tiên của action; throws `"FORBIDDEN"` nếu không phải admin. Không dùng `getUserWithRole()` trực tiếp trong action body cho mục đích guard
+
+```typescript
+// ✅ Admin server action pattern
+import { assertAdmin } from "@/app/actions/admin/assert-admin"
+
+export async function deleteKudos(id: string) {
+  await assertAdmin()           // guard first, always
+  // ... business logic
+}
+```
 
 ## i18n
 
