@@ -10,30 +10,33 @@ interface Props {
   targetDate: string;
 }
 
+const ZERO: TimeLeft = { days: 0, hours: 0, minutes: 0 };
+
 export default function CountdownTimer({ targetDate }: Props) {
   const t = useTranslations("countdown");
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calcTimeLeft(targetDate));
+  // Không dùng lazy init để tránh hydration mismatch (server/client dùng Date.now() khác nhau)
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(ZERO);
 
   useEffect(() => {
-    // If launch date already passed on mount, redirect immediately
-    const initial = calcTimeLeft(targetDate);
-    if (initial.days === 0 && initial.hours === 0 && initial.minutes === 0) {
-      router.replace("/");
-      return;
-    }
-
-    const tick = setInterval(() => {
+    const tick = () => {
       const next = calcTimeLeft(targetDate);
       setTimeLeft(next);
 
       if (next.days === 0 && next.hours === 0 && next.minutes === 0) {
-        clearInterval(tick);
         router.replace("/");
+        return false;
       }
+      return true;
+    };
+
+    if (!tick()) return;
+
+    const id = setInterval(() => {
+      if (!tick()) clearInterval(id);
     }, 1000);
 
-    return () => clearInterval(tick);
+    return () => clearInterval(id);
   }, [targetDate, router]);
 
   return (
