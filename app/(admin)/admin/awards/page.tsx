@@ -5,19 +5,13 @@ import { AwardCard } from "@/app/components/admin/award-card";
 import { AddAwardForm } from "@/app/components/admin/add-award-form";
 import Link from "next/link";
 
-interface AwardRow {
+export interface AwardRow {
   id: string;
+  category_id: string;
+  category_name: string;
   number_of_winners: number;
   winner_unit: number | null;
   prize_value: number;
-}
-
-interface CategoryRow {
-  id: string;
-  name: string;
-  description: string;
-  image_url: string;
-  awards: AwardRow[];
 }
 
 export default async function AdminAwardsPage() {
@@ -27,15 +21,10 @@ export default async function AdminAwardsPage() {
   const supabase = await createClient();
 
   const [categoriesRes, awardsRes] = await Promise.all([
+    supabase.from("award_categories").select("id, name").order("created_at"),
     supabase
-      .from("award_categories")
-      .select("id, name")
-      .order("created_at"),
-    supabase
-      .from("award_categories")
-      .select(
-        "id, name, description, image_url, awards(id, number_of_winners, winner_unit, prize_value)"
-      )
+      .from("awards")
+      .select("id, category_id, number_of_winners, winner_unit, prize_value, award_categories(name)")
       .order("created_at"),
   ]);
 
@@ -49,7 +38,24 @@ export default async function AdminAwardsPage() {
   }
 
   const categories = (categoriesRes.data as { id: string; name: string }[]) ?? [];
-  const awardsData = (awardsRes.data as unknown as CategoryRow[]) ?? [];
+
+  const awards: AwardRow[] = (
+    (awardsRes.data ?? []) as unknown as Array<{
+      id: string;
+      category_id: string;
+      number_of_winners: number;
+      winner_unit: number | null;
+      prize_value: number;
+      award_categories: { name: string } | null;
+    }>
+  ).map((a) => ({
+    id: a.id,
+    category_id: a.category_id,
+    category_name: a.award_categories?.name ?? "—",
+    number_of_winners: a.number_of_winners,
+    winner_unit: a.winner_unit,
+    prize_value: a.prize_value,
+  }));
 
   return (
     <div>
@@ -63,13 +69,14 @@ export default async function AdminAwardsPage() {
         </Link>
       </div>
       <AddAwardForm categories={categories} />
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {awardsData.map((cat) => (
-          <AwardCard key={cat.id} category={cat} />
-        ))}
-      </div>
-      {awardsData.length === 0 && (
+      {awards.length === 0 ? (
         <p className="text-white/40 text-sm">Chưa có dữ liệu giải thưởng.</p>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {awards.map((award) => (
+            <AwardCard key={award.id} award={award} />
+          ))}
+        </div>
       )}
     </div>
   );
