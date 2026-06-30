@@ -12,8 +12,6 @@ Apply this before, during, and after any UI implementation task.
 - [ ] **Image asset strategy** — Check `public/images/` first before fetching. For Figma exports:
   1. Try Figma MCP (`get_media_file`, `get_figma_image`)
   2. If MCP returns 401/500 (rate limit), use Figma REST API: `curl -H "X-Figma-Token: $FIGMA_API_KEY" "https://api.figma.com/v1/images/:fileKey?ids=nodeId1,...&format=png&scale=2"` — returns S3 URLs; download in parallel with `for ... & wait`
-  3. Last resort: fall back to production CDN (e.g. `https://saa.sun-asterisk.vn/assets/`)
-  - Never hardcode placeholder images or use hand-drawn SVGs as permanent stand-ins.
 - [ ] **Confirm unclear requirements first** — _khi có điểm chưa rõ, phải hỏi user trước — không tự ý quyết định_.
 
 ---

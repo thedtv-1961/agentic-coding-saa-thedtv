@@ -108,7 +108,6 @@ app/components/shared/
 
 ## Risk Assessment
 
-- **6 collection icons**: cần download từ Figma hoặc CDN SAA — nếu MCP lỗi 401 dùng fallback CDN `saa.sun-asterisk.vn/assets/`
 - **Drawer width**: Figma chưa rõ (spec nói "full chiều cao") — default 480px, adjust sau khi xem Figma
 
 ## Next Steps
