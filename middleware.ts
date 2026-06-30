@@ -24,9 +24,11 @@ export async function middleware(request: NextRequest) {
 
   const isCountdownRoute = pathname === "/countdown";
   const isAuthRoute = pathname.startsWith("/auth") || pathname === "/login";
+  const isAdminRoute = pathname.startsWith("/admin");
 
   // Prelaunch gate — based solely on countdown_date in DB
-  if (!isCountdownRoute && !isAuthRoute) {
+  // Admin routes are always accessible regardless of launch status
+  if (!isCountdownRoute && !isAuthRoute && !isAdminRoute) {
     const launched = await isLaunchDatePassed();
     if (!launched) {
       return NextResponse.redirect(new URL("/countdown", request.url));

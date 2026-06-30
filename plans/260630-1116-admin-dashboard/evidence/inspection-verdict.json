@@ -1,0 +1,29 @@
+{
+  "score": 8.5,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "5 sections render dưới /admin/* — non-admin bị redirect — verified: layout.tsx redirects !isAdmin → /; admin/page.tsx → redirect /admin/kudos; 5 sub-routes created",
+    "assertAdmin() guard trong mọi write action — verified: all 6 action files call assertAdmin/getUserWithRole+isAdmin check at top",
+    "Kudos: paginated list + expand + delete (cascade) — verified: kudos-table.tsx expand toggle + confirm delete + deleteKudos action; FK cascade confirmed in migration comments",
+    "Users: list + role toggle (self-demote blocked) — verified: toggleUserRole throws CANNOT_DEMOTE_SELF; UI disables button for currentUserId row",
+    "Awards: inline edit 2 bảng (award_categories + awards) — verified: update-award.ts updates both tables sequentially; award-card.tsx view/edit toggle",
+    "Hashtags: add/delete (block nếu đang dùng) — verified: deleteHashtag checks kudos_hashtags count, throws HASHTAG_IN_USE; addHashtag rejects empty/duplicate",
+    "App Settings: countdown_date editable, keys khác read-only — verified: EDITABLE_KEYS allowlist in update-setting.ts; settings-table.tsx renders read-only for non-whitelisted keys",
+    "Migration admin write RLS policies applied (6 policies) — verified: supabase db reset exit 0, psql policy count confirmed",
+    "npm run build pass — verified: temper-results exitCode=0, 15 routes generated",
+    "npm run lint pass — verified: temper-results exitCode=0, 0 errors",
+    "16/16 unit tests pass (admin actions) — verified: vitest run src/test/admin/ exit 0",
+    "EN/VI i18n parity cho tất cả admin.* keys — verified: admin.nav/kudos/users/awards/hashtags/settings blocks in both en.json and vi.json"
+  ],
+  "regressionChecked": [
+    "middleware.ts: /admin auth guard unchanged",
+    "header.tsx + profile-dropdown.tsx: unchanged",
+    "getUserWithRole util: unchanged (read-only by all admin actions)",
+    "existing tests: 154 passing tests unaffected (only pre-existing 5 widget-button failures remain)"
+  ],
+  "contractStatus": "profiles.role 'user'|'admin' — relied upon correctly; kudos FK cascades confirmed; hashtags unique constraint leveraged",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

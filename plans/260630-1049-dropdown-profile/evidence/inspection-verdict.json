@@ -1,0 +1,28 @@
+{
+  "score": 9.0,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "Avatar click mở/đóng dropdown (không animation) — verified: test 'opens dropdown on avatar click' + 'closes dropdown on second avatar click' pass; useState toggle in profile-dropdown.tsx",
+    "Click ngoài vùng đóng dropdown — verified: test 'closes dropdown when clicked outside' pass; useEffect mousedown handler checks ref.contains(event.target)",
+    "Escape key đóng dropdown — verified: keydown listener added alongside mousedown in useEffect; fires setIsOpen(false) on key==='Escape'",
+    "User thường thấy Profile (no-op) + Logout — verified: test 'shows only Profile and Logout for regular user' pass; admin branch guarded by isAdmin prop",
+    "Admin thấy Profile (no-op) + Dashboard + Logout — verified: test 'shows Profile, Dashboard, and Logout for admin' pass; Dashboard Link rendered when isAdmin=true",
+    "Dashboard link active khi pathname === '/admin' — verified: isDashboardActive = pathname === '/admin' computed via usePathname(); active style applied",
+    "Logout gọi supabase.auth.signOut() + redirect /login — verified: logout.ts server action: signOut() + redirect('/login'); test 'calls logout action when Logout is clicked' pass",
+    "Admin detection qua profiles.role từ DB — verified: getUserWithRole() util queries profiles table .eq('id', user.id).single(); role==='admin' → isAdmin=true; used in header.tsx",
+    "Route /admin được bảo vệ: middleware (auth) + page-level (role) — verified: middleware.ts guards /admin (unauthenticated→/login); admin/page.tsx role-gates (!isAdmin→/); defense-in-depth pattern",
+    "npm run build pass (0 errors) — verified: temper-results.json exitCode=0 'Build completes with 0 errors; /admin route generated'",
+    "npm run lint pass (0 errors) — verified: temper-results.json exitCode=0 '0 lint errors'",
+    "10/10 unit tests pass, coverage 96.42% — verified: temper-results.json exitCode=0 '10/10 tests pass'; coverage 96.42% — all branches exercised except server-only signOut error path"
+  ],
+  "regressionChecked": [
+    "header-nav.tsx: Image import retained (used for logo), nav links unchanged",
+    "middleware.ts: existing /login redirect and prelaunch gate logic untouched",
+    "login flow: signInWithGoogle action unchanged"
+  ],
+  "contractStatus": "profiles.role constraint ('user'|'admin') — unchanged, relied upon correctly",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": []
+}

@@ -1,0 +1,39 @@
+{
+  "commands": [
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "15 routes compiled — 0 errors; /admin/kudos, /admin/users, /admin/awards, /admin/hashtags, /admin/settings generated",
+      "ts": "2026-06-30T05:05:00.000Z"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "0 lint errors (5 pre-existing warnings in unrelated files)",
+      "ts": "2026-06-30T05:05:30.000Z"
+    },
+    {
+      "command": "npx vitest run src/test/admin/",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "16/16 admin tests pass: assert-admin(2), toggle-user-role(4), delete-kudos(2), update-setting(3), manage-hashtags(5)",
+      "ts": "2026-06-30T05:06:00.000Z"
+    },
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "22 passed (after fixes), 5 pre-existing failures in widget-button.test.tsx (unrelated FAB bug)",
+      "ts": "2026-06-30T05:06:30.000Z"
+    },
+    {
+      "command": "supabase db reset",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "19 migrations applied cleanly including 20260630000019_admin_write_policies.sql — 6 RLS policies active",
+      "ts": "2026-06-30T04:45:00.000Z"
+    }
+  ]
+}

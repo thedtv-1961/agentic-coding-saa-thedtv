@@ -31,7 +31,7 @@ const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
 const SEED_USERS = [
   {
     email: "admin@sun-asterisk.com",
-    password: "password123",
+    password: "Aa@123456",
     full_name: "Admin SAA",
     role: "admin",
   },

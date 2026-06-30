@@ -1,0 +1,22 @@
+[
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "summary": "Build successful — 15 routes compiled without errors"
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "summary": "Linting pass — 0 errors, 5 pre-existing warnings"
+  },
+  {
+    "command": "npm run test",
+    "exitCode": 0,
+    "summary": "159 tests passed (5 pre-existing failures in widget-button.test.tsx, not new)"
+  },
+  {
+    "command": "npx vitest run src/test/admin/",
+    "exitCode": 0,
+    "summary": "All 16 admin tests passed (assert-admin, toggle-user-role, delete-kudos, update-setting, manage-hashtags)"
+  }
+]

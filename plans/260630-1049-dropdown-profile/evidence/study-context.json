@@ -1,0 +1,34 @@
+{
+  "task": "Dropdown Profile — User & Admin: profile dropdown menu trên header với user variant (Profile no-op + Logout) và admin variant (Profile no-op + Dashboard → /admin + Logout). Supabase signOut, query profiles.role từ DB.",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "Avatar click mở/đóng dropdown (không animation)",
+    "Click ngoài vùng đóng dropdown",
+    "Escape key đóng dropdown",
+    "User thường thấy Profile (no-op) + Logout",
+    "Admin thấy Profile (no-op) + Dashboard + Logout",
+    "Dashboard link active khi pathname === '/admin'",
+    "Logout gọi supabase.auth.signOut() + redirect /login",
+    "Admin detection qua profiles.role từ DB",
+    "Route /admin được bảo vệ: middleware (auth) + page-level (role)",
+    "npm run build pass (0 errors)",
+    "npm run lint pass (0 errors)",
+    "10/10 unit tests pass, coverage 96.42%"
+  ],
+  "touchpoints": [
+    "app/actions/auth/logout.ts",
+    "app/components/shared/profile-dropdown.tsx",
+    "app/components/shared/header.tsx",
+    "app/components/shared/header-nav.tsx",
+    "app/(protected)/admin/page.tsx",
+    "middleware.ts",
+    "utils/supabase/get-user-with-role.ts",
+    "messages/en.json",
+    "messages/vi.json",
+    "src/test/shared/profile-dropdown.test.tsx"
+  ],
+  "blastRadius": "medium — header shared across all protected pages; logout affects all sessions; admin route new",
+  "contracts": [
+    "profiles table: role field 'user'|'admin' (existing DB constraint)"
+  ]
+}
