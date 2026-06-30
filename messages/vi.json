@@ -66,6 +66,7 @@
     "recipient_label": "Người nhận",
     "recipient_placeholder": "Tìm kiếm",
     "recipient_required": "Vui lòng chọn người nhận",
+    "recipient_not_found": "Không tìm thấy người nhận này trong hệ thống",
     "content_placeholder": "Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!",
     "content_required": "Vui lòng nhập nội dung lời cảm ơn",
     "content_hint": "Bạn có thể \"@ + tên\" để nhắc tới đồng nghiệp khác",

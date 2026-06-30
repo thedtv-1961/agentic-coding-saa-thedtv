@@ -5,7 +5,9 @@ import { updateSession } from "@/utils/supabase/middleware";
 
 async function isLaunchDatePassed(): Promise<boolean> {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Đọc bằng publishable/anon key (RLS cho anon SELECT app_settings) — KHÔNG dùng
+  // service_role trong middleware: vừa rủi ro bảo mật, vừa từng fail-open trên prod.
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) return true; // no DB → assume launched
 
   try {
@@ -15,9 +17,9 @@ async function isLaunchDatePassed(): Promise<boolean> {
       .select("value")
       .eq("key", "countdown_date")
       .single();
-    // Timeout 3s — tránh treo Worker khi DB cold-start
+    // Timeout — tránh treo Worker khi DB cold-start
     const timeoutPromise = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error("db_timeout")), 800),
+      setTimeout(() => reject(new Error("db_timeout")), 2500),
     );
     const { data, error } = await Promise.race([queryPromise, timeoutPromise]);
     if (error || !data?.value) return true;

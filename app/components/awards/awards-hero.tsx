@@ -19,7 +19,7 @@ export default async function AwardsHero() {
       </div>
 
       {/* Left content — bounded within max-w-7xl container */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-0 pt-32">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-0 pt-32 pb-10">
         <div className="flex flex-col gap-4  pb-36">
           <Image
             src="/images/homepage/root-further.png"

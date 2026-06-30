@@ -4,7 +4,8 @@ const FALLBACK_DATE = "2026-12-20T00:00:00+07:00";
 
 export async function getCountdownDate(): Promise<string> {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Publishable/anon key — app_settings cho anon SELECT (xem migration anon_read).
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
 
   if (!url || !key) return FALLBACK_DATE;
 
