@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
 import { AdminSidebar } from "@/app/components/admin/admin-sidebar";
 

@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { createClient } from "@/utils/supabase/server";
 import { getUserWithRole } from "@/utils/supabase/get-user-with-role";
 import { redirect } from "next/navigation";
